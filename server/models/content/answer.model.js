@@ -8,14 +8,14 @@ const AnswerSchema = mongoose.Schema({
         type: Date,
         default: Date.now()
     },
+    question: {
+        type: String
+    },
     text: {
         type: String
     },
     images: [{
         type: String // Array of images
-    }],
-    replies: [{
-        type: String // Array of ids of replies objects
     }],
     upVotes: [{
         type: String // Array of ids of users

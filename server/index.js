@@ -9,6 +9,7 @@ const userRouter = require("./routes/entities/user.route");
 const adminRouter = require("./routes/entities/admin.route");
 
 const questionRouter = require("./routes/content/question.route");
+const answerRouter = require("./routes/content/answer.route")
 const topicRouter = require("./routes/content/topic.route");
 
 require("dotenv").config({ path: '.env' });
@@ -21,6 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(userRouter);
 app.use(adminRouter);
 app.use(questionRouter);
+app.use(answerRouter);
 app.use(topicRouter);
 
 // Mongoose Connection section
