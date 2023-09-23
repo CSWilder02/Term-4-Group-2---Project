@@ -27,7 +27,7 @@ router.post("/api/loginUser", async (req, res) => {
             const token = jwt.sign({ userId: findUser?._id, role: findUser?.role }, secretKey, { expiresIn: "1h" });
             res.json({ user: userWithoutPassword, token });
         } else {
-            res.status(401).json({ error: "Invalid credentials." });
+            res.status(401).json({ error: "Invalid username or password." });
         }
     } catch (error) {
         res.status(500).json({ error: "User login failed." });

@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
 
 const QuestionSchema = mongoose.Schema({
-    questionerer: {
+    questioner: {
+        // type: mongoose.Schema.Types.ObjectId,
+        // ref: "User",
         type: String
     },
     dateAsked: {
@@ -9,13 +11,16 @@ const QuestionSchema = mongoose.Schema({
         default: Date.now()
     },
     questionSource: {
-        type: String // Sourced from: Community or Personal
+        type: String,// Sourced from: Community or Personal
+        emum: ["community", "public"]
     },
     title: {
-        type: String
+        type: String,
+        require: true
     },
     text: {
-        type: String
+        type: String,
+        require: true
     },
     images: [{
         type: String // Array of images
@@ -32,6 +37,15 @@ const QuestionSchema = mongoose.Schema({
     topics: [{
         type: String // Array of ids of topics objects
     }]
+});
+
+// Auto find questionerer
+QuestionSchema.pre(/^find/, function (next) {
+    this.populate({
+        path: "questioner",
+        select: ""
+    });
+    next();
 });
 
 module.exports = mongoose.model("Question", QuestionSchema)

@@ -10,7 +10,7 @@ function verifyToken(req, res, next) {
     const token = req.header("Authorization")?.split(" ")[1]; // Get the token from the Authorization header
 
     if (!token) {
-        return res.status(401).json({ error: "Access denied. No token provided." });
+        return res.status(401).json({ error: "Access denied. No token provided, Please provide token in the Header." });
     }
 
     try {
@@ -19,7 +19,7 @@ function verifyToken(req, res, next) {
         // console.log(req.user);
         next();
     } catch (error) {
-        return res.status(401).json({ error: "Invalid token." });
+        return res.status(401).json({ error: "Invalid token or the token provided has expired" });
     }
 }
 

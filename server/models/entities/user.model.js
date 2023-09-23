@@ -36,6 +36,10 @@ const UserSchema = mongoose.Schema({
     accountStatus: {
         type: Boolean,
         default: true //true: active and, false: suspended/disabled
+    },
+    role: {
+        type: String,
+        default: "user"
     }
 });
 
