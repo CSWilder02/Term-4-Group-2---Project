@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
 const { json } = require("body-parser");
+const verifyToken = require("./middleware/auth/verifyToken");
 
 require("dotenv").config({ path: '.env' })
 
@@ -11,6 +12,8 @@ app.use(cors({ origin: 'https://localhost:3000' })
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(verifyToken)
 
 mongoose.connect(
     process.env.DB_CONNECTION,
