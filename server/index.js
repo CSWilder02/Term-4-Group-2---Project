@@ -3,18 +3,16 @@ const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
 const { json } = require("body-parser");
-const verifyToken = require("./middleware/auth/verifyToken");
+const userRouter = require("./routes/entities/user.route");
+const adminRouter = require("./routes/entities/admin.route")
 
-require("dotenv").config({ path: '.env' })
+require("dotenv").config({ path: '.env' });
 
-app.use(cors({ origin: 'https://localhost:3000' })
-);
-
+app.use(cors({ origin: 'https://localhost:3000' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(verifyToken)
-
+// Mongoose Connection section
 mongoose.connect(
     process.env.DB_CONNECTION,
     {
@@ -25,5 +23,10 @@ mongoose.connect(
     .then(console.log('Connected to Database'))
     .catch(err => console.log("No Connection. Error:" + err));
 
+// PORT section
 const PORT = process.env.PORT;
-app.listen(PORT, () => { console.log(`Listening to Port: ${PORT}`) })
+app.listen(PORT, () => { console.log(`Listening to Port: ${PORT}`) });
+
+// Routes section
+app.use(userRouter);
+app.use(adminRouter);
