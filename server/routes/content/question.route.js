@@ -65,7 +65,7 @@ router.post("/api/createQuestion", verifyToken, async (req, res) => {
 });
 
 // Get All Questions
-router.get("/api/questions", verifyToken, async (req, res) => {
+router.get("/api/getQuestions", verifyToken, async (req, res) => {
     try {
         const userId = req.user.userId;
         // const userCommunity = req.user.username; // username is available in the JWT payload
@@ -114,7 +114,6 @@ router.patch("/api/updateQuestion/:id", verifyToken, async (req, res) => {
 
 //Delete Question
 router.delete("/api/deleteQuestion/:id", verifyToken, async (req, res) => {
-    const { id } = req.params.id;
     await QuestionSchema.findByIdAndDelete(req.params.id)
         .then(response => res.json(response))
         .catch(error => res.status(500).json(error));

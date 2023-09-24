@@ -47,7 +47,7 @@ router.get("/api/getUser/:id", async (req, res) => {
 });
 
 //Create User
-router.post("/api/addUser", async (req, res) => {
+router.post("/api/registerUser", async (req, res) => {
     try {
         const user = new UserSchema({ ...req.body });
         await user.save();

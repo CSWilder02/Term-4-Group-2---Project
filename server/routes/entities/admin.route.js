@@ -27,7 +27,7 @@ router.post("/api/loginAdmin", async (req, res) => {
             const token = jwt.sign({ userId: findUser?._id, role: findUser?.role }, secretKey, { expiresIn: "1h" });
             res.json({ user: userWithoutPassword, token });
         } else {
-            res.status(401).json({ error: "Invalid credentials." });
+            res.status(401).json({ error: "Invalid username or password." });
         }
     } catch (error) {
         res.status(500).json({ error: "User login failed." });
@@ -47,7 +47,7 @@ router.get("/api/getAdmin/:id", async (req, res) => {
 });
 
 //Create User
-router.post("/api/addAdmin", async (req, res) => {
+router.post("/api/registerAdmin", async (req, res) => {
     try {
         const user = new AdminSchema({ ...req.body });
         await user.save();

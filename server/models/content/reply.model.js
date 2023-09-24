@@ -8,6 +8,9 @@ const ReplySchema = mongoose.Schema({
         type: Date,
         default: Date.now()
     },
+    answer: {
+        type: String
+    },
     text: {
         type: String
     },
