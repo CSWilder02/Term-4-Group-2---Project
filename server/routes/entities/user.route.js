@@ -4,6 +4,7 @@ const UserSchema = require("../../models/entities/user.model");
 const router = express();
 const jwt = require("jsonwebtoken");
 const upload = multer({ dest: "uploads/" });
+const bcrypt = require('bcryptjs');
 
 require('dotenv').config({ path: '.env' });
 
@@ -49,7 +50,10 @@ router.get("/api/getUser/:id", async (req, res) => {
 //Create User
 router.post("/api/registerUser", async (req, res) => {
     try {
-        const user = new UserSchema({ ...req.body });
+
+        const {userWithoutPassword , ...password} = req.body;
+        const passwordHashed = await bcrypt.hash(password, 10);
+        const user = new UserSchema({ userWithoutPassword, password:passwordHashed });
         await user.save();
 
         // Generate a JWT token
