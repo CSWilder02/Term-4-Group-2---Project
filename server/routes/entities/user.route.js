@@ -14,22 +14,27 @@ const secretKey = process.env.JWT_SECRET_KEY
 router.post("/api/loginUser", async (req, res) => {
 
     try {
+
         const findUser = await UserSchema.findOne({
             username: req.body.username,
             password: req.body.password
         });
 
-        if (findUser) {
+        // If hash returns true execute 
+        if(bcrypt.compareSync(10, hash)){
+            if (findUser) {
 
-            // Exclude the 'password' property from the user object
-            const { password, ...userWithoutPassword } = findUser._doc;
-
-            // Generate a JWT token
-            const token = jwt.sign({ userId: findUser?._id, role: findUser?.role }, secretKey, { expiresIn: "1h" });
-            res.json({ user: userWithoutPassword, token });
-        } else {
-            res.status(401).json({ error: "Invalid username or password." });
+                // Exclude the 'password' property from the user object
+                const { password, ...userWithoutPassword } = findUser._doc;
+    
+                // Generate a JWT token
+                const token = jwt.sign({ userId: findUser?._id, role: findUser?.role }, secretKey, { expiresIn: "1h" });
+                res.json({ user: userWithoutPassword, token });
+            } else {
+                res.status(401).json({ error: "Invalid username or password." });
+            }
         }
+        
     } catch (error) {
         res.status(500).json({ error: "User login failed." });
     }
@@ -51,7 +56,7 @@ router.get("/api/getUser/:id", async (req, res) => {
 router.post("/api/registerUser", async (req, res) => {
     try {
 
-        const {userWithoutPassword , ...password} = req.body;
+        const {userWithoutPassword , password} = req.body;
         const passwordHashed = await bcrypt.hash(password, 10);
         const user = new UserSchema({ userWithoutPassword, password:passwordHashed });
         await user.save();
