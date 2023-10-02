@@ -1,23 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { Home } from './components/screens/home';
+import { QuestionPage } from './components/screens/questionPage';
+import { UserAccount } from './components/screens/userAccount';
+import { Boarding } from './components/screens/boarding';
+import PrivateRoute from './components/util/privateRoute';
+// require('dotenv/config')
+
 
 function App() {
+  const isLoggedIn = sessionStorage.getItem("loggedIn")
+  useEffect(() => {
+    if (!isLoggedIn || isLoggedIn === "") {
+      sessionStorage.setItem("loggedIn", false)
+    }
+  })
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/question/:id' element={<PrivateRoute></PrivateRoute>} />
+        <Route path='/user/:id' element={<PrivateRoute><UserAccount /></PrivateRoute>} />
+        <Route path='/boarding' element={<Boarding />} />
+      </Routes>
     </div>
   );
 }
