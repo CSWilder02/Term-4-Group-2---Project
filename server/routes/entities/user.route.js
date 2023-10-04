@@ -5,84 +5,102 @@ const router = express();
 const jwt = require("jsonwebtoken");
 const upload = multer({ dest: "uploads/" });
 const bcrypt = require('bcryptjs');
+const verifyToken = require("../../middleware/auth/verifyToken");
 
 require('dotenv').config({ path: '.env' });
 
-const secretKey = process.env.JWT_SECRET_KEY
+const secretKey = process.env.JWT_SECRET_KEY;
+const passwordHashKey = JSON.parse(process.env.PASSWORD_HASH_KEY);
 
 // Login user and return a JWT token
 router.post("/api/loginUser", async (req, res) => {
-
     try {
-        const findUser = await UserSchema.findOne({
-            username: req.body.username,
-            password: req.body.password
-        });
+        const { username, password } = req.body;
+
+        const findUser = await UserSchema.findOne({ username });
 
         if (findUser) {
+            const isPasswordValid = await bcrypt.compare(password, findUser.password);
 
-            // Exclude the 'password' property from the user object
-            const { password, ...userWithoutPassword } = findUser._doc;
+            if (isPasswordValid) {
+                // Password is valid, excludes the 'password' property from the user object
+                const { password, ...userWithoutPassword } = findUser._doc;
 
-            // Generate a JWT token
-            const token = jwt.sign({ userId: findUser?._id, role: findUser?.role }, secretKey, { expiresIn: "1h" });
-            res.json({ user: userWithoutPassword, token });
+                // Generates a JWT token
+                const token = jwt.sign({ userId: findUser._id, role: findUser.role }, secretKey, { expiresIn: "1h" });
+                res.json({ user: userWithoutPassword, token });
+            } else {
+                console.log("Invalid password for username:", username);
+                res.status(401).json({ error: "Invalid username or password." });
+            }
         } else {
+            console.log("User not found for username:", username);
             res.status(401).json({ error: "Invalid username or password." });
         }
     } catch (error) {
+        console.error("User login error:", error);
         res.status(500).json({ error: "User login failed." });
     }
 });
 
 //Get All User
-router.get("/api/getUsers", async (req, res) => {
+router.get("/api/getUsers", verifyToken, async (req, res) => {
     const findUser = await UserSchema.find();
     res.json(findUser);
 });
 
 //Get Single User
-router.get("/api/getUser/:id", async (req, res) => {
+router.get("/api/getUser/:id", verifyToken, async (req, res) => {
     const findUser = await UserSchema.findById(req.params.id);
     res.json(findUser);
 });
 
 //Create User
 router.post("/api/registerUser", async (req, res) => {
-    try {
+    const { password, ...userWithoutPassword } = req.body;
 
-        const {userWithoutPassword , ...password} = req.body;
+    try {
         const passwordHashed = await bcrypt.hash(password, 10);
-        const user = new UserSchema({ userWithoutPassword, password:passwordHashed });
+        const user = new UserSchema({ ...userWithoutPassword, password: password });
         await user.save();
 
-        // Generate a JWT token
-        const token = jwt.sign({ userId: user?._id }, JWT_SECRET_KEY, { expiresIn: "1h" });
+        // Generates a JWT token
+        const token = jwt.sign({ userId: user?._id }, secretKey, { expiresIn: "1h" });
 
         res.json({ token });
     } catch (error) {
-        res.status(500).json({ error: "User registration failed." });
+        res.status(500).json({ error: `User registration failed.${error}` });
     }
 });
 
 //Update User
-router.patch("/api/updateUser/:id", async (req, res) => {
-    const userId = req.params.id; // Get the user ID from the URL params
+router.patch("/api/updateUser/:id", verifyToken, async (req, res) => {
+    const userId = req.params.id;
+    const updateUser = req.body;
 
     try {
-        const updatedUser = await UserSchema.findByIdAndUpdate(
-            userId,
-            { $set: req.body }, // Use $set to update only the specified fields
-            { new: true } // Return the updated document
-        );
+        const findUser = await UserSchema.findById(userId);
+        const { newPassword } = req.body;
 
-        if (!updatedUser) {
-            return res.status(404).json({ error: "User not found" });
+        if (!findUser) {
+            return res.status(404).json({ error: "User not found or you are not authorized to access this" });
         }
 
-        res.json(updatedUser);
+        if (updateUser.password) {
+            // If a new password is provided for update, hash it
+            const passwordHashed = await bcrypt.hash(updateUser.password, passwordHashKey);
+            updateUser.password = passwordHashed;
+        }
+
+        // Update user data
+        const updatedUser = await UserSchema.findByIdAndUpdate(userId, updateUser, { new: true });
+
+        // Excludes the 'password' property from the updated user object
+        const { password, ...userWithoutPassword } = updatedUser._doc;
+
+        res.json({ user: userWithoutPassword });
     } catch (error) {
-        res.status(500).json({ error: "Error updating the user" });
+        res.status(500).json({ error: `User update failed: ${error}` });
     }
 });
 

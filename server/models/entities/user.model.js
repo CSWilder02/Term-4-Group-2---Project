@@ -1,4 +1,9 @@
 const mongoose = require("mongoose");
+require('dotenv').config({ path: '.env' });
+
+const passwordHashKey = JSON.parse(process.env.PASSWORD_HASH_KEY);
+const bcrypt = require('bcryptjs');
+
 
 const UserSchema = mongoose.Schema({
     fullName: {
@@ -43,5 +48,18 @@ const UserSchema = mongoose.Schema({
         default: "user"
     }
 });
+
+UserSchema.pre('save', async function (next) {
+    if (this.isModified('password')) {
+        this.password = await bcrypt.hash(this.password, passwordHashKey);
+    }
+    next();
+});
+
+// Method to update the password and rehash it
+UserSchema.methods.updatePassword = async function (newPassword) {
+    this.password = newPassword;
+    await this.save();
+};
 
 module.exports = mongoose.model("User", UserSchema)

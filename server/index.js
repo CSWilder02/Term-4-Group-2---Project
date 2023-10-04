@@ -5,13 +5,7 @@ const mongoose = require("mongoose");
 const { json } = require("body-parser");
 
 // ROUTES Section
-const userRouter = require("./routes/entities/user.route");
-const adminRouter = require("./routes/entities/admin.route");
-
-const questionRouter = require("./routes/content/question.route");
-const answerRouter = require("./routes/content/answer.route");
-const replyRouter = require("./routes/content/reply.route")
-const topicRouter = require("./routes/content/topic.route");
+const routes = require("./routes/routes")
 
 require("dotenv").config({ path: '.env' });
 
@@ -20,12 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Use Routes section
-app.use(userRouter);
-app.use(adminRouter);
-app.use(questionRouter);
-app.use(answerRouter);
-app.use(replyRouter);
-app.use(topicRouter);
+app.use(routes);
 
 // Mongoose Connection section
 mongoose.connect(
