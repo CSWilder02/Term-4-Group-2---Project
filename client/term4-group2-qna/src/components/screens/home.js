@@ -7,7 +7,7 @@ export const Home = ({ user }) => {
     return (
         <div>
             <div>home</div>
-            <NavLink to={`user/1`}>user</NavLink>
+
         </div>
     )
 }

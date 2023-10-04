@@ -18,7 +18,7 @@ const QuestionSchema = mongoose.Schema({
         type: String,
         require: true
     },
-    text: {
+    question: {
         type: String,
         require: true
     },
