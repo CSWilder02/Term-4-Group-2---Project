@@ -60,8 +60,6 @@ router.post("/api/registerUser", async (req, res) => {
     const { password, ...userWithoutPassword } = req.body;
 
     try {
-
-        const { userWithoutPassword, ...password } = req.body;
         const passwordHashed = await bcrypt.hash(password, 10);
         const user = new UserSchema({ ...userWithoutPassword, password: password });
         await user.save();
