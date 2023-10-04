@@ -15,28 +15,28 @@ const passwordHashKey = JSON.parse(process.env.PASSWORD_HASH_KEY);
 // Login user and return a JWT token
 router.post("/api/loginUser", async (req, res) => {
     try {
-        const { username, password } = req.body;
 
-        const findUser = await UserSchema.findOne({ username });
+        const findUser = await UserSchema.findOne({
+            username: req.body.username,
+            password: req.body.password
+        });
 
-        if (findUser) {
-            const isPasswordValid = await bcrypt.compare(password, findUser.password);
+        // If hash returns true execute 
+        if (bcrypt.compareSync(10, hash)) {
+            if (findUser) {
+                const isPasswordValid = await bcrypt.compare(password, findUser.password);
 
-            if (isPasswordValid) {
-                // Password is valid, excludes the 'password' property from the user object
+                // Exclude the 'password' property from the user object
                 const { password, ...userWithoutPassword } = findUser._doc;
 
-                // Generates a JWT token
-                const token = jwt.sign({ userId: findUser._id, role: findUser.role }, secretKey, { expiresIn: "1h" });
+                // Generate a JWT token
+                const token = jwt.sign({ userId: findUser?._id, role: findUser?.role }, secretKey, { expiresIn: "1h" });
                 res.json({ user: userWithoutPassword, token });
             } else {
-                console.log("Invalid password for username:", username);
                 res.status(401).json({ error: "Invalid username or password." });
             }
-        } else {
-            console.log("User not found for username:", username);
-            res.status(401).json({ error: "Invalid username or password." });
         }
+
     } catch (error) {
         console.error("User login error:", error);
         res.status(500).json({ error: "User login failed." });
@@ -60,6 +60,8 @@ router.post("/api/registerUser", async (req, res) => {
     const { password, ...userWithoutPassword } = req.body;
 
     try {
+
+        const { userWithoutPassword, ...password } = req.body;
         const passwordHashed = await bcrypt.hash(password, 10);
         const user = new UserSchema({ ...userWithoutPassword, password: password });
         await user.save();
