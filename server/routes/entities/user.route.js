@@ -67,7 +67,7 @@ router.post("/api/registerUser", async (req, res) => {
         // Generates a JWT token
         const token = jwt.sign({ userId: user?._id }, secretKey, { expiresIn: "1h" });
 
-        res.json({ token });
+        res.json({ user, token });
     } catch (error) {
         res.status(500).json({ error: `User registration failed.${error}` });
     }

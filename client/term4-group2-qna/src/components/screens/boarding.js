@@ -28,6 +28,9 @@ export const Boarding = ({ user }) => {
         axios.request(config)
             .then((response) => {
                 console.log(response);
+                sessionStorage.setItem("loggedIn", "true")
+                sessionStorage.setItem("user", JSON.stringify(response.data.user))
+                sessionStorage.setItem("token", response.data.token)
             })
             .catch((error) => {
                 console.log(error);
@@ -49,6 +52,9 @@ export const Boarding = ({ user }) => {
             .then((response) => {
                 alert("Registered");
                 console.log(response);
+                sessionStorage.setItem("loggedIn", "true")
+                sessionStorage.setItem("user", JSON.stringify(response.data.user))
+                sessionStorage.setItem("token", response.data.token)
             })
             .catch((error) => {
                 alert(`Error: ${error}`);
