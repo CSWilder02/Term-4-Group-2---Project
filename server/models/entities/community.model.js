@@ -29,10 +29,13 @@ const CommunitySchemma = mongoose.Schema({
     topics: [{
         type: String
     }],
+    members: [{
+        type: String
+    }],
     followers: [{
         type: String
     }],
-    followerRequests: [{
+    joinRequests: [{
         type: String
     }]
 });

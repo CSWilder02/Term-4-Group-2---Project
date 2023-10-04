@@ -106,7 +106,6 @@ router.patch("/api/updateUser/:id", verifyToken, async (req, res) => {
 
 //Delete User
 router.delete("/api/deleteUser/:id", async (req, res) => {
-    const { id } = req.params.id;
     await UserSchema.findByIdAndDelete(req.params.id)
         .then(response => res.json(response))
         .catch(error => res.status(500).json(error));
