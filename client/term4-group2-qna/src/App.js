@@ -18,9 +18,9 @@ function App() {
   })
   return (
     <div className="App">
-      <NavLink to={`/user/1`}>user</NavLink>
+      <NavLink to={`/user/1`}>user  </NavLink>
       |
-      <NavLink to={`/questions`}>create questions</NavLink>
+      <NavLink to={`/questions`}>  create questions</NavLink>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/questions' element={<PrivateRoute><QuestionPage /></PrivateRoute>} />
