@@ -1,4 +1,5 @@
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useEffect } from 'react';
 import { Routes, Route, NavLink } from 'react-router-dom';
 import { Home } from './components/screens/home';
@@ -19,7 +20,7 @@ function App() {
   return (
     <div className="App">
       <NavLink to={`/user/1`}>user  </NavLink>
-      |
+      |<span class="material-icons md-18">face</span>
       <NavLink to={`/questions`}>  create questions</NavLink>
       <Routes>
         <Route path='/' element={<Home />} />

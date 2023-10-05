@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const QuestionPage = () => {
     const [questionData, setQuestionData] = useState({});
-    const user = JSON.stringify(sessionStorage.getItem("user"))
+    const user = JSON.stringify(sessionStorage.getItem("user"));
 
     useEffect(() => {
         console.log("Question", questionData)
@@ -31,7 +31,7 @@ export const QuestionPage = () => {
                 alert(`Error: ${error}`);
                 console.log(error);
             });
-    }
+    };
 
     return (
         <div style={{ width: '400px', display: 'flex', gap: '20px', margin: '0 auto' }}>
