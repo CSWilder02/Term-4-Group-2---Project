@@ -1,0 +1,41 @@
+/* Log In & Sign Up */
+.mainbg {
+    background-color: #232428;
+    width: 1570px;
+    height: 840px;
+    margin-left: -8px;
+    padding-top: 100px;
+}
+
+.form {
+    background-color: #3D3F44;
+    margin-left: 560px;
+    width: 400px;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.heading {
+    font-size: 48pt;
+    font-weight: 400;
+    font-family:Arial, Helvetica, sans-serif;
+    color: #F9F5ED;
+    margin-bottom: 20px;
+}
+
+.input_fields {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+
+.login_button {
+    color: black;
+    background-color: #f07f2e;
+    border-radius: 30px;
+    width: 140px;
+    font-size: 24pt;
+    padding: 5px;
+}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import '../../frontend.css';
 
 export const Boarding = ({ user }) => {
 
@@ -63,27 +64,27 @@ export const Boarding = ({ user }) => {
     }
 
     return (
-        <div style={{ width: '400px', display: 'flex', gap: '20px', margin: '0 auto' }}>
+        <div className='mainbg'>
 
-            <div style={{ border: '1px solid #999', padding: '10px' }}>
-                <div>Login</div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <div className='form'>
+                <div className='heading'>Login</div>
+                <div className='input_fields'>
                     <input type='text' placeholder='username' onChange={(e) => setLoginData({ ...loginData, username: e.target.value })} />
                     <input type='password' placeholder='password' onChange={(e) => setLoginData({ ...loginData, password: e.target.value })} />
-                    <button onClick={submitLogin}>Login</button>
+                    <button className='login_button' onClick={submitLogin}>Login</button>
                 </div>
             </div>
 
-            <div style={{ border: '1px solid #999', padding: '10px' }}>
-                <div>Register</div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <div className='form'>
+                <div className='heading'>Register</div>
+                <div className='input_fields'>
                     <input type='text' onChange={e => setRegisterData({ ...registerData, name: e.target.value })} placeholder='Full name' />
                     <input type='text' onChange={e => setRegisterData({ ...registerData, email: e.target.value })} placeholder='email' />
                     <input type='text' onChange={e => setRegisterData({ ...registerData, username: e.target.value })} placeholder='username' />
                     <input type='file' onChange={e => setRegisterData({ ...registerData, profileImage: e.target.value })} placeholder='Image' />
                     <textarea type='text' onChange={e => setRegisterData({ ...registerData, bio: e.target.value })} placeholder='Bio' />
                     <input type='password' onChange={e => setRegisterData({ ...registerData, password: e.target.value })} placeholder='password' />
-                    <button onClick={submitRegister}>Register</button>
+                    <button className='login_button' onClick={submitRegister}>Register</button>
                 </div>
             </div>
 
