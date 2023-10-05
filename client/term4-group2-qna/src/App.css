@@ -1,3 +1,30 @@
+html {
+  background: #101011;
+}
+
+.App {
+  background: #101011;
+  color: #F9F3ED;
+  width: 100%;
+}
+
+/* Material Icons Size Configuration */
+.material-icons.md-20 {
+  font-size: 20px;
+}
+
+.material-icons.md-24 {
+  font-size: 24px;
+}
+
+.material-icons.md-36 {
+  font-size: 36px;
+}
+
+.material-icons.md-48 {
+  font-size: 48px;
+}
+
 .primaryButton {
   border: none;
   background: #FF8328;
