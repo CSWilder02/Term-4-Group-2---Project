@@ -1,0 +1,63 @@
+.button-primary {
+    font-size: 18px;
+    font-family: Kanit;
+    font-weight: 450;
+    background: #FF8328;
+    color: #101011;
+    border: 2px solid #FF8328;
+    border-radius: 300px;
+    padding: 6px 14px;
+}
+
+.button-primary:hover {
+    background: none;
+    color: #FF8328;
+    border: 2px solid #FF8328;
+}
+
+.button-secondary {
+    font-size: 18px;
+    font-family: Kanit;
+    font-weight: 450;
+    background: none;
+    color: #87B7FF;
+    border: 2px solid #87B7FF;
+    border-radius: 300px;
+    padding: 6px 14px;
+}
+
+.button-nav-active {
+    font-family: Kanit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid #FF8328;
+    color: #FF8328;
+    padding: 24px 12px;
+    cursor: pointer;
+    gap: 10px;
+    font-size: 16px;
+}
+
+.button-nav-deactive {
+    font-family: Kanit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    border-bottom: 2px solid #18191B;
+    color: #848079;
+    padding: 24px 12px;
+    cursor: pointer;
+    gap: 10px;
+    font-size: 16px;
+}
+
+.button-nave-deactive:hover {
+    color: #FF8328;
+    border: 2px solid #26282C;
+}
+
+.normalText {
+    font-size: 16px;
+}
