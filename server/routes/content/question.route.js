@@ -74,7 +74,7 @@ router.get("/api/getQuestions", verifyToken, async (req, res) => {
         res.json(findQuestion);
     }
     catch (error) {
-        res.status(500).json({ error: "Error fetching questions." });
+        res.status(500).json({ error: "Error fetching questions.", error });
     }
 });
 

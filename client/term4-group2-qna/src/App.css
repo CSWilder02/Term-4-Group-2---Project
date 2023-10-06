@@ -14,25 +14,27 @@ body {
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Material Icons Size Configuration */
+.material-icons.md-20 {
+  font-size: 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.material-icons.md-24 {
+  font-size: 24px;
 }
 
-.App-link {
-  color: #61dafb;
+.material-icons.md-36 {
+  font-size: 36px;
+}
+
+.material-icons.md-48 {
+  font-size: 48px;
+}
+
+.primaryButton {
+  border: none;
+  background: #FF8328;
+  color: #100E0D;
 }
 
 @keyframes App-logo-spin {
@@ -43,4 +45,3 @@ body {
     transform: rotate(360deg);
   }
 }
-
