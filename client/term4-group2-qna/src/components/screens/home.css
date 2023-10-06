@@ -1,0 +1,152 @@
+
+
+.input-card-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px; /* Adjust padding as needed */
+  margin-bottom: 20px;
+
+  }
+
+  .Menu{
+    float: left;
+    background-color: #4B4D55;
+    width: 200px;
+    height: 600px;
+    margin-left: 50px;
+  }
+
+  .filter{
+    height: 50px;
+    width: 647px;
+    background-color: #2B2C31;
+    border: solid 1px #4B4D55;
+    border-radius: 30px;
+    display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  }
+
+ 
+
+  .btn{
+    background-color: #2B2C31;
+    font-size: 18px;
+    font-weight: 30px;
+    letter-spacing: 2px;
+    height: 40px
+  }
+
+  .btn:hover {
+    width: 158px;
+    background-color: #4B4D55;
+    color: #FF8328;
+    border-radius: 30px;
+  }
+  
+  input {
+    width: 500px;
+    padding: 20px;
+    margin-right: 10px;
+    border-radius: 30px;
+    border: solid 0.5px #4B4D55;
+    background-color: #2B2C31;
+    color: #F9F5ED;
+    transition: background-color 0.3s, color 0.3s; /* Add a smooth transition effect */
+  }
+
+  input:hover {
+    background-color: #2B2C31; /* Change the background color on hover */
+    color: #4B4D55; /* Change the text color on hover */
+    border: solid 2px #FF8328;
+  }
+  
+  button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+
+  .comment-input button {
+    background-image: url('file:///C:/Users/User/Downloads/send%20(3).png'); /* Replace with your image URL */
+    background-repeat: no-repeat;
+    width: 24px; /* Set the width and height of your button image */
+    height: 24px;
+  }
+  .cards-container {
+   
+    width: 647px;
+    height: auto;
+    margin-top: 20px;
+    background: #2B2C31;
+    border-radius: 20px;
+    border: solid 0.5px #4B4D55;
+  }
+  
+  .card {
+    color: #F9F5ED;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 4px;
+  }
+
+  .like-button {
+    background: url('file:///C:/Users/User/Downloads/upload%20(2).png') no-repeat;
+    width: 24px; /* Set the width and height of your button image */
+    height: 24px;
+    margin-left: 450px;
+  }
+  
+  .dislike-button {
+    background: url('file:///C:/Users/User/Downloads/down-arrow%20(8).png') no-repeat;
+    width: 24px; /* Set the width and height of your button image */
+    height: 24px;
+    margin-left: 35px;
+  }
+  
+  .comment-button {
+    background: url('file:///C:/Users/User/Downloads/comment.png') no-repeat left center; /* Adjust the background-position as needed */
+    width: 24px; /* Set the width and height of your button image */
+    height: 24px;
+    margin-left: 35px;
+    margin-bottom: 10px;
+  }
+
+  .optmore{
+    background: url('file:///C:/Users/User/Downloads/option.png') no-repeat left center; /* Adjust the background-position as needed */
+    width: 24px; /* Set the width and height of your button image */
+    height: 24px;
+  }
+
+ 
+  .card-buttons{
+    border-top: 1px solid #4B4D55;
+    padding-top: 20px;
+    margin-top: 27px;
+  }
+
+  .card-content{
+    font-size: 22px;
+    margin-top: 40px;
+    text-align: left;
+    margin-left: 20px;
+  }
