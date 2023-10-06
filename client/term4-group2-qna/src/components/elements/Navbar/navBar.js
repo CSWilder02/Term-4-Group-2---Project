@@ -14,11 +14,39 @@ export const NavBar = () => {
         } else {
             return "button-nav-deactive"
         }
+    };
+
+    const returnUserBtn = () => {
+        if (loggenIn === "true") {
+            return (
+                <div className='navBarRightItm-3-Container'>
+                    <span className="material-icons md-24 ">
+                        person
+                    </span>
+                    <div className='text-normal'>
+                        {username}
+                    </div>
+                    <span className="material-icons md-24">
+                        expand_more
+                    </span>
+                </div>
+            )
+
+        } else {
+            return (
+                <div className='navBarRightItm-3-Container'>
+                    <button className='button-primary'>Sign In</button>
+                </div>
+            )
+
+        }
     }
 
     useEffect(() => {
         setLoggedIn(sessionStorage.getItem("loggedIn"))
-    }, [sessionStorage.getItem("loggedIn")])
+    }, [sessionStorage.getItem("loggedIn")]);
+
+
     return (
         <Row xs={1} sm={1} md={1} lg={1} xl={3} xxl={3} className='navBarWrap'>
             <Col className='navBarLeftContainer'>
@@ -36,17 +64,7 @@ export const NavBar = () => {
                     <span className="material-icons md-24 ">notifications</span>
                     Notifications
                 </div>
-                <div className='navBarRightItm-3-Container'>
-                    <span className="material-icons md-24 ">
-                        person
-                    </span>
-                    <div className='normalText'>
-                        {username}
-                    </div>
-                    <span className="material-icons md-24">
-                        expand_more
-                    </span>
-                </div>
+                {returnUserBtn()}
             </Col>
         </Row>
         // <Container>

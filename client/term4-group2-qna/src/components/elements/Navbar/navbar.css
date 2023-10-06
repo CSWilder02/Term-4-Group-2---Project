@@ -19,15 +19,19 @@
     display: flex;
     width: fit-content;
     align-items: center;
-    gap: 20px;
+    gap: 30px;
+}
+
+.navBarLeftContainer {
+    font-family: Kanit;
 }
 
 .navBarRightItm-3-Container {
     display: flex;
     justify-content: center;
     gap: 8px;
-    background: #26282C;
-    padding: 8px 10px;
+    /* background: #26282C; */
+    padding: 6px 10px;
     border-radius: 12px;
     cursor: pointer;
 }

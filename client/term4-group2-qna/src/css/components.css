@@ -1,12 +1,12 @@
 .button-primary {
-    font-size: 18px;
+    font-size: 16px;
     font-family: Kanit;
     font-weight: 450;
     background: #FF8328;
     color: #101011;
     border: 2px solid #FF8328;
     border-radius: 300px;
-    padding: 6px 14px;
+    padding: 4px 12px;
 }
 
 .button-primary:hover {
@@ -53,11 +53,28 @@
     font-size: 16px;
 }
 
-.button-nave-deactive:hover {
+.button-nav-deactive:hover {
     color: #FF8328;
-    border: 2px solid #26282C;
 }
 
-.normalText {
-    font-size: 16px;
+.material-icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon {
+    cursor: pointer;
+}
+
+.text-normal {
+    font-size: 15px;
+    font-family: Pontano Sans;
+    font-weight: 600;
+}
+
+.text-sm {
+    font-size: 13px;
+    font-family: Pontano Sans;
+    font-weight: 500;
 }
