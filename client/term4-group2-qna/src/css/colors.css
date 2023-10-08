@@ -9,3 +9,7 @@
 .theme-tertiary {
     background: #26282C;
 }
+
+.color-danger {
+    color: #f15d5d !important;
+}

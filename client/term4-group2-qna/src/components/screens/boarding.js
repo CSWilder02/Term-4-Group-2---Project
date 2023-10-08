@@ -4,7 +4,8 @@ import axios from 'axios';
 export const Boarding = ({ user }) => {
 
     // const api_url = process.env.API_URL
-    const api_url = "http://localhost:5000"
+    // const api_url = "http://localhost:5000"
+    const api_url = "http://192.168.8.100:5000"
     const [loginData, setLoginData] = useState({});
     const [registerData, setRegisterData] = useState({});
 
@@ -28,11 +29,13 @@ export const Boarding = ({ user }) => {
         axios.request(config)
             .then((response) => {
                 console.log(response);
+                alert(response.data.message)
                 sessionStorage.setItem("loggedIn", "true")
                 sessionStorage.setItem("user", JSON.stringify(response.data.user))
                 sessionStorage.setItem("token", response.data.token)
             })
             .catch((error) => {
+                alert(error)
                 console.log(error);
             });
     }
@@ -41,7 +44,7 @@ export const Boarding = ({ user }) => {
         let config = {
             method: 'post',
             maxBodyLength: Infinity,
-            url: 'http://localhost:5000/api/registerUser/',
+            url: api_url + '/api/registerUser/',
             headers: {
                 'Content-Type': 'application/json'
             },
