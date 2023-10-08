@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import "./searchBar.css"
+import "./searchBar.css";
 
 export const SearchBar = () => {
     const [searchBarWrap_active, setSearchBarWrap_active] = useState(false);
@@ -18,6 +18,7 @@ export const SearchBar = () => {
     ]);
     // con
     // const[i, setI] = useState(false);
+
 
     useEffect(() => {
 

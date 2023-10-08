@@ -17,8 +17,7 @@ export const NavBar = () => {
         } else {
             return "button-nav-deactive"
         }
-    };
-
+    }
 
     useEffect(() => {
         setLoggedIn(sessionStorage.getItem("loggedIn"))
@@ -47,8 +46,9 @@ export const NavBar = () => {
                     <span className="material-icons md-24 ">notifications</span>
                     <div className='navBarRightContainerItmTxt'>Notifications</div>
                 </div>
-                {/* {returnUserBtn()} */}
-                <RightBar />
+                <div className='navBarRightItm-3-Container'>
+                    <RightBar />
+                </div>
             </Col>
 
         </Row>

@@ -1,11 +1,13 @@
 .button-primary {
     font-size: 16px;
+    font-size: 16px;
     font-family: Kanit;
     font-weight: 450;
     background: #FF8328;
     color: #101011;
     border: 2px solid #FF8328;
     border-radius: 300px;
+    padding: 4px 12px;
     padding: 4px 12px;
 }
 
