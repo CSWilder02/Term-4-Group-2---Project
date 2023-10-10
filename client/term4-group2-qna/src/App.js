@@ -7,7 +7,7 @@ import { Routes, Route, NavLink } from 'react-router-dom';
 import { Home } from './components/screens/home';
 import { QuestionPage } from './components/screens/questionPage';
 import { UserAccount } from './components/screens/userAccount';
-import { Boarding } from './components/screens/boarding';
+import Boarding from './components/screens/boarding'; // Updated import without curly braces
 import PrivateRoute from './components/util/privateRoute';
 import { NavBar } from './components/elements/Navbar/navBar';
 // require('dotenv/config')
