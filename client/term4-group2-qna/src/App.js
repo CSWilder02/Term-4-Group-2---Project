@@ -27,7 +27,6 @@ function App() {
         <Route path='/questions' element={<PrivateRoute><QuestionPage /></PrivateRoute>} />
         <Route path='/user/:id' element={<PrivateRoute><UserAccount /></PrivateRoute>} />
         <Route path='/boarding' element={<Boarding />} />
-        <Route path='/test' element={<Question />} />
       </Routes>
     </div>
   );
