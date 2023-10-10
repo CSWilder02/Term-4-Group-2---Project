@@ -1,0 +1,15 @@
+.Comment {
+    background-color: #232428;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 20px auto 0;
+}
+
+.question-box {
+    background-color: #313338;
+    width: 744px;
+    height: 100px;
+    border-radius: 20px;
+
+}
