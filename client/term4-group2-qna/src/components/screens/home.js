@@ -7,6 +7,9 @@ import CommentCard from './CommentCard';
 
 import Logo from './code.png';
 import More from './more.png';
+import User from './User.png'
+
+
 
 export const Home = ({ user }) => {
     const [inputText, setInputText] = useState('');
@@ -368,6 +371,21 @@ export const Home = ({ user }) => {
           <button onClick={handleDeleteImage}>Delete Image</button>
         </div>
       )}
+
+      <div className='AccountSec'>
+      <img style={{width: '60px', float: 'left', marginTop: '15px', marginLeft: '20px'}} src={User} alt="Uploaded Image" />
+      <p style={{color: '#F9F5ED', marginTop: '55px', fontSize: '15px', marginRight: '130px'}}>Home</p>
+      <p style={{color: '#4B4D55', fontSize: '15px', width: '280px', textAlign: 'left', marginLeft: '20px'}}>Your personal Reddit frontpage. Come here to check in with your favorite communities.</p>
+      <button className='QuestionAsk'>Ask questions </button>
+      <button className='CreateCom'>Create Community </button>
+      </div>
+      <div className='StudentSec'>
+        
+      </div>
+      <div className='LecturerSec'>
+        
+        </div>
+
     </div>
   );
 };

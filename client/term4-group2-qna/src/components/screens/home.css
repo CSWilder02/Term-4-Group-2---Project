@@ -21,6 +21,7 @@
 
  
   .filter {
+    margin-left: -30px;
     height: 50px;
     width: 647px;
     background-color: #18191B;
@@ -225,12 +226,100 @@
 
 .Menu{
     float: left;
-
     width: 300px;
-    height: 630px;
-    margin-left: 50px;
+    height: 685px;
+    margin-left: 20px;
     margin-right: 0px;
     border-right: solid 1px  #4B4D55;
   }
 
+
+  /* Account Section */
+
+  .AccountSec{
+    background-image: url('Banner.png');
+    background-size: 300px;
+    background-repeat: no-repeat;
+    float: right;
+    background-color: #2B2C31;
+    width: 300px;
+    height: 290px;
+    margin-right: 60px;
+    margin-top: 30px;
+    border-radius: 10px;
+  }
+  
+  .LecturerSec{
+    float: right;
+    background-color: #2B2C31;
+    width: 300px;
+    height: 150px;
+    margin-right: 60px;
+    margin-top: 20px;
+    border-radius: 10px;
+  }
+
+  .StudentSec{
+    float: right;
+    background-color: #2B2C31;
+    width: 300px;
+    height: 150px;
+    margin-right: 60px;
+    margin-top: 20px;
+    border-radius: 10px;
+  }
+
+  .QuestionAsk{
+    background-color: #FF8328;
+    color: #2B2C31;
+    text-align: left;
+    padding-left: 30px;
+    width: 270px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    background-image: url('SearchQuest.png');
+    background-repeat: no-repeat;
+    background-position: 220px;
+    background-size: 20px;
+  }
+
+  .QuestionAsk:hover{
+    background-color: #4B4D55;
+    color: #F9F5ED;
+    text-align: left;
+    padding-left: 30px;
+    width: 270px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    background-image: url('SearchQuest2.png');
+    background-repeat: no-repeat;
+    background-position: 220px;
+    background-size: 20px;
+  }
+
+  .CreateCom{
+    border: solid 2px #4B4D55;
+    background-color: transparent;
+    text-align: left;
+    padding-left: 30px;
+    width: 270px;
+    border-radius: 20px;
+    background-image: url('Plus2.png');
+    background-repeat: no-repeat;
+    background-position: 225px;
+    background-size: 20px;
+  }
+
+  .CreateCom:hover{
+    background-color: #18191B;
+    color: #F9F5ED;
+    text-align: left;
+    padding-left: 30px;
+    width: 270px;
+    border-radius: 20px;
+    background-image: url('Plus2.png');
+    background-repeat: no-repeat;
+    background-position: 225px;
+    background-size: 20px;
+  }
   
