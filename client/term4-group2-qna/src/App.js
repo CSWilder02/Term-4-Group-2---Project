@@ -5,7 +5,6 @@ import { Home } from './components/screens/home';
 import { QuestionPage } from './components/screens/questionPage';
 import { UserAccount } from './components/screens/userAccount';
 import { Boarding } from './components/screens/boarding';
-import { Question } from './singleQuestionPage/singleQuestion';
 import PrivateRoute from './components/util/privateRoute';
 // require('dotenv/config')
 
