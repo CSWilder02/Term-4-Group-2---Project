@@ -8,12 +8,13 @@ export const RightBar = () => {
     const [username, setUsername] = useState("21100419");
     const [fullName, setFullName] = useState("Eddie Sosera");
     const [isRightBarActive, setIsRightBarActive] = useState(false);
-    const [loggenIn, setLoggedIn] = useState(sessionStorage.getItem("loggedIn"));
+    const [isLoggenIn, setIsLoggedIn] = useState('false');
 
     const [sectionItems, setsectionItems] = useState([
         {
             icon: "person",
-            title: "View Profile"
+            title: "View Profile",
+            function: () => { navigateTo('/user/me') }
         },
     ]);
 
@@ -43,48 +44,32 @@ export const RightBar = () => {
         },
     ]);
 
-    const [sectionCommunities, setSectionCommunities] = useState([
-        {
-            category: "First Year",
-            communities: [
-                { title: "DV100", to: "/dv100" },
-                { title: "XD100", to: "/xd100" },
-                { title: "ID100", to: "/id100" }
-            ]
-        },
-        {
-            category: "Second Year",
-            communities: [
-                { title: "DV200", to: "/dv200" },
-                { title: "XD200", to: "/xd200" },
-                { title: "ID200", to: "/id200" }
-            ]
-        },
-        {
-            category: "Third Year",
-            communities: [
-                { title: "DV300", to: "/dv300" },
-                { title: "XD300", to: "/xd300" },
-                { title: "ID300", to: "/id300" }
-            ]
-        }
-    ]);
-
-    const [siderBarSelectedDropDown, setSiderBarSelectedDropDown] = useState(sectionCommunities[0].category);
-
     useEffect(() => {
-        setLoggedIn(sessionStorage.getItem("loggedIn"))
-    }, [isRightBarActive]);
+
+        setIsLoggedIn(sessionStorage.getItem('loggedIn'))
+
+    }, [isRightBarActive, isLoggenIn]);
+
+
+    // Function to handle storage changes
+    function handleStorageChange(event) {
+        if (event.key === 'loggedIn') {
+            // Do something with the new value, for example, update a state variable
+            setIsLoggedIn(event.newValue)
+        }
+    }
+    window.addEventListener('storage', handleStorageChange);
+
 
     const returnProfileIcon = () => {
-        if (loggenIn === "true") {
+        if (isLoggenIn === "true") {
             return (
                 <div className='navBarRightItm-3-Container icon-button' onClick={e => setIsRightBarActive(true)}>
                     <span className="material-icons md-24 ">
                         person
                     </span>
                     <div className='text-normal'>
-                        {username}
+                        {username + 'is' + isLoggenIn}
                     </div>
                     <span className="material-icons md-24">
                         expand_more
@@ -96,9 +81,9 @@ export const RightBar = () => {
             return (
                 <div className='navBarRightItm-3-Container'>
                     <button className='button-primary'
-                        // onClick={e => navigateTo("/boarding")}
-                        onClick={e => setIsRightBarActive(true)}
-                    >Sign In</button>
+                        onClick={e => navigateTo("/boarding")}
+                    // onClick={e => setIsRightBarActive(true)}
+                    >Sign In is{isLoggenIn}</button>
                 </div>
             )
 
@@ -108,6 +93,7 @@ export const RightBar = () => {
     const returnRightBar = () => {
         return (
             <div className='sideBarContainer rightSideBarContainer'>
+                {isLoggenIn}
                 <div className='sideBarTopContainer '>
                     <div className='navBarLeftTextContainer'><div className='navBarRightItm-3-Container icon-button' onClick={e => setIsRightBarActive(true)}>
                         <span className="material-icons md-24 ">
@@ -131,7 +117,7 @@ export const RightBar = () => {
                     {
                         sectionItems.map((item) => {
                             return (
-                                <div className='sideBarSectionItmContainer'>
+                                <div className='sideBarSectionItmContainer' onClick={item.function}>
                                     <span class="material-icons icon-button sideBarSectionIcon">
                                         {item.icon}
                                     </span>
@@ -184,7 +170,8 @@ export const RightBar = () => {
                         <span class="material-icons icon-button sideBarSectionIcon color-danger">
                             logout
                         </span>
-                        <div className='font-heading color-danger'>Sign Out</div>
+                        <div className='sideBarSectionTitle font-heading color-danger'
+                            onClick={e => { sessionStorage.setItem('loggedIn', 'false'); setIsRightBarActive(false) }}>Sign Out</div>
                     </div>
                 </div>
             </div >

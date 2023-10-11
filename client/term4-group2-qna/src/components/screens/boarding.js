@@ -5,7 +5,7 @@ export const Boarding = ({ user }) => {
 
     // const api_url = process.env.API_URL
     // const api_url = "http://localhost:5000"
-    const api_url = "http://192.168.8.100:5000"
+    const api_url = "http://localhost:5000"
     const [loginData, setLoginData] = useState({});
     const [registerData, setRegisterData] = useState({});
 

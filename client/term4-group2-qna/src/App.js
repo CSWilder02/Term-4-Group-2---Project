@@ -6,7 +6,7 @@ import React, { useEffect } from 'react';
 import { Routes, Route, NavLink } from 'react-router-dom';
 import { Home } from './components/screens/home';
 import { QuestionPage } from './components/screens/questionPage';
-import { UserAccount } from './components/screens/userAccount';
+// import { UserAccount } from './components/screens/entitities/userAccount';
 import { Boarding } from './components/screens/boarding';
 import PrivateRoute from './components/util/privateRoute';
 import { NavBar } from './components/elements/Navbar/navBar';
@@ -26,7 +26,7 @@ function App() {
 
       <NavBar />
       {/* Test out routing */}
-      <NavLink to={`/user/1`}>user  </NavLink>|<NavLink to={`/questions`}>  + questions</NavLink>|<NavLink to={`/user/me`}>  my profile</NavLink>
+      {/* <NavLink to={`/user/1`}>user  </NavLink>|<NavLink to={`/questions`}>  + questions</NavLink>|<NavLink to={`/user/me`}>  my profile</NavLink> */}
 
       {/* All Routes */}
       <Routes>
