@@ -14,7 +14,7 @@ export const RightBar = () => {
         {
             icon: "person",
             title: "View Profile",
-            function: () => { navigateTo('/user/me') }
+            function: () => { navigateTo('/user/me'); setIsRightBarActive(false) }
         },
     ]);
 

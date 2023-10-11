@@ -9,6 +9,7 @@
     border-radius: 300px;
     padding: 4px 12px;
     padding: 4px 12px;
+    height: fit-content;
 }
 
 .button-primary:hover {
