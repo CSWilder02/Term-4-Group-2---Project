@@ -243,7 +243,7 @@
     float: right;
     background-color: #2B2C31;
     width: 300px;
-    height: 290px;
+    height: 270px;
     margin-right: 60px;
     margin-top: 30px;
     border-radius: 10px;
@@ -253,9 +253,9 @@
     float: right;
     background-color: #2B2C31;
     width: 300px;
-    height: 150px;
+    height: 170px;
     margin-right: 60px;
-    margin-top: 20px;
+    margin-top: 10px;
     border-radius: 10px;
   }
 
@@ -263,13 +263,14 @@
     float: right;
     background-color: #2B2C31;
     width: 300px;
-    height: 150px;
+    height: 170px;
     margin-right: 60px;
-    margin-top: 20px;
+    margin-top: 10px;
     border-radius: 10px;
   }
 
   .QuestionAsk{
+    font-size: 12px;
     background-color: #FF8328;
     color: #2B2C31;
     text-align: left;
@@ -279,8 +280,8 @@
     margin-bottom: 12px;
     background-image: url('SearchQuest.png');
     background-repeat: no-repeat;
-    background-position: 220px;
-    background-size: 20px;
+    background-position: 230px;
+    background-size: 15px;
   }
 
   .QuestionAsk:hover{
@@ -293,21 +294,23 @@
     margin-bottom: 12px;
     background-image: url('SearchQuest2.png');
     background-repeat: no-repeat;
-    background-position: 220px;
-    background-size: 20px;
+    background-position: 230px;
+    background-size: 15px;
   }
 
   .CreateCom{
+    font-size: 12px;
     border: solid 2px #4B4D55;
     background-color: transparent;
     text-align: left;
     padding-left: 30px;
     width: 270px;
+    height: 35px;
     border-radius: 20px;
     background-image: url('Plus2.png');
     background-repeat: no-repeat;
-    background-position: 225px;
-    background-size: 20px;
+    background-position: 230px;
+    background-size: 15px;
   }
 
   .CreateCom:hover{
@@ -316,10 +319,82 @@
     text-align: left;
     padding-left: 30px;
     width: 270px;
+    height: 35px;
     border-radius: 20px;
     background-image: url('Plus2.png');
     background-repeat: no-repeat;
-    background-position: 225px;
-    background-size: 20px;
+    background-position: 230px;
+    background-size: 15px;
   }
   
+  .LecTitle{
+    width: 300px;
+    padding-bottom: 10px;
+    font-size: 12px;
+    color: #A3AABC;
+    float: left;
+    padding-left: 20px;
+    padding-top: 15px;
+    border-bottom: solid 1px #A3AABC;
+    text-align: left;
+  }
+
+  .Student1{
+    margin-left: 8px;
+    height: 62px;
+    width: 280px;
+    margin-top: 48px;
+    border-bottom: solid 1px #4B4D55;
+  }
+
+  .Student2{
+    margin-left: 8px;
+    height: 62px;
+    width: 280px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+
+  .Lecture1{
+    margin-left: 8px;
+    height: 62px;
+    width: 280px;
+    margin-top: 45.1px;
+    border-bottom: solid 1px #4B4D55;
+  }
+
+  .Lecture2{
+    margin-left: 8px;
+    height: 62px;
+    width: 280px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+
+  .NameOfProduct{
+    height: 15px;
+    width: 200px;
+    color: #F9F5ED;
+    float: left;
+    font-size: 15px;
+    margin-left: -30px;
+    margin-bottom: 5px;
+  }
+
+  .NameOfProduct2{
+    height: 15px;
+    width: 200px;
+    color: #F9F5ED;
+    float: left;
+    font-size: 15px;
+    margin-left: -45px;
+    margin-top: -13px;
+    margin-bottom: 5px;
+  }
+
+  .LecEmail{
+    color: #F9F5ED;
+    font-size: 13px;
+    float: left;
+    margin-left: 15px;
+  }

@@ -7,9 +7,10 @@ import CommentCard from './CommentCard';
 
 import Logo from './code.png';
 import More from './more.png';
-import User from './User.png'
-
-
+import User from './User.png';
+import Male from './Male.png';
+import Female from './Female.png';
+import Mail from './mail.png'
 
 export const Home = ({ user }) => {
     const [inputText, setInputText] = useState('');
@@ -380,11 +381,37 @@ export const Home = ({ user }) => {
       <button className='CreateCom'>Create Community </button>
       </div>
       <div className='StudentSec'>
-        
+        <p className='LecTitle'>LECTURES</p>
+        <div className='Lecture1'>
+        <img style={{width: '30px', float: 'left', marginLeft: '10px'}} src={Male} alt="Uploaded Image" />
+        <p className='NameOfProduct'>Gordon Norman</p>
+        <p className='LecEmail'>gordonnorman@gmail.com</p>
+        <img style={{width: '25px', float: 'Right', marginTop: '-12px', marginRight: '10px'}} src={Mail} alt="Uploaded Image" />
+        </div>
+        <br/>
+        <div className='Lecture2'>
+        <img style={{width: '30px', float: 'left', marginLeft: '10px', marginTop: '-8px'}} src={Female} alt="Uploaded Image" />
+        <p className='NameOfProduct2'>Sonya Wolf</p>
+        <p className='LecEmail'>sonyawolf@gmail.com</p>
+        <img style={{width: '25px', float: 'Right', marginTop: '-12px', marginRight: '10px'}} src={Mail} alt="Uploaded Image" />
+        </div>
       </div>
       <div className='LecturerSec'>
-        
-        </div>
+      <p className='LecTitle'>STUDENTS</p>
+      <div className='Student1'>
+      <img style={{width: '30px', float: 'left', marginLeft: '10px'}} src={Male} alt="Uploaded Image" />
+        <p className='NameOfProduct'>Gordon Norman</p>
+        <p className='LecEmail'>gordonnorman@gmail.com</p>
+        <img style={{width: '25px', float: 'Right', marginTop: '-12px', marginRight: '10px'}} src={Mail} alt="Uploaded Image" />
+      </div>
+      <br/>
+      <div className='Student2'>
+      <img style={{width: '30px', float: 'left', marginLeft: '10px', marginTop: '-8px'}} src={Female} alt="Uploaded Image" />
+        <p className='NameOfProduct2'>Sonya Wolf</p>
+        <p className='LecEmail'>sonyawolf@gmail.com</p>
+        <img style={{width: '25px', float: 'Right', marginTop: '-12px', marginRight: '10px'}} src={Mail} alt="Uploaded Image" />
+      </div>
+     </div>
 
     </div>
   );
