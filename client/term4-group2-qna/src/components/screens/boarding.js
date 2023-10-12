@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../../frontend.css';
 
-const Boarding = ({ user }) => {
+export const Boarding = ({ user }) => {
     const api_url = "http://localhost:5000";
   const [loginData, setLoginData] = useState({});
   const [registerData, setRegisterData] = useState({}); // Declare and initialize registerData
@@ -138,5 +138,3 @@ const Boarding = ({ user }) => {
         </div>
     )
 }
-
-export default Boarding; // Export Boarding as the default export
