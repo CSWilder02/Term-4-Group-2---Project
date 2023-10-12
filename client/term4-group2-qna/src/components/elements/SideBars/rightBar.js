@@ -83,7 +83,9 @@ export const RightBar = () => {
                     <button className='button-primary'
                         onClick={e => navigateTo("/boarding")}
                     // onClick={e => setIsRightBarActive(true)}
-                    >Sign In is{isLoggenIn}</button>
+                    >Sign In is
+                        {/* {isLoggenIn} */}
+                    </button>
                 </div>
             )
 

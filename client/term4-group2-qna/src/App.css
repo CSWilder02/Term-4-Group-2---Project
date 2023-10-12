@@ -36,3 +36,7 @@ html {
   background: none;
   color: #87B7FF;
 }
+
+hr {
+  border: 1px solid #39393c !important;
+}
