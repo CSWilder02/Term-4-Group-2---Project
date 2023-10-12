@@ -65,12 +65,15 @@ router.post("/api/createQuestion", verifyToken, async (req, res) => {
 });
 
 // Get All Questions
-router.get("/api/getQuestions", verifyToken, async (req, res) => {
+router.get("/api/getQuestions",  async (req, res) => {
+    console.log("WORKING")
     try {
-        const userId = req.user.userId;
+        // const userId = req.user.userId;
         // const userCommunity = req.user.username; // username is available in the JWT payload
 
-        const findQuestion = await QuestionSchema.find({ questioner: userId });
+        const findQuestion = await QuestionSchema.find(
+            // { questioner: userId }
+            );
         res.json(findQuestion);
     }
     catch (error) {

@@ -1,30 +1,24 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import './home.css'; // Make sure your 'home.css' file is in the same directory
 import { Container, Row, Col } from 'react-bootstrap';
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
-import CommentCard from './CommentCard';
 
 import Logo from './code.png';
 import More from './more.png';
-import User from './User.png';
-import Male from './Male.png';
-import Female from './Female.png';
-import Mail from './mail.png'
-
 export const Home = ({ user }) => {
-    const [inputText, setInputText] = useState('');
-    const [cards, setCards] = useState([]);
-    const [likes, setLikes] = useState([]);
-    const [dislikes, setDislikes] = useState([]);
-    const [showCommentInputs, setShowCommentInputs] = useState(Array(cards.length).fill(false));
-    const [comments, setComments] = useState(Array(cards.length).fill([]).map(_ => []));
-    const [images, setImages] = useState([]);
-    const [timestamps, setTimestamps] = useState([]);
-    const [groupNames, setGroupNames] = useState([]);
-    const [commentTimes, setCommentTimes] = useState(Array(cards.length).fill(0)); // Keep track of comment times
-    const [currentGroupName, setCurrentGroupName] = useState("Home"); // Track the currently selected group name
-  
+  const [inputText, setInputText] = useState('');
+  const [cards, setCards] = useState([]);
+  const [likes, setLikes] = useState([]);
+  const [dislikes, setDislikes] = useState([]);
+  const [showCommentInputs, setShowCommentInputs] = useState(Array(cards.length).fill(false));
+  const [comments, setComments] = useState(Array(cards.length).fill(''));
+  const [images, setImages] = useState([]);
+  const [timestamps, setTimestamps] = useState([]);
+  const [groupNames, setGroupNames] = useState([]);
+  const [commentTimes, setCommentTimes] = useState(Array(cards.length).fill(0)); // Keep track of comment times
+  const [currentGroupName, setCurrentGroupName] = useState("Home"); // Track the currently selected group name
+
   // Function to save the state to localStorage
   const saveStateToLocalStorage = () => {
     localStorage.setItem('cards', JSON.stringify(cards));
@@ -40,7 +34,6 @@ export const Home = ({ user }) => {
   // Function to load the state from localStorage
   const loadStateFromLocalStorage = () => {
     const savedCards = JSON.parse(localStorage.getItem('cards')) || [];
-    console.log('Saved Cards:', savedCards);
     const savedLikes = JSON.parse(localStorage.getItem('likes')) || [];
     const savedDislikes = JSON.parse(localStorage.getItem('dislikes')) || [];
     const savedShowCommentInputs = JSON.parse(localStorage.getItem('showCommentInputs')) || [];
@@ -62,66 +55,23 @@ export const Home = ({ user }) => {
   const [uploadedImage, setUploadedImage] = useState('');
   const fileInputRef = useRef(null);
 
-   // Define your API endpoint for fetching and saving card data
-   const apiUrl = 'http://localhost:5000/api/cards';
-
-   
-  // Function to fetch card data
-  const fetchCardData = () => {
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        setCards(data);
-      })
-      .catch((error) => {
-        console.error('Error fetching card data:', error);
-      });
+  const addNewCard = () => {
+    // Create a new card object and add it to the cards array
+    const newCard = "Your new card content";
+    setCards((prevCards) => [...prevCards, newCard]);
+  };
+  
+  const removeCard = (indexToRemove) => {
+    setCards((prevCards) => prevCards.filter((_, index) => index !== indexToRemove));
   };
 
-  // Function to save card data to the API
-  const saveCardData = (newCard) => {
-    fetch(apiUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newCard),
-    })
-      .then((response) => response.json())
-      .then((savedCard) => {
-        // Add the saved card to the cards state
-        setCards([...cards, savedCard]);
-      })
-      .catch((error) => {
-        console.error('Error saving card data:', error);
-      });
-  };
-
-  // Function to handle sending text and image (if available)
-  const handleSendClick = () => {
-    if (inputText.trim() === '') {
-      // If the input text is empty or contains only whitespace, do not add a card
-      return;
-    }
-
-    // Create a new card object with both text and uploaded image URL
-    const newCard = {
-      text: inputText,
-      imageUrl: uploadedImage,
-    };
-
-    // Save the new card to the API
-    saveCardData(newCard);
-
-    // Clear the input text and uploaded image
-    setInputText('');
-    setUploadedImage('');
-  };
-
-  // Fetch card data when the component mounts
-  useEffect(() => {
-    fetchCardData();
-  }, []);
+  const updateCardContent = (indexToUpdate, newContent) => {
+  setCards((prevCards) => {
+    const updatedCards = [...prevCards];
+    updatedCards[indexToUpdate] = newContent;
+    return updatedCards;
+  });
+};
 
 
   // Function to handle image upload
@@ -162,12 +112,21 @@ export const Home = ({ user }) => {
     setInputText(event.target.value);
   };
 
+  // Function to handle sending text and image (if available)
+  const handleSendClick = () => {
+    // Here, you can send both 'inputText' and 'uploadedImage' to your desired destination.
+    // For demonstration purposes, we'll just log them here.
+    console.log('Text Input:', inputText);
+    console.log('Image URL:', uploadedImage);
+  };
+
   useEffect(() => {
+    // Load the state from localStorage when the component mounts
     loadStateFromLocalStorage();
   }, []);
 
   useEffect(() => {
-    console.log("Saving to local storage...");
+    // Save the state to localStorage whenever it changes
     saveStateToLocalStorage();
   }, [cards, likes, dislikes, showCommentInputs, comments, images, timestamps, groupNames]);
 
@@ -202,11 +161,7 @@ export const Home = ({ user }) => {
 
   const handleCommentSubmit = (index) => {
     const updatedComments = [...comments];
-    const newComment = {
-      text: comments[index], // Assuming you want to add the text from the input
-      timestamp: new Date().toISOString(), // You can use the current timestamp
-    };
-    updatedComments[index].push(newComment);
+    updatedComments[index] =+ 1;
     setComments(updatedComments);
 
     // Calculate the time difference when a comment is added
@@ -259,23 +214,6 @@ export const Home = ({ user }) => {
     // Reset the uploadedImage state variable to an empty string
     setUploadedImage('');
   };
-
-   // Add a new state variable to track uploaded images for each card
-   const [uploadedImagesForCards, setUploadedImagesForCards] = useState(Array(cards.length).fill(''));
-
-  // Fetch data and set the cards state
-  useEffect(() => {
-    // Make a network request to fetch data from your API or another data source
-    fetch('http://localhost:5000/api/cards')
-      .then((response) => response.json())
-      .then((data) => {
-        // Set the fetched data to the cards state
-        setCards(data);
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  }, []);
 
   return (
     <div className="Home">
@@ -333,10 +271,10 @@ export const Home = ({ user }) => {
 
       <div className="cards-container-wrapper">
         <div className="cards-container">
-          {cards.map((card, index) => (
-            <div key={index} className="card">
+          {cards.map((text, index) => (
+            <div key={index}>
               <div className="card-header">
-                <img src={Logo} alt="Logo" style={{ width: '32px', float: 'left', marginLeft: '20px' }} />
+                <img src={Logo} style={{ width: '32px', float: 'left', marginLeft: '20px' }} />
                 <span style={{ float: 'left', marginLeft: '20px', fontSize: '15px', marginTop: '5px' }}>{currentGroupName}</span>
                 {commentTimes[index] >= 60 ? (
                   <span style={{ marginLeft: '330px', fontSize: '12px' }}>
@@ -347,18 +285,9 @@ export const Home = ({ user }) => {
                     {commentTimes[index]} minutes ago
                   </span>
                 )}
-                <img src={More} alt="More" style={{ width: '24px', marginLeft: '20px' }} />
+                <img src={More} style={{ width: '24px', marginLeft: '20px' }} />
               </div>
-              <div className="card-content">{card.text}</div>
-              {card.imageUrl && (
-                <div className="card-image">
-                  <img
-                    src={card.imageUrl}
-                    alt="Uploaded Image"
-                    style={{ width: '100px', height: '100px' }} // Set width and height here
-                  />
-                </div>
-              )}
+              <div className="card-content">{text}</div>
               <div className={`card-buttons card-buttons-${index}`}>
                 <button className={`like-button like-button-${index}`} onClick={() => handleLikeClick(index)}>
                   ({likes[index]})
@@ -367,7 +296,7 @@ export const Home = ({ user }) => {
                   ({dislikes[index]})
                 </button>
                 <button className={`comment-button comment-button-${index}`} onClick={() => handleCommentButtonClick(index)}>
-                  ({comments[index].length})
+                  ({comments[index]})
                 </button>
               </div>
               {showCommentInputs[index] && (
@@ -378,90 +307,36 @@ export const Home = ({ user }) => {
                     value={comments[index]}
                     onChange={(e) => handleCommentInputChange(index, e)}
                   />
-                  <button onClick={() => handleCommentSubmit(index)}>Submit</button>
-                </div>
-              )}
-              {comments[index].map((comment, commentIndex) => (
-                <CommentCard
-                  key={commentIndex}
-                  commentText={comment.text}
-                  timestamp={comment.timestamp}
-                />
-              ))}
-              {card.imageUrl && (
-                <div className="card-image">
-                  <img src={card.imageUrl} alt="Uploaded Image" style={{ width: '100px', height: '100px' }} />
+                  <button onClick={() => handleCommentSubmit(index)}></button>
                 </div>
               )}
             </div>
           ))}
         </div>
-      </div>
-
-      <div className="input-container">
-        <input
-          type="text"
-          placeholder="Type something..."
-          value={inputText}
-          onChange={handleInputChange}
-        />
-        <button className="send" onClick={handleSendClick}></button>
-        <button className='ImageUpload' onClick={handleUploadButtonClick}></button>
-        <input
-          type="file"
-          ref={fileInputRef}
-          accept="image/*"
-          onChange={handleImageUpload}
-          style={{ display: 'none' }}
-        />
-      </div>
-      {uploadedImage && (
-        <div className="image-container">
-          <img src={uploadedImage} alt="Uploaded Image" />
-          <button onClick={handleDeleteImage}>Delete Image</button>
+        <div className="input-container">
+          <input
+            type="text"
+            placeholder="Type something..."
+            value={inputText}
+            onChange={handleInputChange}
+          />
+          <button className="send" onClick={handleSendClick}></button>
+          <button className='ImageUpload' onClick={handleUploadButtonClick}></button>
+          <input
+            type="file"
+            ref={fileInputRef}
+            accept="image/*"
+            onChange={handleImageUpload}
+            style={{ display: 'none' }}
+          />
         </div>
-      )}
-
-      <div className='AccountSec'>
-      <img style={{width: '60px', float: 'left', marginTop: '15px', marginLeft: '20px'}} src={User} alt="Uploaded Image" />
-      <p style={{color: '#F9F5ED', marginTop: '55px', fontSize: '15px', marginRight: '130px'}}>Home</p>
-      <p style={{color: '#4B4D55', fontSize: '15px', width: '280px', textAlign: 'left', marginLeft: '20px'}}>Your personal Reddit frontpage. Come here to check in with your favorite communities.</p>
-      <button className='QuestionAsk'>Ask questions </button>
-      <button className='CreateCom'>Create Community </button>
+        {uploadedImage && (
+          <div className="image-container">
+            <img src={uploadedImage} alt="Uploaded Image" />
+            <button onClick={handleDeleteImage}>Delete Image</button>
+          </div>
+        )}
       </div>
-      <div className='StudentSec'>
-        <p className='LecTitle'>LECTURES</p>
-        <div className='Lecture1'>
-        <img style={{width: '30px', float: 'left', marginLeft: '10px'}} src={Male} alt="Uploaded Image" />
-        <p className='NameOfProduct'>Gordon Norman</p>
-        <p className='LecEmail'>gordonnorman@gmail.com</p>
-        <img style={{width: '25px', float: 'Right', marginTop: '-12px', marginRight: '10px'}} src={Mail} alt="Uploaded Image" />
-        </div>
-        <br/>
-        <div className='Lecture2'>
-        <img style={{width: '30px', float: 'left', marginLeft: '10px', marginTop: '-8px'}} src={Female} alt="Uploaded Image" />
-        <p className='NameOfProduct2'>Sonya Wolf</p>
-        <p className='LecEmail'>sonyawolf@gmail.com</p>
-        <img style={{width: '25px', float: 'Right', marginTop: '-12px', marginRight: '10px'}} src={Mail} alt="Uploaded Image" />
-        </div>
-      </div>
-      <div className='LecturerSec'>
-      <p className='LecTitle'>STUDENTS</p>
-      <div className='Student1'>
-      <img style={{width: '30px', float: 'left', marginLeft: '10px'}} src={Male} alt="Uploaded Image" />
-        <p className='NameOfProduct'>Gordon Norman</p>
-        <p className='LecEmail'>gordonnorman@gmail.com</p>
-        <img style={{width: '25px', float: 'Right', marginTop: '-12px', marginRight: '10px'}} src={Mail} alt="Uploaded Image" />
-      </div>
-      <br/>
-      <div className='Student2'>
-      <img style={{width: '30px', float: 'left', marginLeft: '10px', marginTop: '-8px'}} src={Female} alt="Uploaded Image" />
-        <p className='NameOfProduct2'>Sonya Wolf</p>
-        <p className='LecEmail'>sonyawolf@gmail.com</p>
-        <img style={{width: '25px', float: 'Right', marginTop: '-12px', marginRight: '10px'}} src={Mail} alt="Uploaded Image" />
-      </div>
-     </div>
-
     </div>
   );
 };
