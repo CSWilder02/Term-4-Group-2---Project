@@ -62,6 +62,68 @@ export const Home = ({ user }) => {
   const [uploadedImage, setUploadedImage] = useState('');
   const fileInputRef = useRef(null);
 
+   // Define your API endpoint for fetching and saving card data
+   const apiUrl = 'http://localhost:5000/api/cards';
+
+   
+  // Function to fetch card data
+  const fetchCardData = () => {
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        setCards(data);
+      })
+      .catch((error) => {
+        console.error('Error fetching card data:', error);
+      });
+  };
+
+  // Function to save card data to the API
+  const saveCardData = (newCard) => {
+    fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newCard),
+    })
+      .then((response) => response.json())
+      .then((savedCard) => {
+        // Add the saved card to the cards state
+        setCards([...cards, savedCard]);
+      })
+      .catch((error) => {
+        console.error('Error saving card data:', error);
+      });
+  };
+
+  // Function to handle sending text and image (if available)
+  const handleSendClick = () => {
+    if (inputText.trim() === '') {
+      // If the input text is empty or contains only whitespace, do not add a card
+      return;
+    }
+
+    // Create a new card object with both text and uploaded image URL
+    const newCard = {
+      text: inputText,
+      imageUrl: uploadedImage,
+    };
+
+    // Save the new card to the API
+    saveCardData(newCard);
+
+    // Clear the input text and uploaded image
+    setInputText('');
+    setUploadedImage('');
+  };
+
+  // Fetch card data when the component mounts
+  useEffect(() => {
+    fetchCardData();
+  }, []);
+
+
   // Function to handle image upload
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -98,31 +160,6 @@ export const Home = ({ user }) => {
   // Function to handle text input change
   const handleInputChange = (event) => {
     setInputText(event.target.value);
-  };
-
- // Function to handle sending text and image (if available)
- const handleSendClick = () => {
-    if (inputText.trim() === '') {
-      // If the input text is empty or contains only whitespace, do not add a card
-      return;
-    }
-  
-    // Create a new card object with both text and uploaded image URL
-    const newCard = {
-      text: inputText,
-      imageUrl: uploadedImage,
-    };
-  
-    // Add the new card to the cards state
-    const newCards = [...cards, newCard]; // Create a new array with the updated data
-    setCards(newCards); // Update the state with the new array
-  
-    // Clear the input text and uploaded image
-    setInputText('');
-    setUploadedImage('');
-  
-    // Save the state to localStorage
-    saveStateToLocalStorage();
   };
 
   useEffect(() => {
@@ -226,7 +263,19 @@ export const Home = ({ user }) => {
    // Add a new state variable to track uploaded images for each card
    const [uploadedImagesForCards, setUploadedImagesForCards] = useState(Array(cards.length).fill(''));
 
-
+  // Fetch data and set the cards state
+  useEffect(() => {
+    // Make a network request to fetch data from your API or another data source
+    fetch('http://localhost:5000/api/cards')
+      .then((response) => response.json())
+      .then((data) => {
+        // Set the fetched data to the cards state
+        setCards(data);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
 
   return (
     <div className="Home">
