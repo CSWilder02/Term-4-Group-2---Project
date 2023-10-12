@@ -6,12 +6,12 @@ import React, { useEffect } from 'react';
 import { Routes, Route, NavLink } from 'react-router-dom';
 import { Home } from './components/screens/home';
 import { QuestionPage } from './components/screens/questionPage';
-import { UserAccount } from './components/screens/userAccount';
-import Boarding from './components/screens/boarding'; // Updated import without curly braces
+// import { UserAccount } from './components/screens/entitities/userAccount';
+import { Boarding } from './components/screens/boarding';
 import PrivateRoute from './components/util/privateRoute';
 import { NavBar } from './components/elements/Navbar/navBar';
+import { UserProfile } from './components/screens/entitities/userProfile';
 // require('dotenv/config')
-
 
 
 function App() {
@@ -23,16 +23,20 @@ function App() {
   })
   return (
     <div className="App">
+
       <NavBar />
-      {/* <NavLink to={`/user/1`}>user  </NavLink>
-      |
-      <NavLink to={`/questions`}>  create questions</NavLink> */}
+      {/* Test out routing */}
+      {/* <NavLink to={`/user/1`}>user  </NavLink>|<NavLink to={`/questions`}>  + questions</NavLink>|<NavLink to={`/user/me`}>  my profile</NavLink> */}
+
+      {/* All Routes */}
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/questions' element={<PrivateRoute><QuestionPage /></PrivateRoute>} />
-        <Route path='/user/:id' element={<PrivateRoute><UserAccount /></PrivateRoute>} />
+        {/* <Route path='/user/:id' element={<PrivateRoute><UserAccount /></PrivateRoute>} /> */}
         <Route path='/boarding' element={<Boarding />} />
+        <Route path='/user/:id' element={<PrivateRoute><UserProfile /></PrivateRoute>} />
       </Routes>
+
     </div>
   );
 }

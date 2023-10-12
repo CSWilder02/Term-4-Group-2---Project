@@ -5,13 +5,13 @@ import '../../frontend.css';
 
 export const Boarding = ({ user }) => {
     const api_url = "http://localhost:5000";
-  const [loginData, setLoginData] = useState({});
-  const [registerData, setRegisterData] = useState({}); // Declare and initialize registerData
-  const navigate = useNavigate(); // Initialize useNavigate
+    const [loginData, setLoginData] = useState({});
+    const [registerData, setRegisterData] = useState({}); // Declare and initialize registerData
+    const navigate = useNavigate(); // Initialize useNavigate
 
 
 
-   
+
 
     useEffect(() => {
         console.log("Login Data", loginData);
@@ -19,7 +19,7 @@ export const Boarding = ({ user }) => {
     }, [loginData, registerData]);
 
 
-      
+
     const submitLogin = () => {
         alert("Username: " + loginData.username + ", Password: " + loginData.password + ", url: " + api_url);
         let config = {
@@ -33,17 +33,17 @@ export const Boarding = ({ user }) => {
         };
 
         axios.request(config)
-      .then((response) => {
-        console.log(response);
-        sessionStorage.setItem("loggedIn", "true");
-        sessionStorage.setItem("user", JSON.stringify(response.data.user));
-        sessionStorage.setItem("token", response.data.token);
-        navigate('/'); // Navigate to the "Home" page
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+            .then((response) => {
+                console.log(response);
+                sessionStorage.setItem("loggedIn", "true");
+                sessionStorage.setItem("user", JSON.stringify(response.data.user));
+                sessionStorage.setItem("token", response.data.token);
+                navigate('/'); // Navigate to the "Home" page
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
 
 
     const submitRegister = () => {
@@ -97,8 +97,8 @@ export const Boarding = ({ user }) => {
                 </div>
                 <div className="form-container">
                     <div className="slide-controls">
-                        <input type="radio" name="slide" id="login" checked/>
-                        <input type="radio" name="slide" id="signup"/>
+                        <input type="radio" name="slide" id="login" checked />
+                        <input type="radio" name="slide" id="signup" />
                         <label for="login" className="slide login" onClick={loginBtn}>Login</label>
                         <label for="signup" className="slide signup" onClick={signupBtn}>Signup</label>
                         <div class="slider-tab"></div>
@@ -106,27 +106,27 @@ export const Boarding = ({ user }) => {
                     <div class="form-inner">
                         <form action="#" className="login" id="login2">
                             <div >
-                                <input className="field3" style={{marginLeft: '10px'}} type="text" placeholder="Username" onChange={(e) => setLoginData({ ...loginData, username: e.target.value })}/>
+                                <input className="field3" style={{ marginLeft: '10px' }} type="text" placeholder="Username" onChange={(e) => setLoginData({ ...loginData, username: e.target.value })} />
                             </div>
                             <div>
-                                <input className="field3" style={{marginLeft: '10px', marginTop: '10px'}} type="password" placeholder="Password" onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}/>
+                                <input className="field3" style={{ marginLeft: '10px', marginTop: '10px' }} type="password" placeholder="Password" onChange={(e) => setLoginData({ ...loginData, password: e.target.value })} />
                             </div>
-                            
+
                             <button className='login_button' onClick={submitLogin}>Log In</button>
-                            
+
                         </form>
                         <form action="#" className="signup">
                             <div>
-                                <input className="field2"  type="text" placeholder="Username" onChange={e => setRegisterData({ ...registerData, name: e.target.value })}/>
+                                <input className="field2" type="text" placeholder="Username" onChange={e => setRegisterData({ ...registerData, name: e.target.value })} />
                             </div>
                             <div>
-                                <input className="field2" style={{ marginTop: '10px'}} type="text" placeholder="Email"  onChange={e => setRegisterData({ ...registerData, email: e.target.value })}/>
+                                <input className="field2" style={{ marginTop: '10px' }} type="text" placeholder="Email" onChange={e => setRegisterData({ ...registerData, email: e.target.value })} />
                             </div>
                             <div className="field_file">
-                                <input className="field2" style={{marginTop: '10px'}} type="file" placeholder="Image" onChange={e => setRegisterData({ ...registerData, profileImage: e.target.value })}/>
+                                <input className="field2" style={{ marginTop: '10px' }} type="file" placeholder="Image" onChange={e => setRegisterData({ ...registerData, profileImage: e.target.value })} />
                             </div>
                             <div>
-                                <input className="field2" style={{ marginTop: '10px'}} type="password" placeholder="Password" onChange={e => setRegisterData({ ...registerData, password: e.target.value })}/>
+                                <input className="field2" style={{ marginTop: '10px' }} type="password" placeholder="Password" onChange={e => setRegisterData({ ...registerData, password: e.target.value })} />
                             </div>
                             <div>
                                 <button className='signup_button' onClick={submitRegister}>Register</button>
@@ -135,6 +135,6 @@ export const Boarding = ({ user }) => {
                     </div>
                 </div>
             </div>
-        </div>
-    )
+        </div>
+    )
 }

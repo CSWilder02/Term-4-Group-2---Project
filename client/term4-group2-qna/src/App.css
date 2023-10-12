@@ -1,17 +1,11 @@
-body {
-  margin: 0;
-  padding: 0;
+html {
+  background: #101011;
 }
 
 .App {
-  text-align: center;
-  background-color: #18191B;
-  height: 100vh;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+  background: #101011;
+  color: #F9F3ED;
+  width: 100%;
 }
 
 /* Material Icons Size Configuration */
@@ -37,11 +31,12 @@ body {
   color: #100E0D;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.secondaryButton {
+  border: 1px solid #87B7FF;
+  background: none;
+  color: #87B7FF;
+}
+
+hr {
+  border: 1px solid #39393c !important;
 }

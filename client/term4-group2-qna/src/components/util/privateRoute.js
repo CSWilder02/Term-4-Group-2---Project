@@ -12,7 +12,8 @@ const PrivateRoute = ({ children }) => {
 
     return (
 
-        loggedIn === "true" ? children : <Navigate to="/boarding" />
+        // loggedIn === "true" ? children : <Navigate to="/boarding" />
+        children
     )
 };
 
