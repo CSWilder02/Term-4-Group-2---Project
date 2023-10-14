@@ -1,0 +1,146 @@
+.questionWrap {
+    border-radius: 10px 10px 0px 0px;
+    padding: 20px;
+    background: #18191B;
+    font-family: Pontano Sans;
+}
+
+.questionTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* padding: 10px; */
+    padding-bottom: 15px;
+}
+
+.questionTopLeft {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.questionTopLeftDetailsWrap {
+    display: flex;
+    gap: 2px;
+}
+
+.questionTopLeftImgWrap {}
+
+.questionTopLeftImgEmptyWrap {
+    background: #18191B;
+    height: 36px;
+    width: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    border: 1px solid #2A2A2E;
+}
+
+.questionTopLeftImgEmptyComWrap {
+    background: #101011;
+    height: 36px;
+    width: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid #2A2A2E;
+}
+
+.questionTopRight {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.questionTopRightTimeAsked {}
+
+.questionTop-hr {
+    margin: 0;
+    margin-bottom: 15px;
+}
+
+.questionMid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.questionMidText {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.questionMidCard {
+    height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.questionMidTextDescription.expanded {
+    /* width: 100%;
+    height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; */
+    height: auto;
+    overflow: visible;
+    white-space: normal;
+}
+
+.expanded {
+    white-space: normal;
+}
+
+.questionMidImgs {}
+
+.questionMidImgsCarousel {
+    /* display: flex; */
+    /* width: 100%; */
+    align-items: center;
+}
+
+.questionMidImgsCarouselImage {
+    width: 100%;
+    max-width: 600px;
+    max-height: 600px;
+    border: 1px solid #2A2A2E;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.ImgCarouselButtons {
+    position: absolute;
+    z-index: 1;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    max-width: 580px;
+    max-height: 590px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.carasoul-button {
+    cursor: pointer;
+}
+
+.questionBtm {}
+
+.questionBtmLeftTags {}
+
+.questionBtmRightInteraction {}
+
+/* Responsiveness */
+
+@media only screen and (max-width: 500px) {
+
+    /* For Mobiles: */
+    .ImgCarouselButtons {
+        display: none;
+    }
+
+}

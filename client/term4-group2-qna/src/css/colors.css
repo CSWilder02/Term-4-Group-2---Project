@@ -13,3 +13,15 @@
 .color-danger {
     color: #f15d5d !important;
 }
+
+.color-text-primary {
+    color: #f6f7f9;
+}
+
+.color-text-secondary {
+    color: #67686c;
+}
+
+.color-component-secondary {
+    color: #67686c;
+}

@@ -13,6 +13,7 @@
     flex-direction: column;
     gap: 10px;
     width: 100%;
+    max-width: 600px;
 }
 
 .userProfileHeaderContainer {
@@ -212,7 +213,11 @@
     font-size: 12px;
 }
 
-
+.userProfileQuestionsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
 .userProfileRightWrap {}
 

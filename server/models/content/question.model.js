@@ -14,11 +14,23 @@ const QuestionSchema = mongoose.Schema({
         type: String,// Sourced from: Community or Personal
         emum: ["community", "public"]
     },
+    community: {
+        id: {
+            type: String
+        },
+        name: {
+            type: String
+        },
+
+        category: {
+            type: String
+        }
+    },
     title: {
         type: String,
         require: true
     },
-    question: {
+    descriptionOfIssue: {
         type: String,
         require: true
     },
