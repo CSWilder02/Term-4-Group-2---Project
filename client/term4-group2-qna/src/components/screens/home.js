@@ -8,7 +8,7 @@ import CommentCard from './CommentCard';
 import Logo from './code.png';
 import More from './more.png';
 import User from './User.png';
-import Male from './male.png';
+import Male from './Male.png';
 import Female from './Female.png';
 import Mail from './mail.png'
 
