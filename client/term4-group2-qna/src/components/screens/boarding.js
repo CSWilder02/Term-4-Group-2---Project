@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-// import '../../frontend.css';
+import '../../frontend.css';
 
 export const Boarding = ({ user }) => {
     const api_url = "http://localhost:5000";
@@ -99,7 +99,7 @@ export const Boarding = ({ user }) => {
                     <div className="slide-controls">
                         <input type="radio" name="slide" id="login" checked />
                         <input type="radio" name="slide" id="signup" />
-                        <label for="login" className="slide login" onClick={e => { submitLogin(); loginBtn(); }}>Login</label>
+                        <label for="login" className="slide login" onClick={loginBtn}>Login</label>
                         <label for="signup" className="slide signup" onClick={signupBtn}>Signup</label>
                         <div class="slider-tab"></div>
                     </div>
