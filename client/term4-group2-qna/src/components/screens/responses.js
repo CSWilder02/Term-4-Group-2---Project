@@ -1,11 +1,27 @@
 import React, { useState, useEffect } from "react";
 import "./responses.css";
-import { Container, Card, Form, Button } from "react-bootstrap";
+import { Container, Card, Form, Button, Dropdown } from "react-bootstrap";
 
 import Male from "./male.png";
 
 export const Comment = ({ user }) => {
-  const [comments, setComments] = useState([]);
+
+  const [isCommentInputVisible, setIsCommentInputVisible] = useState(false);
+  const [newComment, setNewComment] = useState("");
+
+  const handleCommentBtn = () => {
+    setIsCommentInputVisible(!isCommentInputVisible);
+  };
+
+  const options = [
+    { label: "Top", value: "top" },
+
+    { label: "Newest", value: "newest" },
+
+    { label: "Oldest", value: "oldest" },
+  ];
+
+
 
   return (
     <div className="Comment">
@@ -96,8 +112,102 @@ export const Comment = ({ user }) => {
                 />
               </svg>
             </div>
+            <div className="comment-vote-divide">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="2"
+                height="20"
+                viewBox="0 0 2 20"
+                fill="none"
+              >
+                <path d="M1 0V19.5" stroke="#595B60" stroke-width="0.5" />
+              </svg>
+            </div>
+            <button className="comment-btn" onClick={() => handleCommentBtn}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="21"
+                viewBox="0 0 20 21"
+                fill="none"
+              >
+                <path
+                  d="M17 0.999756H3C1.89543 0.999756 1 1.89518 1 2.99975V14.5481V18.9998L8.96068 14.781C9.24917 14.6281 9.5707 14.5481 9.8972 14.5481H17C18.1046 14.5481 19 13.6527 19 12.5481V2.99976C19 1.89519 18.1046 0.999756 17 0.999756Z"
+                  stroke="#B7B4AF"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </button>
+            <div className="comment-count">1</div>
           </div>
         </div>
+        {isCommentInputVisible && (
+        <div className="comment-input">
+          <input
+            type="text"
+            placeholder="Write your comment here"
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+          />
+          <button >Submit</button>
+        </div>
+      )}
+      </div>
+      <div className="filter-add-comment">
+        <div className="comment-filter">
+          <label className="dropdown-filter">
+            Sort by:
+            <select className="select-box">
+              {options.map((option) => (
+                <option value={option.value}>{option.label}</option>
+              ))}
+            </select>
+          </label>
+        </div>
+        {/* <div
+          className="add-comment"
+          onClick={() => setIsCommentInputVisible(!isCommentInputVisible)}
+        >
+          <label className="add-comment-label">Add Comment</label>
+          {isCommentInputVisible ? (
+            <div className="comment-input">
+              <input
+                type="text"
+                placeholder="Write your comment here"
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+              />
+              <button onClick={handleCommentSubmit}>Submit</button>
+            </div>
+          ) : (
+            <div className="add-comment-button">
+              <svg
+                className="add-btn"
+                xmlns="http://www.w3.org/2000/svg"
+                width="10"
+                height="10"
+                viewBox="0 0 10 10"
+                fill="none"
+              >
+                <path
+                  d="M1 5H9"
+                  stroke="#F9F5ED"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M5 1V9"
+                  stroke="#F9F5ED"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+          )}
+        </div> */}
       </div>
     </div>
   );
