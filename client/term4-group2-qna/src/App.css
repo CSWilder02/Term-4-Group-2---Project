@@ -10,11 +10,11 @@ html {
 
 /* Material Icons Size Configuration */
 .material-icons.md-20 {
-  font-size: 20px;
+  font-size: 20px !important;
 }
 
 .material-icons.md-24 {
-  font-size: 24px;
+  font-size: 24px !important;
 }
 
 .material-icons.md-36 {
@@ -37,6 +37,19 @@ html {
   color: #87B7FF;
 }
 
+.button-icon-2 {
+  background: #18191B;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 100px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #2A2A2E;
+}
+
 hr {
   border: 1px solid #39393c !important;
+  /* margin: 10px 0px; */
 }

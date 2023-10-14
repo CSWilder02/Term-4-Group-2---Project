@@ -3,6 +3,8 @@ import './userProfile.css';
 import { AskQuestionWidget } from '../content/askQuestionWidget';
 import { LeftBar } from '../../elements/SideBars/leftBar';
 import { RightBar } from '../../elements/SideBars/rightBar';
+import { QuestionCard } from '../../elements/Cards/questionCard';
+import questionsDemoData from '../../../test_data/question.data';
 // https://ucarecdn.com/adcb4679-f8e5-4c8a-a4bd-38af2c934f48/christopherburnsKj2SaNHGhgunsplash.jpg
 
 export const UserProfile = ({ user }) => {
@@ -11,6 +13,7 @@ export const UserProfile = ({ user }) => {
 
     const userContent = ["Questions", "Answers", "Replies"];
     const [selectedUserContent, setSelectedUserContent] = useState("Questions");
+    const [questions, setQuestions] = useState([])
 
     const userInfo = [
         {
@@ -28,10 +31,11 @@ export const UserProfile = ({ user }) => {
             info: "This is my bio and what I am up to.",
             preInfo: "",
         }
-    ]
+    ];
 
     useEffect(() => {
-
+        setQuestions(questionsDemoData);
+        console.log(questions)
     }, [selectedUserContent])
 
     return (
@@ -101,6 +105,13 @@ export const UserProfile = ({ user }) => {
                 <hr />
                 <div className='userProfileQuestionsContainer'>
                     {/* QUESTIONS | ANSWERS | REPLIES Section */}
+                    {
+                        questions.map((question) => {
+                            return (
+                                <QuestionCard question={question} />
+                            )
+                        })
+                    }
                 </div>
             </div>
             <div className='userProfileRightWrap'>Right Section</div>

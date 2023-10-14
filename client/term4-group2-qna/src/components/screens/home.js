@@ -13,18 +13,18 @@ import Female from './Female.png';
 import Mail from './mail.png'
 
 export const Home = ({ user }) => {
-    const [inputText, setInputText] = useState('');
-    const [cards, setCards] = useState([]);
-    const [likes, setLikes] = useState([]);
-    const [dislikes, setDislikes] = useState([]);
-    const [showCommentInputs, setShowCommentInputs] = useState(Array(cards.length).fill(false));
-    const [comments, setComments] = useState(Array(cards.length).fill([]).map(_ => []));
-    const [images, setImages] = useState([]);
-    const [timestamps, setTimestamps] = useState([]);
-    const [groupNames, setGroupNames] = useState([]);
-    const [commentTimes, setCommentTimes] = useState(Array(cards.length).fill(0)); // Keep track of comment times
-    const [currentGroupName, setCurrentGroupName] = useState("Home"); // Track the currently selected group name
-  
+  const [inputText, setInputText] = useState('');
+  const [cards, setCards] = useState([]);
+  const [likes, setLikes] = useState([]);
+  const [dislikes, setDislikes] = useState([]);
+  const [showCommentInputs, setShowCommentInputs] = useState(Array(cards.length).fill(false));
+  const [comments, setComments] = useState(Array(cards.length).fill([]).map(_ => []));
+  const [images, setImages] = useState([]);
+  const [timestamps, setTimestamps] = useState([]);
+  const [groupNames, setGroupNames] = useState([]);
+  const [commentTimes, setCommentTimes] = useState(Array(cards.length).fill(0)); // Keep track of comment times
+  const [currentGroupName, setCurrentGroupName] = useState("Home"); // Track the currently selected group name
+
   // Function to save the state to localStorage
   const saveStateToLocalStorage = () => {
     localStorage.setItem('cards', JSON.stringify(cards));
@@ -100,27 +100,27 @@ export const Home = ({ user }) => {
     setInputText(event.target.value);
   };
 
- // Function to handle sending text and image (if available)
- const handleSendClick = () => {
+  // Function to handle sending text and image (if available)
+  const handleSendClick = () => {
     if (inputText.trim() === '') {
       // If the input text is empty or contains only whitespace, do not add a card
       return;
     }
-  
+
     // Create a new card object with both text and uploaded image URL
     const newCard = {
       text: inputText,
       imageUrl: uploadedImage,
     };
-  
+
     // Add the new card to the cards state
     const newCards = [...cards, newCard]; // Create a new array with the updated data
     setCards(newCards); // Update the state with the new array
-  
+
     // Clear the input text and uploaded image
     setInputText('');
     setUploadedImage('');
-  
+
     // Save the state to localStorage
     saveStateToLocalStorage();
   };
@@ -223,8 +223,8 @@ export const Home = ({ user }) => {
     setUploadedImage('');
   };
 
-   // Add a new state variable to track uploaded images for each card
-   const [uploadedImagesForCards, setUploadedImagesForCards] = useState(Array(cards.length).fill(''));
+  // Add a new state variable to track uploaded images for each card
+  const [uploadedImagesForCards, setUploadedImagesForCards] = useState(Array(cards.length).fill(''));
 
 
 
@@ -374,44 +374,44 @@ export const Home = ({ user }) => {
       )}
 
       <div className='AccountSec'>
-      <img style={{width: '60px', float: 'left', marginTop: '15px', marginLeft: '20px'}} src={User} alt="Uploaded Image" />
-      <p style={{color: '#F9F5ED', marginTop: '55px', fontSize: '15px', marginRight: '130px'}}>Home</p>
-      <p style={{color: '#4B4D55', fontSize: '15px', width: '280px', textAlign: 'left', marginLeft: '20px'}}>Your personal Reddit frontpage. Come here to check in with your favorite communities.</p>
-      <button className='QuestionAsk'>Ask questions </button>
-      <button className='CreateCom'>Create Community </button>
+        <img style={{ width: '60px', float: 'left', marginTop: '15px', marginLeft: '20px' }} src={User} alt="Uploaded Image" />
+        <p style={{ color: '#F9F5ED', marginTop: '55px', fontSize: '15px', marginRight: '130px' }}>Home</p>
+        <p style={{ color: '#4B4D55', fontSize: '15px', width: '280px', textAlign: 'left', marginLeft: '20px' }}>Your personal Reddit frontpage. Come here to check in with your favorite communities.</p>
+        <button className='QuestionAsk'>Ask questions </button>
+        <button className='CreateCom'>Create Community </button>
       </div>
       <div className='StudentSec'>
         <p className='LecTitle'>LECTURES</p>
         <div className='Lecture1'>
-        <img style={{width: '30px', float: 'left', marginLeft: '10px'}} src={Male} alt="Uploaded Image" />
-        <p className='NameOfProduct'>Gordon Norman</p>
-        <p className='LecEmail'>gordonnorman@gmail.com</p>
-        <img style={{width: '25px', float: 'Right', marginTop: '-12px', marginRight: '10px'}} src={Mail} alt="Uploaded Image" />
+          <img style={{ width: '30px', float: 'left', marginLeft: '10px' }} src={Male} alt="Uploaded Image" />
+          <p className='NameOfProduct'>Gordon Norman</p>
+          <p className='LecEmail'>gordonnorman@gmail.com</p>
+          <img style={{ width: '25px', float: 'Right', marginTop: '-12px', marginRight: '10px' }} src={Mail} alt="Uploaded Image" />
         </div>
-        <br/>
+        <br />
         <div className='Lecture2'>
-        <img style={{width: '30px', float: 'left', marginLeft: '10px', marginTop: '-8px'}} src={Female} alt="Uploaded Image" />
-        <p className='NameOfProduct2'>Sonya Wolf</p>
-        <p className='LecEmail'>sonyawolf@gmail.com</p>
-        <img style={{width: '25px', float: 'Right', marginTop: '-12px', marginRight: '10px'}} src={Mail} alt="Uploaded Image" />
+          <img style={{ width: '30px', float: 'left', marginLeft: '10px', marginTop: '-8px' }} src={Female} alt="Uploaded Image" />
+          <p className='NameOfProduct2'>Sonya Wolf</p>
+          <p className='LecEmail'>sonyawolf@gmail.com</p>
+          <img style={{ width: '25px', float: 'Right', marginTop: '-12px', marginRight: '10px' }} src={Mail} alt="Uploaded Image" />
         </div>
       </div>
       <div className='LecturerSec'>
-      <p className='LecTitle'>STUDENTS</p>
-      <div className='Student1'>
-      <img style={{width: '30px', float: 'left', marginLeft: '10px'}} src={Male} alt="Uploaded Image" />
-        <p className='NameOfProduct'>Gordon Norman</p>
-        <p className='LecEmail'>gordonnorman@gmail.com</p>
-        <img style={{width: '25px', float: 'Right', marginTop: '-12px', marginRight: '10px'}} src={Mail} alt="Uploaded Image" />
+        <p className='LecTitle'>STUDENTS</p>
+        <div className='Student1'>
+          <img style={{ width: '30px', float: 'left', marginLeft: '10px' }} src={Male} alt="Uploaded Image" />
+          <p className='NameOfProduct'>Gordon Norman</p>
+          <p className='LecEmail'>gordonnorman@gmail.com</p>
+          <img style={{ width: '25px', float: 'Right', marginTop: '-12px', marginRight: '10px' }} src={Mail} alt="Uploaded Image" />
+        </div>
+        <br />
+        <div className='Student2'>
+          <img style={{ width: '30px', float: 'left', marginLeft: '10px', marginTop: '-8px' }} src={Female} alt="Uploaded Image" />
+          <p className='NameOfProduct2'>Sonya Wolf</p>
+          <p className='LecEmail'>sonyawolf@gmail.com</p>
+          <img style={{ width: '25px', float: 'Right', marginTop: '-12px', marginRight: '10px' }} src={Mail} alt="Uploaded Image" />
+        </div>
       </div>
-      <br/>
-      <div className='Student2'>
-      <img style={{width: '30px', float: 'left', marginLeft: '10px', marginTop: '-8px'}} src={Female} alt="Uploaded Image" />
-        <p className='NameOfProduct2'>Sonya Wolf</p>
-        <p className='LecEmail'>sonyawolf@gmail.com</p>
-        <img style={{width: '25px', float: 'Right', marginTop: '-12px', marginRight: '10px'}} src={Mail} alt="Uploaded Image" />
-      </div>
-     </div>
 
     </div>
   );
