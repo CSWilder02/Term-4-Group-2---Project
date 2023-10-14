@@ -59,6 +59,8 @@ export const Home = ({ user }) => {
     setGroupNames(savedGroupNames);
   };
 
+  const Male = ""
+
   const [uploadedImage, setUploadedImage] = useState('');
   const fileInputRef = useRef(null);
 
