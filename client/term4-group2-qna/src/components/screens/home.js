@@ -8,7 +8,7 @@ import CommentCard from './CommentCard';
 import Logo from './code.png';
 import More from './more.png';
 import User from './User.png';
-import Male from './Male.png';
+// import Male from './Male.png';
 import Female from './Female.png';
 import Mail from './mail.png'
 
@@ -58,6 +58,8 @@ export const Home = ({ user }) => {
     setTimestamps(savedTimestamps);
     setGroupNames(savedGroupNames);
   };
+
+  const Male = ""
 
   const [uploadedImage, setUploadedImage] = useState('');
   const fileInputRef = useRef(null);
