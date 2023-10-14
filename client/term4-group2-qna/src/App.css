@@ -1,40 +1,42 @@
+html {
+  background: #101011;
+}
+
 .App {
-  text-align: center;
-  /* background-color: #232428; */
-  height: 100vh;
+  background: #101011;
+  color: #F9F3ED;
+  width: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Material Icons Size Configuration */
+.material-icons.md-20 {
+  font-size: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.material-icons.md-24 {
+  font-size: 24px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.material-icons.md-36 {
+  font-size: 36px;
 }
 
-.App-link {
-  color: #61dafb;
+.material-icons.md-48 {
+  font-size: 48px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.primaryButton {
+  border: none;
+  background: #FF8328;
+  color: #100E0D;
+}
+
+.secondaryButton {
+  border: 1px solid #87B7FF;
+  background: none;
+  color: #87B7FF;
+}
+
+hr {
+  border: 1px solid #39393c !important;
 }

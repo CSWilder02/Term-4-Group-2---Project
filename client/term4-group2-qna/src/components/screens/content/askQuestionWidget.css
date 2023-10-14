@@ -1,0 +1,46 @@
+.askQuestionWidgetWrap {
+    display: flex;
+    background: #18191B;
+    border: 1px solid #2A2A2E;
+    border-radius: 10px;
+    padding: 20px;
+    justify-content: space-between;
+}
+
+.askQuestionLeftContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.askQuestionUserContainer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.askQuestionUserImg {
+    height: 40px;
+    width: 40px;
+    border-radius: 100px;
+}
+
+.askQuestionUserOnlineStatus {
+    height: 12px;
+    width: 12px;
+    border: 3px solid #18191B;
+    border-radius: 100px;
+    background: rgb(18, 234, 54);
+    position: absolute;
+}
+
+.askQuestionUserOnlineStatus {}
+
+.askQuestionInput {
+    color: gray;
+}
+
+.askQuestionMediaIcon {
+    color: gray;
+}
