@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./responses.css";
 import { Container, Card, Form, Button, Dropdown } from "react-bootstrap";
 
-import Male from "./male.png";
+import Male from "./Male.png";
 
 export const Comment = ({ user }) => {
 
