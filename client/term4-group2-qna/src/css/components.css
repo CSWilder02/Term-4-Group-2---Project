@@ -69,6 +69,7 @@
 
 .icon {
     cursor: pointer;
+    user-select: none;
 }
 
 .icon-button {
@@ -108,6 +109,21 @@
     font-size: 13px;
     font-family: Pontano Sans;
     font-weight: 500;
+}
+
+.text-button {
+    color: #f9d5bb;
+    font-family: Kanit;
+    user-select: none;
+    cursor: pointer;
+}
+
+.text-button-2 {
+    font-size: 12px;
+    color: #87B7FF;
+    font-family: Kanit;
+    user-select: none;
+    cursor: pointer;
 }
 
 .font-heading {

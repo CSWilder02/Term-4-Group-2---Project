@@ -5,6 +5,9 @@ import { Carousel, Button } from "antd";
 export const QuestionCard = ({ question, questioner, community }) => {
     const carouselRef = useRef(null);
     const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
+    const [upVote, setUpVote] = useState(false)
+    const [downVote, setDownVote] = useState(false)
+    const [saved, setSaved] = useState(false)
 
     // Carousel Methods
     const next = () => {
@@ -19,8 +22,6 @@ export const QuestionCard = ({ question, questioner, community }) => {
         setIsDescriptionExpanded(!isDescriptionExpanded);
     };
 
-
-    // questioner
     // Format date
     function formatDate(rawDate) {
         const date = new Date(rawDate);
@@ -30,9 +31,28 @@ export const QuestionCard = ({ question, questioner, community }) => {
         return `${day} ${month} ${year}`
     }
 
+    // Card Bottom Interactions
+    const cardBtmInteractions = [
+        {
+            icon: "arrow_circle_up",
+            interactionCount: question?.upVotes?.length,
+            action: () => { alert("Upvoted!") }
+        },
+        {
+            icon: "arrow_circle_down",
+            interactionCount: question?.downVotes?.length,
+            action: () => { alert("Downvoted... :(") }
+        },
+        {
+            icon: "mode_comment",
+            interactionCount: question?.answers?.length,
+            action: () => { alert("I will navigate to Comment section") }
+        }
+    ]
+
     useEffect(() => {
 
-    }, [question]);
+    }, [question, isDescriptionExpanded]);
 
 
     return (
@@ -81,16 +101,20 @@ export const QuestionCard = ({ question, questioner, community }) => {
                     <div className='questionMidTextTitle text-heading-sub'>{question?.title}</div>
                     <div>
                         <div className={`questionMidCard ${isDescriptionExpanded ? 'expanded' : ''}`}>
-                            <div className={`questionMidTextDescription text-normal color-text-secondary ${isDescriptionExpanded ? 'expanded' : ''}`}>
+                            <div className={`questionMidTextDescription text-normal color-text-secondary ${isDescriptionExpanded ? 'expanded' : ''}`}
+                                style={{ maxHeight: isDescriptionExpanded ? 'none' : '67px', minHeight: isDescriptionExpanded ? 'none' : 'fit-content' }}
+                            >
                                 {question?.descriptionOfIssue}
                             </div>
                         </div>
-                        <div className="see-more-button" onClick={toggleExpand}>
-                            {question?.descriptionOfIssue?.length > 200 && isDescriptionExpanded ? 'Read Less' : 'See More'}
-                        </div>
+                        {question?.descriptionOfIssue?.length > 120 && (
+                            <div className="text-sm text-button" onClick={e => toggleExpand()}>
+                                {isDescriptionExpanded ? 'Read Less' : 'Read More'}
+                            </div>
+                        )}
                     </div>
                 </div>
-                <div className='questionMidImgs'>
+                <div className='questionMidImgs' style={{ display: question?.images?.length === 1 && question?.images[0] === "" && "none" }}>
                     {
                         question?.images?.length > 0 && question?.images[0] !== "" && (
                             <div className='questionMidImgsCarousel'>
@@ -121,8 +145,43 @@ export const QuestionCard = ({ question, questioner, community }) => {
                 </div>
             </div>
             <div className='questionBtm'>
-                <div className='questionBtmLeftTags'></div>
-                <div className='questionBtmRightInteraction'></div>
+                <ul className='questionBtmLeftTags'
+                    style={{ display: question?.topics?.length <= 1 && question?.topics[0] !== "" && "none" }}>
+                    {question?.topics?.length > 0 && question?.topics[0] !== "" &&
+                        (question?.topics?.map((topic, i) => {
+                            const topicsList = question?.topics?.length
+                            return (
+                                <li className='questionBtmLeftTagsTag text-button-2'>
+                                    {`#${topic} ${topicsList <= 1 || topicsList - 1 === i ? "" : ", "} `}
+                                </li>
+                            )
+                        }))
+                    }
+                </ul>
+                <hr className='questionBtm-hr' />
+                <div className='questionBtmInteractionsWrap'>
+                    <ul className='questionBtmRightInteraction'>
+                        {
+                            cardBtmInteractions?.map((interaction, i) => {
+                                return (
+                                    <li key={i} className='questionBtmRightInteractionItem'
+                                        onClick={interaction?.action}>
+                                        <span className='material-icons material-icons.md-36 icon'>
+                                            {interaction?.icon}
+                                        </span>
+                                        <div className='questionBtmRightInteraction-metrics text-normal'>{interaction?.interactionCount}</div>
+                                    </li>
+                                )
+                            })
+                        }
+                    </ul>
+                    <div className='questionBtmRightInteractionItem'
+                        onClick={e => alert("Saved")}>
+                        <span className='material-icons material-icons.md-36 icon'>
+                            {saved ? "bookmark_added" : "bookmark_add"}
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
     )

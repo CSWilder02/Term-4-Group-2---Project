@@ -8,7 +8,7 @@ const questionsDemoData = [
         images: ["https://ucarecdn.com/6915ebad-7392-414a-99bb-ca60b6badc11/Screenshot250.png"],
         answers: ["650e36d1746ee46f0605e388"],
         upVotes: ["650e36d1746ee46f0605e388", "650e36d1746ee46f0605e388"],
-        downVotes: [""],
+        downVotes: [],
         topics: ["650f4b1505c05ab84a56e440"]
     },
     {
@@ -16,11 +16,11 @@ const questionsDemoData = [
         dateAsked: "2023-09-28T12:34:17.667+00:00",
         questionSource: "public",
         title: "I cannot import routes in index file",
-        descriptionOfIssue: " I'm running into an issue where I can't import routes from my index file. It seems there might be a configuration problem or a naming mismatch somewhere. I'm digging into it to figure out what's going on. If anyone has experience with this, your insights would be much appreciated. Thanks in advance",
+        descriptionOfIssue: " I'm running into an issue where I can't import routes from my index file. It seems there might be a configuration problem or a naming mismatch somewhere. I'm digging into it to figure out what's going on. If anyone has experience with this, your insights would be much appreciated. Thanks in advance!",
         images: [""],
         answers: [],
         upVotes: ["651d5945767c56cbc2de9170", "651b0756e2324b713536e137"],
-        downVotes: [""],
+        downVotes: [],
         topics: ["650f4b1505c05ab84a56e43a", "650f4b1505c05ab84a56e43e", "650f4b1505c05ab84a56e43c"]
     },
     {
@@ -34,7 +34,7 @@ const questionsDemoData = [
         answers: [],
         upVotes: ["651d5945767c56cbc2de9170", "650e36d1746ee46f0605e388"],
         downVotes: ["651cd16e2fae30cc4824cc62"],
-        topics: [""]
+        topics: ["CORS", "Google", "Backend", "Express.js"]
     },
     {
         questioner: "650e36d1746ee46f0605e388",

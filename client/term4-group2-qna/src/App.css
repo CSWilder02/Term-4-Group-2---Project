@@ -10,11 +10,11 @@ html {
 
 /* Material Icons Size Configuration */
 .material-icons.md-20 {
-  font-size: 20px;
+  font-size: 20px !important;
 }
 
 .material-icons.md-24 {
-  font-size: 24px;
+  font-size: 24px !important;
 }
 
 .material-icons.md-36 {

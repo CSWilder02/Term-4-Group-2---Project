@@ -14,12 +14,12 @@
     color: #f15d5d !important;
 }
 
-.color-text-primary {
+.color-main .color-text-primary {
     color: #f6f7f9;
 }
 
 .color-text-secondary {
-    color: #67686c;
+    color: #a2a2a5;
 }
 
 .color-component-secondary {
