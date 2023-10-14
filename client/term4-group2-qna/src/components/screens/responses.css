@@ -1,0 +1,166 @@
+body {
+  background-color: #232428;
+  align-items: center;
+}
+
+.Comment {
+  background-color: #232428;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 20px auto 0;
+}
+
+.question-box {
+  background-color: #313338;
+  width: 744px;
+  border-radius: 20px;
+  padding-bottom: 10px;
+}
+
+.comment-header {
+  padding-top: 10px;
+  width: 100%;
+  height: fit-content;
+}
+
+.user-header {
+  width: 35px;
+}
+
+.user-header-title {
+  color: #f9f5ed;
+  font-family: Uni Sans;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  float: left;
+  margin-left: 8px;
+}
+
+.comment-main-question {
+  color: #f9f5ed;
+  font-family: Uni Sans;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  display: flex;
+  float: left;
+  padding-left: 14px;
+  padding-right: 14px;
+  justify-content: left;
+}
+
+/* .comment-main-img {
+    padding-left: 14px;
+    padding-right: 14px;
+    width: 712px;
+} */
+
+.comment-vote {
+  float: right;
+  padding-right: 14px;
+}
+
+.vote {
+  display: flex;
+  width: 160px;
+  height: 24px;
+  margin-top: 20px;
+}
+
+.up-vote {
+  float: left;
+}
+
+.down-vote {
+  float: right;
+  margin-right: 20px;
+}
+
+.vote-count {
+  color: #fff;
+  font-family: Uni Sans;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-left: 13px;
+  margin-right: 13px;
+  margin-top: 4px;
+}
+
+/* .comment-vote-divide{
+  margin-right: 20px;
+} */
+
+.comment-btn {
+  margin-left: 20px;
+}
+
+.comment-count {
+  color: #b7b4af;
+  font-family: Uni Sans;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding-left: 12px;
+}
+
+.filter-add-comment{
+  display: flex;
+}
+
+.comment-filter {
+  width: 149px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: 17px;
+  background: #313338;
+  padding-top: 12px;
+}
+
+.dropdown-filter {
+  margin-top: 15px;
+  color: #fff;
+  font-family: Uni Sans;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.select-box{
+  background-color: #313338;
+  border: transparent;
+  color: #fff;
+  font-family: Uni Sans;
+  font-style: normal;
+  font-weight: 600;
+  margin-left: 5px;
+}
+
+.add-comment{
+  width: auto;
+  height: 28px;
+  border-radius: 17px;
+  background-color: #313338;
+  float: right;
+  padding-top: 12px;
+  font-size: 14px;
+  color: #fff;
+  font-family: Uni Sans;
+  font-style: normal;
+  font-weight: 600;
+  margin-left: 5px;
+  display: flex;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.add-btn{
+  margin-left: 20px;
+}
