@@ -8,6 +8,7 @@ import { Home } from './components/screens/home';
 import { QuestionPage } from './components/screens/questionPage';
 // import { UserAccount } from './components/screens/entitities/userAccount';
 import { Boarding } from './components/screens/boarding';
+import { Comment } from './components/screens/responses';
 import PrivateRoute from './components/util/privateRoute';
 import { NavBar } from './components/elements/Navbar/navBar';
 import { UserProfile } from './components/screens/entitities/userProfile';
@@ -34,6 +35,9 @@ function App() {
         <Route path='/questions' element={<PrivateRoute><QuestionPage /></PrivateRoute>} />
         {/* <Route path='/user/:id' element={<PrivateRoute><UserAccount /></PrivateRoute>} /> */}
         <Route path='/boarding' element={<Boarding />} />
+
+        <Route path='/comment' element={<Comment />} />
+
         <Route path='/user/:id' element={<PrivateRoute><UserProfile /></PrivateRoute>} />
       </Routes>
 
