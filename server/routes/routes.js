@@ -11,6 +11,7 @@ const questionRouter = require("./content/question.route");
 const answerRouter = require("./content/answer.route");
 const replyRouter = require("./content/reply.route")
 const topicRouter = require("./content/topic.route");
+const imageRouter = require("./content/image.route")
 
 // Use Routes section
 routes.use(adminRouter);
@@ -21,5 +22,6 @@ routes.use(questionRouter);
 routes.use(answerRouter);
 routes.use(replyRouter);
 routes.use(topicRouter);
+routes.use(imageRouter);
 
 module.exports = routes

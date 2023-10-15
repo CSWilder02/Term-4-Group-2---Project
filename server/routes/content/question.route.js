@@ -1,4 +1,5 @@
 const express = require("express");
+const multer = require('multer');
 const QuestionSchema = require("../../models/content/question.model");
 const AnswerSchema = require("../../models/content/answer.model");
 const UserSchema = require("../../models/entities/user.model");
@@ -7,6 +8,7 @@ const AdminSchema = require("../../models/entities/admin.model");
 
 const router = express();
 const verifyToken = require("../../middleware/auth/verifyToken");
+
 
 //Create
 router.post("/api/createQuestion", verifyToken, async (req, res) => {
@@ -22,7 +24,7 @@ router.post("/api/createQuestion", verifyToken, async (req, res) => {
         }
 
         // Extract topics from the request body
-        const { topics, ...questionData } = req.body;
+        const { topics, images, ...questionData } = req.body;
 
         // Create a new Question with the associated user data
         const question = new QuestionSchema({
@@ -54,10 +56,36 @@ router.post("/api/createQuestion", verifyToken, async (req, res) => {
         // Set the Question's topics array
         question.topics = questionTopics;
 
-        // Save the Question to the database
-        const savedQuestion = await question.save();
+        // Iterate through uploaded images and save them to MongoDB's GridFS
+        for (const base64Image of images) {
+            const buffer = Buffer.from(base64Image.split(";base64,").pop(), "base64");
+            const writeStream = gfs.createWriteStream({
+                filename: `image-${Date.now()}.png`,
+            });
 
-        res.json(savedQuestion);
+            writeStream.on("close", (file) => {
+                // Save GridFS file ID to the Question's images array
+                question.images.push(file._id);
+                // If all images are processed, save the Question to the database
+                if (question.images.length === images.length) {
+                    question.save().then((savedQuestion) => {
+                        res.json(savedQuestion);
+                    });
+                }
+            });
+
+            // Pipe the buffer to GridFS write stream
+            writeStream.write(buffer);
+            writeStream.end();
+        }
+
+        // If no images are uploaded, save the Question without waiting for images processing
+        if (images.length === 0) {
+            question.save().then((savedQuestion) => {
+                res.json(savedQuestion);
+            });
+        }
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Error creating Question.' });
