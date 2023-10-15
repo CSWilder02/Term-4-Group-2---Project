@@ -1,0 +1,104 @@
+.sideBarContainer {
+    background: #26282C;
+    border: 1px solid #42424C;
+    padding: 20px;
+    height: 93vh;
+    z-index: 9;
+}
+
+.leftSideBarContainer {
+    border-radius: 0px 15px 15px 0px;
+    position: absolute;
+    top: 1px;
+    left: 0;
+    width: 300px;
+}
+
+.rightSideBarContainer {
+    border-radius: 15px 0px 0px 15px;
+    position: absolute;
+    top: 1px;
+    right: 0;
+    width: 300px;
+}
+
+.sideBarTopContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+}
+
+.navBarLeftLogoContainer {
+    font-family: Kanit;
+    font-size: 18px;
+}
+
+.sideBarSectionTopDivider {
+    margin-top: 0;
+}
+
+.sideBarSectionContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sideBarSectionItmContainer {
+    /* padding: 2px 6px; */
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: Pontano Sans;
+    cursor: pointer;
+    /* padding-left: 12px; */
+}
+
+.sideBarSetionItmContainer:hover {
+    background: #494b50;
+}
+
+.siderBarSectionDropDown {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.sideBarSectionIcon {
+    color: #848079;
+}
+
+.sideBarSectionTitle {
+    font-size: 16px;
+    font-weight: 400;
+    font-family: Kanit;
+}
+
+.sideBarSectionCategory {
+    font-family: Kanit;
+    font-size: 16px;
+    font-weight: 400;
+    color: #848079;
+}
+
+.dropdown-active {
+    color: #FF8328 !important;
+}
+
+.itemContainerActive {
+    display: flex !important;
+}
+
+.itemContainerDeactive {
+    display: none !important;
+    opacity: 0;
+}
+
+.sideBarItemsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
