@@ -20,7 +20,7 @@
 
 .wrapper {
     overflow: hidden;
-    max-width: 530px;
+    max-width: 460px;
     background-color: #3D3F44;
     padding: 28px;
     margin-left: auto;
@@ -36,14 +36,24 @@
 
 }
 
-.wrapper .title {
+.title {
+    color: #D6D6D6;
+    width: 580px;
+    margin-bottom: 20px;
+    padding-left: 6px;
+    font-size: 35pt;
+    font-weight: 500;
+    font-family: Kanit;
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.title2 {
     color: #D6D6D6;
     width: 400px;
     margin-bottom: 20px;
-    font-size: 30pt;
-
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
+    font-size: 35pt;
+    font-weight: 500;
+    font-family: Kanit;
     transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
@@ -65,12 +75,13 @@
     height: 100%;
     width: 100%;
     color: #2B2C31;
-    font-size: 20pt;
+    font-size: 23pt;
     font-weight: 700;
     text-align: center;
     line-height: 48px;
     cursor: pointer;
     z-index: 1;
+    font-family: Pontano Sans;
     transition: all 0.6s ease;
 }
 
@@ -92,11 +103,6 @@
 input[type="radio"] {
     display: none;
 }
-
-
-
-
-
 
 #signup:checked~.slider-tab {
     left: 50%;
@@ -139,12 +145,15 @@ input[type="radio"] {
 
 .field2 {
     height: 60px;
-    width: 410px;
+    width: 400px;
     margin-right: 10px;
     border-radius: 30px;
     border: solid 0.5px #4B4D55;
     background-color: #2B2C31;
     color: #F9F5ED;
+    font-family: Pontano Sans;
+    font-size: 18pt;
+    padding-left: 20px;
     transition: background-color 0.3s, color 0.3s;
     /* Add a smooth transition effect */
 }
@@ -159,12 +168,16 @@ input[type="radio"] {
 
 .field3 {
     height: 60px;
-    width: 420px;
+    width: 403px;
     margin-right: 10px;
     border-radius: 30px;
     border: solid 0.5px #4B4D55;
     background-color: #2B2C31;
     color: #F9F5ED;
+    font-family: Pontano Sans;
+    font-size: 18pt;
+    padding-left: 20px;
+    margin-left: '10px';
     transition: background-color 0.3s, color 0.3s;
     /* Add a smooth transition effect */
 }
@@ -181,39 +194,54 @@ input[type="radio"] {
 .login_button {
     color: black;
     background-color: #f07f2e;
-    width: 350px;
-    font-size: 18pt;
+    width: 270px;
+    font-size: 22pt;
+    font-weight: 500;
+    border-radius: 40px;
     padding: 5px;
+    font-family: Kanit;
     margin-top: 40px;
+    margin-left: 62px;
 }
 
 .login_button:hover {
     color: white;
     background-color: #4B4D55;
-    width: 350px;
-    font-size: 18pt;
+    width: 270px;
+    font-size: 22pt;
+    font-weight: 500;
+    border-radius: 40px;
     padding: 5px;
+    font-family: Kanit;
     margin-top: 40px;
-    margin-left: 70px;
+    margin-left: 62px;
 }
 
 
 .signup_button {
     color: black;
     background-color: #f07f2e;
-    width: 350px;
-    font-size: 18pt;
+    width: 270px;
+    font-size: 22pt;
+    font-weight: 500;
+    border-radius: 40px;
     padding: 5px;
+    font-family: Kanit;
     margin-top: 30px;
     margin-left: 70px;
+    margin-left: 63px;
 }
 
 .signup_button:hover {
     color: white;
     background-color: #4B4D55;
-    width: 350px;
-    font-size: 18pt;
+    width: 270px;
+    font-size: 22pt;
+    font-weight: 500;
+    border-radius: 40px;
     padding: 5px;
+    font-family: Kanit;
     margin-top: 30px;
     margin-left: 70px;
+    margin-left: 63px;
 }
