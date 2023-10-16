@@ -11,7 +11,7 @@ const ReplySchema = mongoose.Schema({
     answer: {
         type: String
     },
-    text: {
+    code: {
         type: String
     },
     upVotes: [{

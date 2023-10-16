@@ -1,0 +1,7 @@
+.homeWrap {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 5px;
+    gap: 10px;
+}

@@ -12,6 +12,7 @@ const QuestionSchema = mongoose.Schema({
     },
     questionSource: {
         type: String,// Sourced from: Community or Personal
+        default: "public",
         emum: ["community", "public"]
     },
     community: {
@@ -35,8 +36,12 @@ const QuestionSchema = mongoose.Schema({
         require: true
     },
     images: [{
-        type: String // Array of images
-    }],
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Image",
+    },],
+    code: {
+        type: String
+    },
     answers: [{
         type: String // Array of ids of answer objects
     }],
