@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import './navbar.css';
 import { Container, Row, Col } from 'react-bootstrap';
 import { SearchBar } from '../Search Bar/searchBar'
-import { LeftBar } from '../SideBars/leftBar';
-import { RightBar } from '../SideBars/rightBar';
+import { LeftMenu } from '../Menus/leftMenu';
+import { RightMenu } from '../Menus/rightMenu';
+import { useNavigate } from 'react-router-dom';
 
-export const NavBar = () => {
+export const NavBar = ({ user, users }) => {
+    const navigatTo = useNavigate();
     const [username, setUsername] = useState("Eddie");
     const [loggenIn, setLoggedIn] = useState(sessionStorage.getItem("loggedIn"));
     const [currentPage, setCurrentPage] = useState('/');
@@ -27,11 +29,11 @@ export const NavBar = () => {
     return (
         <Row xs={1} sm={1} md={1} lg={1} xl={3} xxl={3} className='navBarWrap'>
             <Col className='navBarLeftContainer'>
-                <LeftBar />
-                <div className='navBarLeftLogoContainer'>CodeGenius</div>
-                {/* RightBar for mobile view */}
+                <LeftMenu />
+                <div className='navBarLeftLogoContainer' onClick={e => { navigatTo('/') }}>CodeGenius</div>
+                {/* RightMenu for mobile view */}
                 <div className='navBarLeftProfileContainer-mobile'>
-                    <RightBar />
+                    <RightMenu />
                 </div>
             </Col>
             <Col className='navBarMidContainer'>
@@ -47,7 +49,7 @@ export const NavBar = () => {
                     <div className='navBarRightContainerItmTxt'>Notifications</div>
                 </div>
                 <div className='navBarRightItm-3-Container'>
-                    <RightBar />
+                    <RightMenu />
                 </div>
             </Col>
 

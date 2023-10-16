@@ -12,7 +12,7 @@ router.get("/api/getTopics", verifyToken, async (req, res) => {
             const findTopic = await TopicSchema.find();
             res.json(findTopic);
         } else {
-            res.jsonp({ error: "Access denied. Please login or provide token." })
+            res.json({ error: "Access denied. Please login or provide token." })
         }
 
     }
