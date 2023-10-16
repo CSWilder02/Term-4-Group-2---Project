@@ -14,9 +14,9 @@ const AnswerSchema = mongoose.Schema({
     text: {
         type: String
     },
-    images: [{
+    code: {
         type: String // Array of images
-    }],
+    },
     upVotes: [{
         type: String // Array of ids of users
     }],

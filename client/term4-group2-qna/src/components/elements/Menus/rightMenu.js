@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import './sideMenus.css'
 import { SearchBar } from '../Search Bar/searchBar';
+import { useLoggedInUser } from '../../util/UseContext/loggedInUserContext';
 
 export const RightMenu = () => {
     const navigateTo = useNavigate("")
@@ -9,12 +10,13 @@ export const RightMenu = () => {
     const [fullName, setFullName] = useState("Eddie Sosera");
     const [isRightBarActive, setIsRightBarActive] = useState(false);
     const [isLoggenIn, setIsLoggedIn] = useState('false');
+    const { loggedInUser, setLoggedInUser } = useLoggedInUser();
 
     const [sectionItems, setsectionItems] = useState([
         {
             icon: "person",
             title: "View Profile",
-            function: () => { navigateTo('/user/me'); setIsRightBarActive(false) }
+            function: () => { navigateTo('/profile/user/me'); setIsRightBarActive(false) }
         },
     ]);
 
@@ -44,9 +46,15 @@ export const RightMenu = () => {
         },
     ]);
 
+    // Init
     useEffect(() => {
-        setIsLoggedIn(sessionStorage.getItem('loggedIn'))
-    }, [isRightBarActive, isLoggenIn]);
+
+    }, [])
+
+    useEffect(() => {
+        // !isLoggenIn && setIsLoggedIn(sessionStorage.getItem('loggedIn'))
+        loggedInUser && loggedInUser?.username ? setIsLoggedIn("true") : setIsLoggedIn("false")
+    }, [isRightBarActive, isLoggenIn, loggedInUser]);
 
 
     // Function to handle storage changes
@@ -79,7 +87,7 @@ export const RightMenu = () => {
             return (
                 <div className='navBarRightItm-3-Container'>
                     <button className='button-primary'
-                        onClick={e => navigateTo("/boarding")}
+                        onClick={e => navigateTo("/onboarding")}
                     // onClick={e => setIsRightBarActive(true)}
                     >Sign In
                         {/* {isLoggenIn} */}
@@ -93,7 +101,6 @@ export const RightMenu = () => {
     const returnRightBar = () => {
         return (
             <div className='sideBarContainer rightSideBarContainer'>
-                {isLoggenIn}
                 <div className='sideBarTopContainer '>
                     <div className='navBarLeftTextContainer'><div className='navBarRightItm-3-Container icon-button' onClick={e => setIsRightBarActive(true)}>
                         <span className="material-icons md-24 ">
@@ -101,7 +108,7 @@ export const RightMenu = () => {
                         </span>
                         <div className='rightBarUserDetailsContainer'>
                             <div className='text-sm'>
-                                @{username}
+                                @{loggedInUser?.username}
                             </div>
                             <div className='text-sm'>
                                 {fullName}

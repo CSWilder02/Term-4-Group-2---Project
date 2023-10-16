@@ -1,26 +1,40 @@
 const express = require("express");
 const multer = require('multer');
+const mongoose = require("mongoose");
 const QuestionSchema = require("../../models/content/question.model");
 const AnswerSchema = require("../../models/content/answer.model");
 const UserSchema = require("../../models/entities/user.model");
+const ImageSchema = require("../../models/content/image.model")
 const TopicSchema = require("../../models/content/topic.model")
 const AdminSchema = require("../../models/entities/admin.model");
 
 const router = express();
 const verifyToken = require("../../middleware/auth/verifyToken");
 
+const Grid = require("gridfs-stream");
+const storage = multer.memoryStorage();
+const upload = multer({
+    storage,
+    limits: {
+        fileSize: 10 * 1024 * 1024, // 10 MB (adjust the size as needed)
+    },
+});
 
 //Create
-router.post("/api/createQuestion", verifyToken, async (req, res) => {
+router.post("/api/createQuestion", verifyToken, upload.array("images", 5), async (req, res) => {
     try {
+        console.log("Start of createQuestion route"); // Debugging
+        console.log(req.body);
+
         // Get the user ID from the decoded token
         const userId = req.user.userId;
 
         // Fetch the user data (excluding password) from the database
-        const user = await UserSchema.findById(userId).select('-password');
+        const user = await UserSchema.findById(userId).select("-password");
 
         if (!user) {
-            return res.status(404).json({ error: 'User not found.' });
+            console.log("User not found."); // Debugging
+            return res.status(404).json({ error: "User not found." });
         }
 
         // Extract topics from the request body
@@ -29,7 +43,8 @@ router.post("/api/createQuestion", verifyToken, async (req, res) => {
         // Create a new Question with the associated user data
         const question = new QuestionSchema({
             ...questionData,
-            questioner: user._id
+            questioner: user._id,
+            images: images, // Use the provided base64-encoded images directly
         });
 
         // Create an array to hold references to Topics
@@ -56,39 +71,32 @@ router.post("/api/createQuestion", verifyToken, async (req, res) => {
         // Set the Question's topics array
         question.topics = questionTopics;
 
-        // Iterate through uploaded images and save them to MongoDB's GridFS
-        for (const base64Image of images) {
-            const buffer = Buffer.from(base64Image.split(";base64,").pop(), "base64");
-            const writeStream = gfs.createWriteStream({
-                filename: `image-${Date.now()}.png`,
-            });
+        const imageIds = [];
 
-            writeStream.on("close", (file) => {
-                // Save GridFS file ID to the Question's images array
-                question.images.push(file._id);
-                // If all images are processed, save the Question to the database
-                if (question.images.length === images.length) {
-                    question.save().then((savedQuestion) => {
-                        res.json(savedQuestion);
-                    });
-                }
-            });
-
-            // Pipe the buffer to GridFS write stream
-            writeStream.write(buffer);
-            writeStream.end();
+        if (images && images.length > 0) {
+            for (const imageData of images) {
+                let image = new ImageSchema({ data: imageData, source: { userId: userId } });
+                console.log(image)
+                const savedImage = await image.save();
+                imageIds.push(savedImage._id);
+            }
         }
+        question.images = imageIds
 
-        // If no images are uploaded, save the Question without waiting for images processing
-        if (images.length === 0) {
-            question.save().then((savedQuestion) => {
+        question.save()
+            .then((savedQuestion) => {
+                console.log("Question saved successfully."); // Debugging
                 res.json(savedQuestion);
+            })
+            .catch((error) => {
+                console.error("Error saving question:", error);
+                res.status(500).json({ error: "Error saving question." });
             });
-        }
 
+        console.log("End of createQuestion route"); // Debugging
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Error creating Question.' });
+        res.status(500).json({ error: "Error creating Question." });
     }
 });
 
@@ -119,13 +127,36 @@ router.get("/api/question/:id", verifyToken, async (req, res) => {
 });
 
 //Update Question, Excludes id parameter as it automatically updates
-router.patch("/api/updateQuestion/:id", verifyToken, async (req, res) => {
+router.patch("/api/updateQuestion/:id", verifyToken, upload.array("images", 5), async (req, res) => {
     const questionId = req.params.id; // Get the Question id from the URL parameters
 
     try {
         // Create an object containing the fields to update (excluding _id)
         const updatedFields = { ...req.body };
         delete updatedFields._id; // Remove _id if it's present in the request body
+
+        // Handle image uploads (if any)
+        const newImages = req.files;
+        const imageIds = [];
+
+        if (newImages && newImages.length > 0) {
+            for (const file of newImages) {
+                let image = new ImageSchema({ data: file.buffer, source: { userId: req.user.userId } });
+                const savedImage = await image.save();
+                imageIds.push(savedImage._id);
+            }
+        }
+
+        // Update the `images` field with new image IDs
+        updatedFields.images = imageIds;
+
+        // Retrieve the existing question to delete old images if needed
+        const existingQuestion = await QuestionSchema.findById(questionId);
+
+        if (existingQuestion && existingQuestion.images) {
+            // Delete old images (if any) by their IDs
+            await ImageSchema.deleteMany({ _id: { $in: existingQuestion.images } });
+        }
 
         // Update the Question document by ID
         const result = await QuestionSchema.updateOne({ _id: questionId }, { $set: updatedFields });
@@ -142,9 +173,31 @@ router.patch("/api/updateQuestion/:id", verifyToken, async (req, res) => {
 
 //Delete Question
 router.delete("/api/deleteQuestion/:id", verifyToken, async (req, res) => {
-    await QuestionSchema.findByIdAndDelete(req.params.id)
-        .then(response => res.json(response))
-        .catch(error => res.status(500).json(error));
+    try {
+        const questionId = req.params.id;
+
+        // Find the question to be deleted
+        const question = await QuestionSchema.findById(questionId);
+
+        if (!question) {
+            return res.status(404).json({ error: "Question not found." });
+        }
+
+        // Collect the image IDs associated with the question
+        const imageIds = question.imageReferences || [];
+
+        // Delete the images associated with the question
+        for (const imageId of imageIds) {
+            await Image.findByIdAndDelete(imageId);
+        }
+
+        // Delete the question
+        const response = await QuestionSchema.findByIdAndDelete(questionId);
+
+        res.json(response);
+    } catch (error) {
+        res.status(500).json({ error: "Error deleting the question." });
+    }
 });
 
 module.exports = router;

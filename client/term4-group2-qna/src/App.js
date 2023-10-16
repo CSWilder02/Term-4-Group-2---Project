@@ -14,7 +14,7 @@ import 'swiper/css';
 // Use Context Providers
 import { NavBar } from './components/elements/Navbar/navBar';
 import { Home } from './components/screens/Home/home';
-import { LoggedInUserProvider, useLoggedInUser } from './components/util/UseContext/loggedInUserContext';
+import { LoggedInUserProvider, TokenProvider, useLoggedInUser, useToken } from './components/util/UseContext/loggedInUserContext';
 import { UsersProvider, useUsers } from './components/util/UseContext/usersContext';
 import { QuestionsProvider, useQuestions } from './components/util/UseContext/questionsContext';
 import { AnswersProvider, useAnswers } from './components/util/UseContext/answersContext';
@@ -36,23 +36,26 @@ import { useCommunities } from './components/util/UseContext/communitiesContext'
 function App() {
 
   return (
-    <LoggedInUserProvider>
-      <UsersProvider>
-        <QuestionsProvider>
-          <AnswersProvider>
-            <RepliesProvider>
-              <AppContent />
-            </RepliesProvider>
-          </AnswersProvider>
-        </QuestionsProvider>
-      </UsersProvider>
-    </LoggedInUserProvider>
+    <TokenProvider>
+      <LoggedInUserProvider>
+        <UsersProvider>
+          <QuestionsProvider>
+            <AnswersProvider>
+              <RepliesProvider>
+                <AppContent />
+              </RepliesProvider>
+            </AnswersProvider>
+          </QuestionsProvider>
+        </UsersProvider>
+      </LoggedInUserProvider>
+    </TokenProvider>
   );
 }
 
 const AppContent = () => {
 
   const { loggedInUser, setLoggedInUser } = useLoggedInUser();
+  const { token } = useToken();
   const { users, setUsers } = useUsers();
   const { communities, setCommunities } = useCommunities();
   const { questions, setQuestions } = useQuestions();
@@ -67,9 +70,9 @@ const AppContent = () => {
     <div className="App">
       <NavBar user={loggedInUser} users={users} />
       <Routes>
-        <Route path='/' element={<Home user={loggedInUser} users={users} questions={questions} topics={topics} />} />
-        <Route path='/questions/:id' element={<Questions user={loggedInUser} users={users} questions={questions} topics={topics} />} />
-        <Route path='/onboarding' element={<OnBoarding users={users} />} />
+        <Route path='/' element={<Home />} />
+        <Route path='/questions/:id' element={<Questions />} />
+        <Route path='/onboarding' element={<OnBoarding />} />
         <Route path='/profile/:type/:id' element={<UserProfile />} />
         <Route path='/account/:type/:id' element={<UserAccount />} />
         <Route path='/question/:id' element={<Question />} />

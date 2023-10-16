@@ -4,13 +4,20 @@ import { QuestionCard } from '../../elements/Cards/QuestionCard/questionCard';
 import questionsDemoData from '../../../test_data/question.data';
 import LeftBar from '../../elements/SideBars/leftBar';
 import { useUsers } from '../../util/UseContext/usersContext';
+import { useQuestions } from '../../util/UseContext/questionsContext';
+import { useTopics } from '../../util/UseContext/topicsContext';
+import { useLoggedInUser } from '../../util/UseContext/loggedInUserContext';
 
-export const Home = ({ user, users, questions, topics }) => {
+export const Home = () => {
+  const { user } = useLoggedInUser();
+  const { users } = useUsers();
+  const { questions } = useQuestions();
+  const { topics } = useTopics();
   const [Questions, setQuestions] = useState(questionsDemoData)
 
   useEffect(() => {
 
-  }, [users])
+  }, [user, users, questions, topics])
 
   return (
     <div className="homeWrap">

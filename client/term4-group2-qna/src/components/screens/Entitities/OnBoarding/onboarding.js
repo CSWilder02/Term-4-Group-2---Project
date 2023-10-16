@@ -2,36 +2,30 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './onboarding.css';
+import { useLoggedInUser, useToken } from '../../../util/UseContext/loggedInUserContext';
+import requestDataOf from '../../../util/DataRequests/fetchData';
 
 export const OnBoarding = ({ user, users }) => {
-    const api_url = "http://localhost:5000";
+    const { loggedInUser, setLoggedInUser } = useLoggedInUser();
+    const { token, setToken } = useToken();
     const [loginData, setLoginData] = useState({});
     const [registerData, setRegisterData] = useState({}); // Declare and initialize registerData
     const navigate = useNavigate(); // Initialize useNavigate
 
     useEffect(() => {
-        console.log("Login Data", loginData);
-        console.log("Register Data", registerData);
-    }, [loginData, registerData]);
+    }, [loginData, registerData, loggedInUser, token]);
 
-    const submitLogin = () => {
-        alert("Username: " + loginData.username + ", Password: " + loginData.password + ", url: " + api_url);
-        let config = {
-            method: 'post',
-            maxBodyLength: Infinity,
-            url: api_url + '/api/loginUser',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: loginData
-        };
+    const submitLogin = (e) => {
+        e?.preventDefault()
 
-        axios.request(config)
+        // requestDataOf.request(method, endpoint, token, formData) This is the structure of the function
+        requestDataOf.request("post", "loginUser", '', loginData)
             .then((response) => {
-                console.log(response);
                 sessionStorage.setItem("loggedIn", "true");
-                sessionStorage.setItem("user", JSON.stringify(response.data.user));
-                sessionStorage.setItem("token", response.data.token);
+                sessionStorage.setItem("user", JSON.stringify(response?.data?.user));
+                sessionStorage.setItem("token", response?.data?.token);
+                setLoggedInUser(response?.data);
+                setToken(response?.data?.token)
                 navigate('/'); // Navigate to the "Home" page
             })
             .catch((error) => {
@@ -39,32 +33,21 @@ export const OnBoarding = ({ user, users }) => {
             });
     };
 
-
-    const submitRegister = () => {
-        let config = {
-            method: 'post',
-            maxBodyLength: Infinity,
-            url: 'http://localhost:5000/api/registerUser/',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: registerData
-        };
-
-        axios.request(config)
+    const submitRegister = (e) => {
+        e?.preventDefault()
+        requestDataOf.request("post", "registerUser", '', registerData)
             .then((response) => {
-                alert("Registered");
-                console.log(response);
                 sessionStorage.setItem("loggedIn", "true");
-                sessionStorage.setItem("user", JSON.stringify(response.data.user));
-                sessionStorage.setItem("token", response.data.token);
+                sessionStorage.setItem("user", JSON.stringify(response?.data?.user));
+                sessionStorage.setItem("token", response?.data?.token);
+                setLoggedInUser(response?.data);
+                setToken(response?.data?.token)
             })
             .catch((error) => {
                 alert("Error: " + error);
                 console.log(error);
             });
     }
-
 
     // To switch between Login and Sign Up
     const loginHeading = document.getElementById("login3");
@@ -106,7 +89,7 @@ export const OnBoarding = ({ user, users }) => {
                                 <input className="field3" style={{ marginLeft: '10px', marginTop: '10px' }} type="password" placeholder="Password" onChange={(e) => setLoginData({ ...loginData, password: e.target.value })} />
                             </div>
 
-                            <button className='login_button' onClick={submitLogin}>Log In</button>
+                            <button className='login_button' onClick={e => submitLogin(e)}>Log In</button>
 
                         </form>
                         <form action="#" className="signup">
@@ -123,7 +106,7 @@ export const OnBoarding = ({ user, users }) => {
                                 <input className="field2" style={{ marginTop: '10px' }} type="password" placeholder="Password" onChange={e => setRegisterData({ ...registerData, password: e.target.value })} />
                             </div>
                             <div>
-                                <button className='signup_button' onClick={submitRegister}>Register</button>
+                                <button className='signup_button' onClick={e => submitRegister(e)}>Register</button>
                             </div>
                         </form>
                     </div>
