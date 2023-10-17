@@ -1,6 +1,7 @@
 const express = require("express");
 const multer = require("multer");
 const UserSchema = require("../../models/entities/user.model");
+const ImageSchema = require("../../models/content/image.model")
 const router = express();
 const jwt = require("jsonwebtoken");
 const upload = multer({ dest: "uploads/" });
@@ -57,19 +58,36 @@ router.get("/api/getUser/:id", verifyToken, async (req, res) => {
 
 //Create User
 router.post("/api/registerUser", async (req, res) => {
-    const { password, ...userWithoutPassword } = req.body;
+    const communityDetails = req.body;
+    const images = req.body.images; // Extract images from the request body
 
     try {
-        const passwordHashed = await bcrypt.hash(password, 10);
-        const user = new UserSchema({ ...userWithoutPassword, password: password });
-        await user.save();
+        console.log('Received communityDetails:', communityDetails);
 
-        // Generates a JWT token
-        const token = jwt.sign({ userId: user?._id }, secretKey, { expiresIn: "1h" });
+        const imageIds = [];
 
-        res.json({ user, token });
+        // Handle community images
+        if (images && images.length > 0) {
+            for (const imageData of images) {
+                const image = new ImageSchema({ data: imageData, source: { userId: req.user.userId } });
+                const savedImage = await image.save();
+                imageIds.push(savedImage._id);
+            }
+        }
+
+        const community = new CommunitySchema({
+            ...communityDetails,
+            images: imageIds, // Associate the uploaded image IDs with the community
+            moderator: req.user.userId,
+            admin: req.user.userId,
+        });
+        await community.save();
+
+        console.log('Community created:', community);
+        res.json({ community });
     } catch (error) {
-        res.status(500).json({ error: `User registration failed.${error}` });
+        console.error('Error creating community:', error);
+        res.status(500).json({ error: `Sorry, Could not create community: ${error}` });
     }
 });
 
@@ -80,17 +98,41 @@ router.patch("/api/updateUser/:id", verifyToken, async (req, res) => {
 
     try {
         const findUser = await UserSchema.findById(userId);
-        const { newPassword } = req.body;
+        const { newPassword, images, removeImageIds } = req.body;
 
         if (!findUser) {
             return res.status(404).json({ error: "User not found or you are not authorized to access this" });
         }
 
-        if (updateUser.password) {
+        if (newPassword) {
             // If a new password is provided for update, hash it
-            const passwordHashed = await bcrypt.hash(updateUser.password, passwordHashKey);
+            const passwordHashed = await bcrypt.hash(newPassword, passwordHashKey);
             updateUser.password = passwordHashed;
         }
+
+        const userImages = findUser.images || [];
+        const updatedImages = userImages.slice(); // Create a copy of the user's existing images
+
+        // Handle adding new images
+        if (images && images.length > 0) {
+            for (const imageData of images) {
+                const image = new ImageSchema({ data: imageData, source: { userId: userId } });
+                const savedImage = await image.save();
+                updatedImages.push(savedImage._id);
+            }
+        }
+
+        // Handle removing images
+        if (removeImageIds && removeImageIds.length > 0) {
+            removeImageIds.forEach((removeImageId) => {
+                const removeIndex = updatedImages.indexOf(removeImageId);
+                if (removeIndex !== -1) {
+                    updatedImages.splice(removeIndex, 1);
+                }
+            });
+        }
+
+        updateUser.profileImage = updatedImages[0];
 
         // Update user data
         const updatedUser = await UserSchema.findByIdAndUpdate(userId, updateUser, { new: true });
@@ -105,10 +147,29 @@ router.patch("/api/updateUser/:id", verifyToken, async (req, res) => {
 });
 
 //Delete User
-router.delete("/api/deleteUser/:id", async (req, res) => {
-    await UserSchema.findByIdAndDelete(req.params.id)
-        .then(response => res.json(response))
-        .catch(error => res.status(500).json(error));
+router.delete("/api/deleteUser/:id", verifyToken, async (req, res) => {
+    const userId = req.params.id;
+
+    try {
+        const user = await UserSchema.findById(userId);
+
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        // Get image IDs associated with the user and remove the images
+        const imageId = user.profileImage;
+
+        if (imageId && imageIds.length !== "") {
+            // Assuming you have an ImageSchema with a remove method to delete images
+            await ImageSchema.remove({ _id: { $in: imageId } });
+        }
+
+        await UserSchema.findByIdAndDelete(userId);
+        res.json({ message: "User deleted successfully" });
+    } catch (error) {
+        res.status(500).json({ error: "Error deleting the user" });
+    }
 });
 
 module.exports = router;

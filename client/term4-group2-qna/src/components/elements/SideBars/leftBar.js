@@ -1,147 +1,146 @@
 import React, { useEffect, useState } from 'react';
-import './sideBars.css'
-import { SearchBar } from '../Search Bar/searchBar';
+import './sideBars.css';
+import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 
-export const LeftBar = ({ visibility }) => {
-
-    const [isLeftBarActive, setIsLeftBarActive] = useState(false);
-
-    const [sectionItems, setsectionItems] = useState([
+const LeftBar = () => {
+    const menu = [
         {
-            icon: "home",
-            title: "Home"
+            menuCategories: "First Year",
+            subMenus: [
+                {
+                    subMenuTitle: "DV100",
+                    codeMenu: "dv100"
+                },
+                {
+                    subMenuTitle: "DV101",
+                    codeMenu: "dv101"
+                }
+                ,
+                {
+                    subMenuTitle: "DV102",
+                    codeMenu: "dv102"
+                }
+                ,
+                {
+                    subMenuTitle: "DV103",
+                    codeMenu: "dv103"
+                }
+                ,
+                {
+                    subMenuTitle: "DV104",
+                    codeMenu: "dv104"
+                }
+            ]
+
         },
         {
-            icon: "electric_bolt",
-            title: "New"
-        }
-    ]);
-
-    const [sectionCommunities, setSectionCommunities] = useState([
-        {
-            category: "First Year",
-            communities: [
-                { title: "DV100", to: "/dv100" },
-                { title: "XD100", to: "/xd100" },
-                { title: "ID100", to: "/id100" }
+            menuCategories: "Second Year",
+            subMenus: [
+                {
+                    subMenuTitle: "DV200",
+                    codeMenu: "dv200"
+                },
+                {
+                    subMenuTitle: "DV201",
+                    codeMenu: "dv201"
+                }
+                ,
+                {
+                    subMenuTitle: "DV202",
+                    codeMenu: "dv202"
+                }
+                ,
+                {
+                    subMenuTitle: "DV203",
+                    codeMenu: "dv203"
+                }
+                ,
+                {
+                    subMenuTitle: "DV204",
+                    codeMenu: "dv204"
+                }
             ]
+
         },
         {
-            category: "Second Year",
-            communities: [
-                { title: "DV200", to: "/dv200" },
-                { title: "XD200", to: "/xd200" },
-                { title: "ID200", to: "/id200" }
+            menuCategories: "Third Year",
+            subMenus: [
+                {
+                    subMenuTitle: "DV300",
+                    codeMenu: "dv300"
+                },
+                {
+                    subMenuTitle: "DV301",
+                    codeMenu: "dv301"
+                }
+                ,
+                {
+                    subMenuTitle: "DV302",
+                    codeMenu: "dv302"
+                }
+                ,
+                {
+                    subMenuTitle: "DV303",
+                    codeMenu: "dv303"
+                }
+                ,
+                {
+                    subMenuTitle: "DV304",
+                    codeMenu: "dv304"
+                }
             ]
+
         },
         {
-            category: "Third Year",
-            communities: [
-                { title: "DV300", to: "/dv300" },
-                { title: "XD300", to: "/xd300" },
-                { title: "ID300", to: "/id300" }
+            menuCategories: "Trending Topics",
+            subMenus: [
+                {
+                    subMenuTitle: "React",
+                    codeMenu: "react"
+                },
+                {
+                    subMenuTitle: "Phython",
+                    codeMenu: "phython"
+                },
+                {
+                    subMenuTitle: "State Management",
+                    codeMenu: "state management"
+                },
             ]
-        }
-    ]);
 
-    const [siderBarSelectedDropDown, setSiderBarSelectedDropDown] = useState(sectionCommunities[0].category);
+        },
+    ];
+
+    const [selectedPage, setSelectedPage] = useState("dv100");
 
     useEffect(() => {
 
-    }, [isLeftBarActive]);
+    }, [selectedPage])
 
-    const returnMenuIcon = () => {
-        return (
-            <span class="material-icons navBar-menu icon-button" onClick={e => setIsLeftBarActive(true)}>
-                menu
-            </span>
-        )
-    }
 
-    const returnLeftBar = () => {
-        return (
-            <div className='sideBarContainer leftSideBarContainer'>
-                <div className='sideBarTopContainer '>
-                    <div className='navBarLeftTextContainer'>More Options</div>
-                    <span class="material-icons navBar-menu icon-button" onClick={e => setIsLeftBarActive(false)}>
-                        close
-                    </span>
-                </div>
-                {/* <hr className='sideBarSectionTopDivider' /> */}
-                <div className='sideBarSectionContainer'>
-                    {
-                        sectionItems.map((item) => {
-                            return (
-                                <div className='sideBarSectionItmContainer'>
-                                    <span class="material-icons icon-button sideBarSectionIcon">
-                                        {item.icon}
-                                    </span>
-                                    <div className='sideBarSectionTitle'>{item.title}</div>
-                                </div>
-                            )
-                        })
-                    }
-
-                </div>
-                <hr className='sideBarSectionContentDivider' />
+    return (
+        <Sidebar className='sideBarWrap' style={{ marginLeft: '48px', border: '0px' }}>
+            <Menu style={{ backgroundColor: '#18191B', color: '#A3A6B5', transition: 'background-color 0.3s', padding: '10px', textAlign: 'left' }}>
+                <MenuItem style={{ borderBottom: 'solid 1px #' }} > Home </MenuItem>
+                <MenuItem style={{ borderBottom: 'solid 1px #4B4D55' }} > New </MenuItem>
                 {
-                    sectionCommunities.map((community, i) => {
+                    menu?.map((menuItem) => {
                         return (
-                            <div>
-                                {i > 0 && <hr className='sideBarSectionContentDivider' />}
-                                <div className='sideBarSectionContainer'>
-                                    <div className={siderBarSelectedDropDown === community.category ?
-                                        'siderBarSectionDropDown icon-button dropdown-active' :
-                                        'siderBarSectionDropDown icon-button dropdown-deactive'}
-                                        onClick={e => {
-                                            if (siderBarSelectedDropDown !== community.category) {
-                                                setSiderBarSelectedDropDown(community.category)
-                                            } else {
-                                                setSiderBarSelectedDropDown("")
-                                            }
-                                        }}>
-                                        <div className={siderBarSelectedDropDown === community.category ?
-                                            'sideBarSectionCategory dropdown-active' :
-                                            'sideBarSectionCategory dropdown-deactive'}>{community.category}</div>
-                                        <span class="material-icons">
-                                            {siderBarSelectedDropDown === community.category ?
-                                                'keyboard_arrow_up' :
-                                                'expand_more'}
-                                        </span>
-                                    </div>
-
-                                    <div className={
-                                        siderBarSelectedDropDown === community.category ?
-                                            'sideBarItemsContainer itemContainerActive' :
-                                            'sideBarItemsContainer itemContainerDeactive '}>
-                                        {
-                                            community.communities.map((comm) => {
-                                                return (
-                                                    <div className='sideBarSectionItmContainer'>
-                                                        <span class="material-icons icon-button sideBarSectionIcon">
-                                                            groups_3
-                                                        </span>
-                                                        <div className='sideBarSectionTitle'>{comm.title}</div>
-                                                    </div>
-                                                )
-                                            })
-                                        }
-                                    </div>
-                                </div>
-                            </div>
+                            <SubMenu style={{ borderBottom: 'solid 1px #4B4D55' }} label={menuItem?.menuCategories}>
+                                {
+                                    menuItem?.subMenus?.map((submenu) => {
+                                        return (
+                                            <MenuItem onClick={e => setSelectedPage(submenu?.codeMenu)} style={{ backgroundColor: selectedPage === submenu?.codeMenu ? "red" : '#18191B' }} > {submenu?.subMenuTitle} </MenuItem>
+                                        )
+                                    })
+                                }
+                            </SubMenu>
                         )
                     })
                 }
-                <hr className='sideBarSectionContentDivider' />
-                <SearchBar />
-                {/* <div className={isLeftBarActive ? "backgroundOverlay" : "backgroundOverlay-deactive"}
-                    onClick={e => setIsLeftBarActive(false)}>
-                </div> */}
-            </div>
-        )
-    }
+            </Menu>
+        </Sidebar>
+    );
+};
 
-    return (
-        isLeftBarActive ? returnLeftBar() : returnMenuIcon()
-    )
-}
+export default LeftBar;
