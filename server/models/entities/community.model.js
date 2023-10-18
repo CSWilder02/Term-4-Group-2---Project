@@ -19,6 +19,9 @@ const CommunitySchemma = mongoose.Schema({
     moderator: [{
         type: String
     }],
+    communityIcon: {
+        type: String
+    },
     questions: [{
         type: String
     }],
