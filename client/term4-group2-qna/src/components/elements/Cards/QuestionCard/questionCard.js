@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import 'swiper/css/navigation';
 import { Pagination, Navigation } from "swiper/modules";
+import { CardOptions } from './CardOptions/cardOptions';
 
 export const QuestionCard = ({ question, questioner, community }) => {
     const carouselRef = useRef(null);
@@ -96,9 +97,7 @@ export const QuestionCard = ({ question, questioner, community }) => {
                 </div>
                 <div className='questionTopRight'>
                     <div className='questionTopRightTimeAsked text-sm color-text-secondary'>{formatDate(question?.dateAsked)}</div>
-                    <span className="material-icons">
-                        more_horiz
-                    </span>
+                    <CardOptions />
                 </div>
             </div>
             <hr className='questionTop-hr' />
