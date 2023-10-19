@@ -2,43 +2,43 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import requestDataOf from '../DataRequests/fetchData';
 import { useToken } from './loggedInUserContext';
 
-
-// Use Context Creator
 const QuestionsContext = createContext([]);
 
-
-// Questions Context
 export const QuestionsProvider = ({ children }) => {
     const { token } = useToken();
     const [questions, setQuestions] = useState([]);
 
-    // Init
     useEffect(() => {
-        requestDataOf.request("get", "getQuestions", token, "")
-            .then((response) => {
-                sessionStorage.setItem('questions', JSON.stringify(response?.data))
-            }).then(setQuestions(JSON.parse(sessionStorage.getItem('questions'))));
-    }, [])
+        // Initialize questions from session storage
+        const storedQuestions = sessionStorage.getItem('questions');
+        if (storedQuestions) {
+            setQuestions(JSON.parse(storedQuestions));
+        } else {
+            requestDataOf
+                .request("get", "getQuestions", token, "")
+                .then((response) => {
+                    const newQuestions = response?.data;
+                    sessionStorage.setItem('questions', JSON.stringify(newQuestions));
+                    setQuestions(newQuestions);
+                });
+        }
+    }, [token]); // Make sure to include dependencies that trigger the initialization
 
-    // Listen for changes
     useEffect(() => {
-        window.addEventListener('storage', function (event) {
-            if (event?.storageArea === sessionStorage) {
-                const key = event?.key;
+        // Listen for changes in session storage
+        const handleStorageChange = (event) => {
+            if (event?.storageArea === sessionStorage && event?.key === 'questions') {
                 const newValue = event?.newValue;
-                const oldValue = event?.oldValue;
-
-                key === "questions" && oldValue !== newValue && setQuestions(JSON.parse(newValue))
-                console.log(`Key "${key}" changed from "${oldValue}" to "${newValue}"`);
-
-                // Get Questions on change
-                requestDataOf.request("get", "getQuestions", token, "")
-                    .then((response) => {
-                        sessionStorage.setItem('questions', JSON.stringify(response?.data))
-                    }).then(setQuestions(JSON.parse(sessionStorage.getItem('questions'))));
+                setQuestions(JSON.parse(newValue));
             }
-        });
-    }, [questions]);
+        };
+
+        window.addEventListener('storage', handleStorageChange);
+
+        return () => {
+            window.removeEventListener('storage', handleStorageChange);
+        };
+    }, []);
 
     return (
         <QuestionsContext.Provider value={{ questions, setQuestions }}>

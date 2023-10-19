@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import './sideMenus.css'
 import { SearchBar } from '../Search Bar/searchBar';
-import { useLoggedInUser } from '../../util/UseContext/loggedInUserContext';
+import { useLoggedIn, useLoggedInUser } from '../../util/UseContext/loggedInUserContext';
+import { useInteraction } from '../../util/UI/interactionListener';
 
 export const RightMenu = () => {
-    const navigateTo = useNavigate("")
-    const [username, setUsername] = useState("21100419");
-    const [fullName, setFullName] = useState("Eddie Sosera");
+    const navigateTo = useNavigate("");
     const [isRightBarActive, setIsRightBarActive] = useState(false);
-    const [isLoggenIn, setIsLoggedIn] = useState('false');
+    const [isLoggedIn, setIsLoggedIn] = useState(sessionStorage.getItem("loggedIn"));
     const { loggedInUser, setLoggedInUser } = useLoggedInUser();
 
     const [sectionItems, setsectionItems] = useState([
@@ -19,70 +18,58 @@ export const RightMenu = () => {
             function: () => { navigateTo('/profile/user/me'); setIsRightBarActive(false) }
         },
     ]);
-
     const [sectionItems2, setsectionItems2] = useState([
         {
             icon: "forum",
-            title: "My Questions"
+            title: "My Questions",
+            function: () => { navigateTo('/profile/user/my-questions'); setIsRightBarActive(false) }
         },
         {
             icon: "comment",
-            title: "My Answers"
+            title: "My Answers",
+            function: () => { navigateTo('/profile/user/my-answers'); setIsRightBarActive(false) }
         },
         {
             icon: "groups_3",
             title: "My Communities"
         },
     ]);
-
     const [sectionItems3, setsectionItems3] = useState([
         {
             icon: "bookmarks",
-            title: "Saved Questions"
+            title: "Saved Questions",
+            function: () => { navigateTo('/profile/user/saved-questions'); setIsRightBarActive(false) }
         },
         {
             icon: "bookmarks",
-            title: "Saved Answers"
+            title: "Saved Answers",
+            function: () => { navigateTo('/profile/user/saved-bookmarks'); setIsRightBarActive(false) }
         },
     ]);
 
-    // Init
     useEffect(() => {
-
-    }, [])
-
-    useEffect(() => {
-        // !isLoggenIn && setIsLoggedIn(sessionStorage.getItem('loggedIn'))
-        loggedInUser && loggedInUser?.username ? setIsLoggedIn("true") : setIsLoggedIn("false")
-    }, [isRightBarActive, isLoggenIn, loggedInUser]);
-
-
-    // Function to handle storage changes
-    function handleStorageChange(event) {
-        if (event.key === 'loggedIn') {
-            // Do something with the new value, for example, update a state variable
-            setIsLoggedIn(event.newValue)
-        }
-    }
-    window.addEventListener('storage', handleStorageChange);
+        console.log(isLoggedIn)
+        setIsLoggedIn(sessionStorage.getItem('loggedIn'));
+        console.log(loggedInUser)
+        // loggedInUser && loggedInUser?.username ? setIsLoggedIn("true") : setIsLoggedIn("false")
+    }, [isRightBarActive, isLoggedIn, useInteraction(), loggedInUser]);
 
 
     const returnProfileIcon = () => {
-        if (isLoggenIn === "true") {
+        if (isLoggedIn === "true") {
             return (
-                <div className='navBarRightItm-3-Container icon-button' onClick={e => setIsRightBarActive(true)}>
+                <div className='navBarRightItmWrap icon-button' onClick={e => setIsRightBarActive(true)}>
                     <span className="material-icons md-24 ">
                         person
                     </span>
                     <div className='text-normal'>
-                        {username + 'is' + isLoggenIn}
+                        {loggedInUser?.username}
                     </div>
                     <span className="material-icons md-24">
                         expand_more
                     </span>
                 </div>
             )
-
         } else {
             return (
                 <div className='navBarRightItm-3-Container'>
@@ -97,24 +84,29 @@ export const RightMenu = () => {
 
         }
     }
-
     const returnRightBar = () => {
         return (
             <div className='sideBarContainer rightSideBarContainer'>
+                {/* {loggedInUser} */}
                 <div className='sideBarTopContainer '>
-                    <div className='navBarLeftTextContainer'><div className='navBarRightItm-3-Container icon-button' onClick={e => setIsRightBarActive(true)}>
-                        <span className="material-icons md-24 ">
-                            person
-                        </span>
-                        <div className='rightBarUserDetailsContainer'>
-                            <div className='text-sm'>
-                                @{loggedInUser?.username}
+                    <div className='navBarLeftTextContainer'>
+                        <div className='navBarRightItm-3-Container icon-button' onClick={e => setIsRightBarActive(true)}>
+                            <div className='rightBarUserDetailsContainer'>
+                                <span className="material-icons md-24 ">
+                                    person
+                                </span>
+                                <div className='text-sm'>
+                                    @{loggedInUser?.username}
+                                </div>
                             </div>
-                            <div className='text-sm'>
-                                {fullName}
-                            </div>
+                            {
+                                loggedInUser?.questions &&
+                                (<div className='text-sm rightBarQuestiondsAsked'>
+                                    <b>{loggedInUser?.questions?.length}</b>  {" questions asked."}
+                                </div>)
+                            }
                         </div>
-                    </div></div>
+                    </div>
                     <span class="material-icons navBar-menu icon-button" onClick={e => setIsRightBarActive(false)}>
                         close
                     </span>
@@ -137,15 +129,15 @@ export const RightMenu = () => {
                 </div>
                 <hr className='sideBarSectionContentDivider' />
                 <div className='sideBarSectionContainer'>
-                    <button className='button-primary'>Ask Question</button>
-                    <button className='button-secondary'>Create Community</button>
+                    <button onClick={e => navigateTo('/question/create')} className='button-primary'>Ask Question</button>
+                    <button onClick={e => navigateTo('/comminity/create')} className='button-secondary'>Create Community</button>
                 </div>
                 <hr className='sideBarSectionContentDivider' />
                 <div className='sideBarSectionContainer'>
                     {
                         sectionItems2.map((item) => {
                             return (
-                                <div className='sideBarSectionItmContainer'>
+                                <div className='sideBarSectionItmContainer' onClick={item?.function}>
                                     <span class="material-icons icon-button sideBarSectionIcon">
                                         {item.icon}
                                     </span>
@@ -160,7 +152,7 @@ export const RightMenu = () => {
                     {
                         sectionItems3.map((item) => {
                             return (
-                                <div className='sideBarSectionItmContainer'>
+                                <div className='sideBarSectionItmContainer' onClick={item?.function}>
                                     <span class="material-icons icon-button sideBarSectionIcon">
                                         {item.icon}
                                     </span>
@@ -178,7 +170,14 @@ export const RightMenu = () => {
                             logout
                         </span>
                         <div className='sideBarSectionTitle font-heading color-danger'
-                            onClick={e => { sessionStorage.setItem('loggedIn', 'false'); setIsRightBarActive(false) }}>Sign Out</div>
+                            onClick={e => {
+                                sessionStorage.setItem('loggedIn', 'false');
+                                sessionStorage.setItem('user', '');
+                                sessionStorage.setItem('token', '');
+                                // setIsLoggedIn("false");
+                                setLoggedInUser({})
+                                setIsRightBarActive(false);
+                            }}>Sign Out</div>
                     </div>
                 </div>
             </div >

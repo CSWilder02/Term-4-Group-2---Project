@@ -1,7 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react';
+import './form.css'
 
-export const Form = ({ fields, initialValues, onSubmit }) => {
+export const Form = ({ fields, initialValues, onSubmit, onCancel }) => {
+
     const [formValues, setFormValues] = useState(initialValues || {});
+    const [hover, setHover] = useState(false);
+    const [listOfImages, setListOfImages] = useState([]);
+    const btnIndex = 6
 
     function readAndConvertFileToBase64(file) {
         return new Promise((resolve, reject) => {
@@ -14,6 +19,30 @@ export const Form = ({ fields, initialValues, onSubmit }) => {
             };
             reader.readAsDataURL(file);
         });
+    };
+
+    const returnButtonWithCancel = () => {
+        if (fields[btnIndex]?.cancelLabel) {
+            if (fields[btnIndex]?.cancelLabel !== "") {
+                return (
+                    <div style={{ display: "flex", gap: "20px" }}>
+                        <div style={{ width: "100%" }}>
+                            <button style={{ width: "100%" }} className='button-primary form-btn' type="submit">{fields[btnIndex]?.submitLabel}</button>
+                        </div>
+                        <div style={{ width: "" }}>
+                            <button style={{ width: "fit-content" }} className='button-secondary form-btn' onClick={onCancel}>{fields[btnIndex]?.cancelLabel}</button>
+                        </div>
+                    </div>
+                )
+            }
+
+        } else {
+            return (
+                <div style={{ display: "flex", gap: "20px" }}>
+                    <button style={{ width: "100%" }} className='button-primary form-btn' type="submit">{fields[btnIndex]?.submitLabel}</button>
+                </div>
+            )
+        }
     }
 
     const handleInputChange = async (e, fieldName, fieldType) => {
@@ -36,6 +65,9 @@ export const Form = ({ fields, initialValues, onSubmit }) => {
                 const base64Array = await Promise.all(base64Promises);
                 // Push each image to an array
                 inputValue = base64Array;
+
+                // Update the listOfImages state with the base64 strings
+                setListOfImages(prevImages => [...prevImages, ...base64Array]);
             } catch (error) {
                 console.error('Error converting files to base64:', error);
                 inputValue = [];
@@ -50,61 +82,105 @@ export const Form = ({ fields, initialValues, onSubmit }) => {
         }));
     };
 
+
     const handleSubmit = e => {
         e.preventDefault();
         onSubmit(formValues);
     };
 
     useEffect(() => {
+        console.log(fields?.cancelLabel)
         console.log(formValues)
-    }, [formValues]);
+    }, [formValues, hover, listOfImages]);
+
 
     return (
-        <form onSubmit={handleSubmit} enctype="multipart/form-data">
-            {fields.map(field => (
-                <div key={field.name}>
-                    <label>{field.label}</label>
-                    {field.type === 'text' && (
-                        <input
-                            type="text"
-                            value={formValues[field.name] || ''}
-                            onChange={e => handleInputChange(e, field.name, 'string')}
-                        />
-                    )}
-                    {field.type === 'number' && (
-                        <input
-                            type="number"
-                            value={formValues[field.name] || ''}
-                            onChange={e => handleInputChange(e, field.name, 'number')}
-                        />
-                    )}
-                    {field.type === 'arrayOfStrings' && (
-                        <input
-                            type="text"
-                            placeholder="item1, item2, item3, ..."
-                            value={formValues[field.name] ? formValues[field.name].join(', ') : ''}
-                            onChange={e => handleInputChange(e, field.name, 'arrayOfStrings')}
-                        />
-                    )}
-                    {field.type === 'file' && (
-                        <input
-                            name={field?.name}
-                            type="file"
-                            accept=".png, .jpeg, .jpg, .gif"
-                            multiple={field.multiple}
-                            onChange={e => handleInputChange(e, field.name, 'file')}
-                        />
-                    )}
-                    {field.type === 'checkbox' && (
-                        <input
-                            type="checkbox"
-                            checked={formValues[field.name] || false}
-                            onChange={e => handleInputChange(e, field.name, 'checkbox')}
-                        />
-                    )}
-                </div>
-            ))}
-            <button className='button-primary' type="submit">Submit</button>
+        <form className='formWrap' onSubmit={handleSubmit} enctype="multipart/form-data">
+            <div>
+                <div className='formHeader'>{fields[0]?.title}</div>
+                <div className='formDescription'>{fields[1]?.description}</div>
+                <hr className='formTophr' />
+            </div>
+            <div className='formInputs'>
+                {fields.map(field => (
+                    <>
+                        {/* <label>{field.label}</label> */}
+                        {field.type === 'text' && (
+                            <input
+                                placeholder={field?.label}
+                                className='text'
+                                type="text"
+                                value={formValues[field.name] || ''}
+                                onChange={e => handleInputChange(e, field.name, 'string')}
+                            />
+                        )}
+                        {field.type === 'number' && (
+                            <input
+                                placeholder={field?.label}
+                                type="number"
+                                value={formValues[field.name] || ''}
+                                onChange={e => handleInputChange(e, field.name, 'number')}
+                            />
+                        )}
+                        {field.type === 'paragraph' && (
+                            <textarea
+                                placeholder={field?.label}
+                                value={formValues[field.name] || ''}
+                                onChange={e => handleInputChange(e, field.name, 'paragraph')}
+                            ></textarea>
+                        )}
+                        {field.type === 'arrayOfStrings' && (
+                            <input
+                                placeholder={field?.label}
+                                className='text'
+                                type="text"
+                                // placeholder="item1, item2, item3, ..."
+                                value={formValues[field.name] ? formValues[field.name].join(', ') : ''}
+                                onChange={e => handleInputChange(e, field.name, 'arrayOfStrings')}
+                            />
+                        )}
+                        {field.type === 'file' && (
+                            <div className='imageListWrap' onMouseOver={e => setHover(true)}>
+                                {
+                                    listOfImages?.map((image) => {
+                                        return (
+                                            <img className="imageUploaded" src={"data:image/png;base64," + image} alt='Uploaded Image' />
+                                        )
+                                    })
+                                }
+                                <input
+                                    id="fileInput"
+                                    name={field?.name}
+                                    type="file"
+                                    accept=".png, .jpeg, .jpg, .gif"
+                                    multiple={field.multiple}
+                                    onChange={e => { handleInputChange(e, field.name, 'file'); }}
+                                />
+                                <label for="fileInput" id="customUploadButton">
+                                    <i class="ri-add-line"></i>
+                                    <div className='uploadBtnLabel'> Image</div>
+                                </label>
+                            </div>
+                        )}
+                        {field.type === 'checkbox' && (
+                            <input
+                                placeholder={field?.label}
+                                type="checkbox"
+                                checked={formValues[field.name] || false}
+                                onChange={e => handleInputChange(e, field.name, 'checkbox')}
+                            />
+                        )}
+                    </>
+                ))}
+            </div>
+
+            <div>
+                <hr className='formBtmhr' />
+                {
+                    returnButtonWithCancel()
+
+                }
+            </div>
         </form>
     )
 }

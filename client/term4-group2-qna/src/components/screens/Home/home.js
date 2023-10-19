@@ -6,21 +6,23 @@ import LeftBar from '../../elements/SideBars/leftBar';
 import { useUsers } from '../../util/UseContext/usersContext';
 import { useQuestions } from '../../util/UseContext/questionsContext';
 import { useTopics } from '../../util/UseContext/topicsContext';
-import { useLoggedInUser } from '../../util/UseContext/loggedInUserContext';
+import { useLoggedInUser, useToken } from '../../util/UseContext/loggedInUserContext';
 
 export const Home = () => {
   const { user } = useLoggedInUser();
+  const { token } = useToken();
   const { users } = useUsers();
   const { questions } = useQuestions();
   const { topics } = useTopics();
   const [Questions, setQuestions] = useState(questionsDemoData)
 
   useEffect(() => {
-
+    console.log("tkn: ", token)
   }, [user, users, questions, topics])
 
   return (
     <div className="homeWrap">
+
 
       {/* <div class="filter" role="group" aria-label="Basic example">
         <Col className="navBarRightContainerHome">
@@ -50,6 +52,7 @@ export const Home = () => {
       </div>
 
       <div className='homeMidWrap'>
+        {/* {token} */}
         {
           Questions?.map((question) => {
             return (
