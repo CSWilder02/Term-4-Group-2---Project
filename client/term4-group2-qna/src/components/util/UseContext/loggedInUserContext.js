@@ -1,40 +1,29 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import getDataOf from '../DataRequests/fetchData';
 
-
-// Use Context Creator
 const LoggedInUserContext = createContext({});
 const TokenContext = createContext("");
+const LoggedInContext = createContext("");
 
 
-// User Logged In Context
+// Current User Logged In
 export const LoggedInUserProvider = ({ children }) => {
-    const user = sessionStorage.getItem("user") || {}
-    const [loggedInUser, setLoggedInUser] = useState(user);
-    const [isLoggedIn, setIsLoggedIn] = useState(sessionStorage.getItem("loggedIn"));
+    const initialUser = sessionStorage.getItem("user");
+    const [loggedInUser, setLoggedInUser] = useState({});
 
     useEffect(() => {
-        setLoggedInUser(user)
-    }, [])
-
-    useEffect(() => {
-        // Init Value set
-        !isLoggedIn || isLoggedIn === "" && sessionStorage.setItem("loggedIn", false);
-        !sessionStorage.getItem("user") && sessionStorage.setItem("user", '{ username: "Sign In" }')
-
-        window.addEventListener('storage', function (event) {
-            if (event?.storageArea === sessionStorage) {
-                const key = event?.key;
-                const newValue = event?.newValue;
-                const oldValue = event?.oldValue;
-
-                key === "user" && oldValue !== newValue && setLoggedInUser(JSON.parse(newValue));
-                sessionStorage.setItem('user', newValue)
-                console.log(`Key "${key}" changed from "${oldValue}" to "${JSON.parse(newValue)}"`);
+        if (sessionStorage.getItem("user") !== null) {
+            if (initialUser) {
+                try {
+                    let user = JSON.parse(initialUser)
+                    setLoggedInUser(user)
+                } catch (error) {
+                    setLoggedInUser({})
+                }
+            } else {
+                setLoggedInUser({})
             }
-        });
-        // console.log(loggedInUser)
-    }, [loggedInUser, isLoggedIn]);
+        }
+    }, []);
 
     return (
         <LoggedInUserContext.Provider value={{ loggedInUser, setLoggedInUser }}>
@@ -44,25 +33,29 @@ export const LoggedInUserProvider = ({ children }) => {
 };
 
 export const useLoggedInUser = () => {
-    return (useContext(LoggedInUserContext));
+    return useContext(LoggedInUserContext);
 };
 
 
-// User Token Context
+// Token
 export const TokenProvider = ({ children }) => {
-    const [token, setToken] = useState(sessionStorage.getItem("token"));
-    useEffect(() => {
-        window.addEventListener('storage', function (event) {
-            if (event?.storageArea === sessionStorage) {
-                const key = event?.key;
-                const newValue = event?.newValue;
-                const oldValue = event?.oldValue;
+    const initialToken = sessionStorage.getItem("token");
+    const [token, setToken] = useState(initialToken);
 
-                key === "token" && oldValue !== newValue && setToken(newValue)
-                console.log(`Token "${key}" changed from "${oldValue}" to "${newValue}"`);
+    useEffect(() => {
+        if (sessionStorage.getItem("token") !== null) {
+            if (initialToken) {
+                try {
+                    let tkn = JSON.parse(initialToken)
+                    setToken(tkn)
+                } catch (error) {
+                    setToken("")
+                }
+            } else {
+                setToken("")
             }
-        });
-    }, [token])
+        }
+    }, []);
 
     return (
         <TokenContext.Provider value={{ token, setToken }}>
@@ -73,4 +66,36 @@ export const TokenProvider = ({ children }) => {
 
 export const useToken = () => {
     return useContext(TokenContext);
+};
+
+
+// Logged In status
+export const LoggedInProvider = ({ children }) => {
+    const initialIsLoggedIn = sessionStorage.getItem("loggedIn");
+    const [isLoggedIn, setIsLoggedIn] = useState(initialIsLoggedIn);
+
+    useEffect(() => {
+        if (sessionStorage.getItem("loggedIn") !== null) {
+            if (initialIsLoggedIn) {
+                try {
+                    let status = JSON.parse(initialIsLoggedIn)
+                    setIsLoggedIn(status)
+                } catch (error) {
+                    setIsLoggedIn("")
+                }
+            } else {
+                setIsLoggedIn("")
+            }
+        }
+    }, []);
+
+    return (
+        <LoggedInContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+            {children}
+        </LoggedInContext.Provider>
+    );
+};
+
+export const useLoggedIn = () => {
+    return useContext(LoggedInContext);
 };

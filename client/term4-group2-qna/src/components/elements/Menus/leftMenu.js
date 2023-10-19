@@ -117,7 +117,7 @@ export const LeftMenu = ({ visibility }) => {
                                         {
                                             community.communities.map((comm) => {
                                                 return (
-                                                    <div className='sideBarSectionItmContainer'>
+                                                    <div className='sideBarSectionItmContainer itemInList'>
                                                         <span class="material-icons icon-button sideBarSectionIcon">
                                                             groups_3
                                                         </span>

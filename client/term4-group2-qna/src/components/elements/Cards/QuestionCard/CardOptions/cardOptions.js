@@ -1,33 +1,40 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import './cardOptions.css'
+import { useInteraction } from '../../../../util/UI/interactionListener';
+
 
 export const CardOptions = ({ questionId }) => {
-
+    let interactionState = useInteraction();
+    const [interaction, setInteraction] = useState('idle');
     const [isOptionsVisible, setIsOptionsVisible] = useState(false)
     const options = [
         {
             icon: "share",
-            title: "Share Link",
+            title: "Share",
             function: () => { },
-            optionType: "public"
+            optionType: "public",
+            code: 'normal'
         },
         {
             icon: "report",
             title: "Report",
             function: () => { },
-            optionType: "public"
+            optionType: "public",
+            code: 'normal'
         },
         {
             icon: "edit",
-            title: "Update Question",
+            title: "Update",
             function: () => { },
-            optionType: "public"
+            optionType: "private",
+            code: 'action'
         },
         {
             icon: "delete",
             title: "Delete",
             function: () => { },
-            optionType: "public"
+            optionType: "private",
+            code: 'danger'
         }
 
     ];
@@ -40,8 +47,8 @@ export const CardOptions = ({ questionId }) => {
                     {
                         options?.map((option, i) => {
                             return (
-                                <div className={"cardOption "} key={i} onClick={e => { option?.function(); setIsOptionsVisible(false) }}>
-                                    <span className='material-icons material-icons.md-18'>
+                                <div className={`cardOption ${option?.code === "danger" ? "danger" : option?.code === "action" && "action"}`} key={i} onClick={e => { option?.function(); setIsOptionsVisible(false) }}>
+                                    <span className={`material-icons material-icons.md-18 optionIcon ${option?.code === "danger" ? "danger" : option?.code === "action" && "action"}`}>
                                         {option?.icon}
                                     </span>
                                     <div className='optionTitle'>{option?.title}</div>
@@ -59,8 +66,12 @@ export const CardOptions = ({ questionId }) => {
     };
 
     useEffect(() => {
+        setInteraction(interactionState)
+        interaction?.interactionState === "scroll" && setIsOptionsVisible(false)
 
-    }, [isOptionsVisible])
+    }, [isOptionsVisible, useInteraction()]);
+
+
     return (
         returnOptions()
     )
