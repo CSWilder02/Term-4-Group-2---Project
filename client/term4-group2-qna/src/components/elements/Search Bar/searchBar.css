@@ -13,6 +13,14 @@
 
 }
 
+.searchBarOverlay-active {
+    background: #18191B;
+    box-shadow: 0 4px 31px rgba(237, 238, 242, 0.045);
+    -webkit-box-shadow: 0 4px 31px rgba(237, 238, 242, 0.045);
+    -moz-box-shadow: 0 4px 31px rgba(237, 238, 242, 0.045);
+
+}
+
 .searchBarLeftContainer {
     display: flex;
     align-items: center;

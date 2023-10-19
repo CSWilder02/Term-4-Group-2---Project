@@ -90,7 +90,7 @@ export const Form = ({ fields, initialValues, onSubmit, onCancel }) => {
 
     useEffect(() => {
         console.log(fields?.cancelLabel)
-        console.log(listOfImages)
+        console.log(formValues)
     }, [formValues, hover, listOfImages]);
 
 

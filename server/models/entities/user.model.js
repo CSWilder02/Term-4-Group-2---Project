@@ -26,6 +26,14 @@ const UserSchema = mongoose.Schema({
     questions: [{
         type: String
     }],
+    saved: {
+        questions: [{
+            type: String
+        }],
+        answers: [{
+            type: String
+        }]
+    },
     answers: [{
         type: String
     }],
