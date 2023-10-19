@@ -12,8 +12,13 @@ const QuestionSchema = mongoose.Schema({
     },
     questionSource: {
         type: String,// Sourced from: Community or Personal
+        default: "user",
+        emum: ["community", "user"]
+    },
+    questionType: {
+        type: String,
         default: "public",
-        emum: ["community", "public"]
+        emum: ["private", "public"]
     },
     community: {
         id: {

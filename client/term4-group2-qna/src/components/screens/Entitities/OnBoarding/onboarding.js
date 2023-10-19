@@ -24,7 +24,7 @@ export const OnBoarding = ({ user, users }) => {
                 sessionStorage.setItem("loggedIn", "true");
                 sessionStorage.setItem("user", JSON.stringify(response?.data?.user));
                 sessionStorage.setItem("token", response?.data?.token);
-                setLoggedInUser(response?.data);
+                setLoggedInUser(response?.data?.user);
                 setToken(response?.data?.token)
                 navigate('/'); // Navigate to the "Home" page
             })
@@ -40,7 +40,7 @@ export const OnBoarding = ({ user, users }) => {
                 sessionStorage.setItem("loggedIn", "true");
                 sessionStorage.setItem("user", JSON.stringify(response?.data?.user));
                 sessionStorage.setItem("token", response?.data?.token);
-                setLoggedInUser(response?.data);
+                setLoggedInUser(response?.data?.user);
                 setToken(response?.data?.token)
             })
             .catch((error) => {

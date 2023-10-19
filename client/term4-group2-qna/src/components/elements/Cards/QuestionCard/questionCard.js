@@ -8,13 +8,35 @@ import "swiper/css/pagination";
 import 'swiper/css/navigation';
 import { Pagination, Navigation } from "swiper/modules";
 import { CardOptions } from './CardOptions/cardOptions';
+import FindImages from '../../../util/DataRequests/findImages';
+import { useImages } from '../../../util/UseContext/imagesContext';
+// import { FindImages } from '../../../util/DataRequests/findImages';
 
 export const QuestionCard = ({ question, questioner, community }) => {
     const carouselRef = useRef(null);
     const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
-    const [upVote, setUpVote] = useState(false)
-    const [downVote, setDownVote] = useState(false)
-    const [saved, setSaved] = useState(false)
+    const [upVote, setUpVote] = useState(false);
+    const [downVote, setDownVote] = useState(false);
+    const [saved, setSaved] = useState(false);
+    const { images } = useImages();
+
+    // Find Images
+    function imagesOnQuestion(imagesOnQuestion) {
+        let filteredImages = []
+        if (imagesOnQuestion?.length > 0) {
+            for (const image of imagesOnQuestion) {
+                for (let i = 0; i < images?.length; i++) {
+                    if (image === images[i]?._id) {
+                        filteredImages.push(images[i]?.data);
+                    }
+                    // console.log(images[i]?.data)
+                }
+                // console.log(image)
+            }
+        }
+        return filteredImages; // Return the filteredImages array
+    }
+
 
     // Carousel Methods
     const pagination = {
@@ -131,10 +153,10 @@ export const QuestionCard = ({ question, questioner, community }) => {
                                     modules={[Pagination, Navigation]}
                                     className="mySwiper">
                                     {
-                                        question?.images?.map((image) => {
+                                        imagesOnQuestion(question?.images)?.map((image) => {
                                             return (
                                                 <SwiperSlide>
-                                                    <img className='questionMidImgsCarouselImage' src={image} alt="Supporting Image" />
+                                                    <img className='questionMidImgsCarouselImage' src={"data:image/png;base64," + image} alt="Supporting Image" />
                                                 </SwiperSlide>
                                             )
                                         })

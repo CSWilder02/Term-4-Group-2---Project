@@ -103,22 +103,30 @@ router.post("/api/createQuestion", verifyToken, upload.array("images", 5), async
 // Get All Questions
 router.get("/api/getQuestions", verifyToken, async (req, res) => {
     try {
-        const userId = req.user.userId;
+        const userId = req?.user?.userId;
         // const userCommunity = req.user.username; // username is available in the JWT payload
-
-        const findQuestion = await QuestionSchema.find({ questioner: userId });
+        // if (req?.user?.userId) {
+        //     const findQuestion = await QuestionSchema.find({ questioner: userId });
+        //     res.json(findQuestion);
+        //     console.log("User: " + userId)
+        // } else {
+        const findQuestion = await QuestionSchema.find();
         res.json(findQuestion);
+        console.log("No user")
+        // }
+
     }
     catch (error) {
         res.status(500).json({ error: "Error fetching questions.", error });
+        console.log(error)
     }
 });
 
 // Get Single Question
-router.get("/api/question/:id", verifyToken, async (req, res) => {
+router.get("/api/question/:id", async (req, res) => {
     try {
 
-        const findSingleQuestion = await QuestionSchema.findById(req.params.id);
+        const findSingleQuestion = await QuestionSchema.findById(req?.params?.id);
 
         res.json(findSingleQuestion);
     } catch (error) {

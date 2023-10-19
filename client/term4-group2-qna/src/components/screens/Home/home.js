@@ -7,6 +7,7 @@ import { useUsers } from '../../util/UseContext/usersContext';
 import { useQuestions } from '../../util/UseContext/questionsContext';
 import { useTopics } from '../../util/UseContext/topicsContext';
 import { useLoggedInUser, useToken } from '../../util/UseContext/loggedInUserContext';
+import { useInteraction } from '../../util/UI/interactionListener';
 
 export const Home = () => {
   const { user } = useLoggedInUser();
@@ -18,7 +19,7 @@ export const Home = () => {
 
   useEffect(() => {
     console.log("tkn: ", token)
-  }, [user, users, questions, topics])
+  }, [user, users, questions, topics, useInteraction()])
 
   return (
     <div className="homeWrap">
@@ -54,7 +55,7 @@ export const Home = () => {
       <div className='homeMidWrap'>
         {/* {token} */}
         {
-          Questions?.map((question) => {
+          questions?.map((question) => {
             return (
               <QuestionCard question={question} />
             )

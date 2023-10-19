@@ -35,7 +35,12 @@ export const CreateQuestion = () => {
     };
 
     const createQuestion = async (formValues) => {
-        requestDataOf.request("post", "createQuestion", token, formValues).then(() => { alert("Posted") })
+        requestDataOf.request("post", "createQuestion", token, formValues).
+            then(() => {
+                alert("Posted"); navigateTo('/')
+            }).
+            catch(err => console.log(err))
+
     };
     const cancelQuestion = async (formValues) => {
         navigateTo('/')
