@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 import "./answers.css";
-import { Container, Card, Form, Button, Dropdown } from "react-bootstrap";
-
+// import { QuestionCard } from './src/components/elements/Cards/QuestionCard/questionCard';
+import { QuestionCard } from "../../../elements/Cards/QuestionCard/questionCard";
+import questionsDemoData from "../../../../test_data/question.data";
 // import from "./";
 
 export const Answers = ({ user, users, questions, answers, replies, topics }) => {
-  const Male = ""
+ 
+  const [Questions, setQuestions] = useState(questionsDemoData)
+  // const [isCommentInputVisible, setIsCommentInputVisible] = useState(false);
+  // const [newComment, setNewComment] = useState("");
 
-  const [isCommentInputVisible, setIsCommentInputVisible] = useState(false);
-  const [newComment, setNewComment] = useState("");
-
-  const handleCommentBtn = () => {
-    setIsCommentInputVisible(!isCommentInputVisible);
-  };
+  // const handleCommentBtn = () => {
+  //   setIsCommentInputVisible(!isCommentInputVisible);
+  // };
 
   const options = [
     { label: "Top", value: "top" },
@@ -26,7 +27,18 @@ export const Answers = ({ user, users, questions, answers, replies, topics }) =>
 
   return (
     <div className="Comment">
-      <div className="question-box">
+      <div className="question-card">
+      <div className='homeMidWrap'>
+        {
+          Questions?.map((question) => {
+            return (
+              <QuestionCard question={question} />
+            )
+          })
+        }
+      </div>
+      </div>
+      {/* <div className="question-box">
         <div className="comment-header">
           <div className="user-header">
             <img
@@ -154,7 +166,7 @@ export const Answers = ({ user, users, questions, answers, replies, topics }) =>
             <button >Submit</button>
           </div>
         )}
-      </div>
+      </div> */}
       <div className="filter-add-comment">
         <div className="comment-filter">
           <label className="dropdown-filter">

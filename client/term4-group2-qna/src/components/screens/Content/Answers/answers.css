@@ -1,10 +1,6 @@
-body {
-  background-color: #232428;
-  align-items: center;
-}
+
 
 .Comment {
-  background-color: #232428;
   width: 100%;
   display: flex;
   justify-content: center;
