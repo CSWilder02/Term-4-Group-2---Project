@@ -70,7 +70,7 @@ export const OnBoarding = ({ user, users }) => {
             <div className="wrapper">
                 <div className='form'>
                     <div className='title login' id="login3">Login Form</div>
-                    <div className='title signup'>Signup Form</div>
+                    <div className='title2 signup'>Signup Form</div>
                 </div>
                 <div className="form-container">
                     <div className="slide-controls">
@@ -83,10 +83,10 @@ export const OnBoarding = ({ user, users }) => {
                     <div class="form-inner">
                         <form action="#" className="login" id="login2">
                             <div >
-                                <input className="field3" style={{ marginLeft: '10px' }} type="text" placeholder="Username" onChange={(e) => setLoginData({ ...loginData, username: e.target.value })} />
+                                <input className="field3" type="text" placeholder="Username" onChange={(e) => setLoginData({ ...loginData, username: e.target.value })} />
                             </div>
                             <div>
-                                <input className="field3" style={{ marginLeft: '10px', marginTop: '10px' }} type="password" placeholder="Password" onChange={(e) => setLoginData({ ...loginData, password: e.target.value })} />
+                                <input className="field3" style={{ marginLeft: '1px', marginTop: '10px' }} type="password" placeholder="Password" onChange={(e) => setLoginData({ ...loginData, password: e.target.value })} />
                             </div>
 
                             <button className='login_button' onClick={e => submitLogin(e)}>Log In</button>
@@ -100,7 +100,7 @@ export const OnBoarding = ({ user, users }) => {
                                 <input className="field2" style={{ marginTop: '10px' }} type="text" placeholder="Email" onChange={e => setRegisterData({ ...registerData, email: e.target.value })} />
                             </div>
                             <div className="field_file">
-                                <input className="field2" style={{ marginTop: '10px' }} type="file" placeholder="Image" onChange={e => setRegisterData({ ...registerData, profileImage: e.target.value })} />
+                                <input className="field2" style={{ marginTop: '10px', paddingTop: '9px' }} type="file" placeholder="Image" onChange={e => setRegisterData({ ...registerData, profileImage: e.target.value })} />
                             </div>
                             <div>
                                 <input className="field2" style={{ marginTop: '10px' }} type="password" placeholder="Password" onChange={e => setRegisterData({ ...registerData, password: e.target.value })} />

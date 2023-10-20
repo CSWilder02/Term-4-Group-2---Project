@@ -31,18 +31,24 @@ import { Notifications } from './components/screens/Content/Notifications/notifi
 import { Error404 } from './components/screens/404/error404';
 import { useTopics } from './components/util/UseContext/topicsContext';
 import { useCommunities } from './components/util/UseContext/communitiesContext';
+import { ClickInteractionProvider, InteractionProvider } from './components/util/UI/interactionListener';
 
 
 function App() {
-
   return (
+    // Data Provider
     <TokenProvider>
       <LoggedInUserProvider>
         <UsersProvider>
           <QuestionsProvider>
             <AnswersProvider>
               <RepliesProvider>
-                <AppContent />
+
+                {/* UI Provider*/}
+                <InteractionProvider>
+                  <AppContent />
+                </InteractionProvider>
+
               </RepliesProvider>
             </AnswersProvider>
           </QuestionsProvider>

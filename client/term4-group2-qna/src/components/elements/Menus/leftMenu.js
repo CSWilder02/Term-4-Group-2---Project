@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './sideMenus.css'
 import { SearchBar } from '../Search Bar/searchBar';
+import { useNavigate } from 'react-router-dom';
 
 export const LeftMenu = ({ visibility }) => {
-
+    const navigateTo = useNavigate("");
     const [isLeftBarActive, setIsLeftBarActive] = useState(false);
 
     const [sectionItems, setsectionItems] = useState([
@@ -117,7 +118,7 @@ export const LeftMenu = ({ visibility }) => {
                                         {
                                             community.communities.map((comm) => {
                                                 return (
-                                                    <div className='sideBarSectionItmContainer'>
+                                                    <div className='sideBarSectionItmContainer itemInList' onClick={e => { navigateTo("/community" + comm?.to); setIsLeftBarActive(false) }}>
                                                         <span class="material-icons icon-button sideBarSectionIcon">
                                                             groups_3
                                                         </span>
