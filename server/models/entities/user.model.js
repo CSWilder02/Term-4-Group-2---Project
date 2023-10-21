@@ -23,20 +23,6 @@ const UserSchema = mongoose.Schema({
         type: Date,
         default: Date.now()
     },
-    questions: [{
-        type: String
-    }],
-    saved: {
-        questions: [{
-            type: String
-        }],
-        answers: [{
-            type: String
-        }]
-    },
-    answers: [{
-        type: String
-    }],
     bio: {
         type: String
     },
@@ -54,6 +40,38 @@ const UserSchema = mongoose.Schema({
     role: {
         type: String,
         default: "user"
+    },
+    questions: [{
+        type: String
+    }],
+    answers: [{
+        type: String
+    }],
+    saved: {
+        questions: [{
+            type: String
+        }],
+        answers: [{
+            type: String
+        }]
+    },
+    session: {
+        signedInAt: {
+            type: Date,
+            default: Date.now(),
+        },
+        expiresAt: {
+            type: Date,
+            default: function () {
+                // Set the expiresAt 4 hours after signedInAt
+                const expiresAtDate = new Date(this.signedInAt);
+                expiresAtDate.setHours(expiresAtDate.getHours() + 4);
+                return expiresAtDate;
+            },
+        },
+        token: {
+            type: String // Should be returned after logging in
+        },
     }
 });
 

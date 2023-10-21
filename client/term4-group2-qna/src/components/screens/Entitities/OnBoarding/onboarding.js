@@ -21,12 +21,14 @@ export const OnBoarding = ({ user, users }) => {
         // requestDataOf.request(method, endpoint, token, formData) This is the structure of the function
         requestDataOf.request("post", "loginUser", '', loginData)
             .then((response) => {
+                let res = response?.data
                 sessionStorage.setItem("loggedIn", "true");
-                sessionStorage.setItem("user", JSON.stringify(response?.data?.user));
-                sessionStorage.setItem("token", response?.data?.token);
-                setLoggedInUser(response?.data?.user);
-                setToken(response?.data?.token)
+                sessionStorage.setItem("user", JSON.stringify(res?.user));
+                sessionStorage.setItem("token", res?.token);
+                setLoggedInUser(res?.user);
+                setToken(res?.token)
                 navigate('/'); // Navigate to the "Home" page
+                console.log(response)
             })
             .catch((error) => {
                 console.log(error);
