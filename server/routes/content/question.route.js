@@ -20,7 +20,7 @@ const upload = multer({
     },
 });
 
-//Create
+// Create Question
 router.post("/api/createQuestion", verifyToken, upload.array("images", 5), async (req, res) => {
     try {
         console.log("Start of createQuestion route"); // Debugging
@@ -76,16 +76,21 @@ router.post("/api/createQuestion", verifyToken, upload.array("images", 5), async
         if (images && images.length > 0) {
             for (const imageData of images) {
                 let image = new ImageSchema({ data: imageData, source: { userId: userId } });
-                console.log(image)
+                console.log(image);
                 const savedImage = await image.save();
                 imageIds.push(savedImage._id);
             }
         }
-        question.images = imageIds
+        question.images = imageIds;
 
         question.save()
             .then((savedQuestion) => {
                 console.log("Question saved successfully."); // Debugging
+
+                // Add the question ID to the user's questions array
+                user.questions.push(savedQuestion._id);
+                user.save(); // Save the user document
+
                 res.json(savedQuestion);
             })
             .catch((error) => {
@@ -99,6 +104,7 @@ router.post("/api/createQuestion", verifyToken, upload.array("images", 5), async
         res.status(500).json({ error: "Error creating Question." });
     }
 });
+
 
 // Get All Questions
 router.get("/api/getQuestions", verifyToken, async (req, res) => {
