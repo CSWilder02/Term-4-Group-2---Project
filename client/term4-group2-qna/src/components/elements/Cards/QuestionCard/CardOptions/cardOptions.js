@@ -3,38 +3,42 @@ import './cardOptions.css'
 import { useInteraction } from '../../../../util/UI/interactionListener';
 
 
-export const CardOptions = ({ questionId }) => {
+export const CardOptions = ({ questionId, scope }) => {
     let interactionState = useInteraction();
     const [interaction, setInteraction] = useState('idle');
     const [isOptionsVisible, setIsOptionsVisible] = useState(false)
     const options = [
         {
-            icon: "share",
+            icon: "ios_share",
             title: "Share",
             function: () => { },
             optionType: "public",
-            code: 'normal'
+            code: 'normal',
+            scope: "public"
         },
         {
-            icon: "report",
+            icon: "flag",
             title: "Report",
             function: () => { },
             optionType: "public",
-            code: 'normal'
+            code: 'normal',
+            scope: "public"
         },
         {
-            icon: "edit",
+            icon: "edit_note",
             title: "Update",
             function: () => { },
             optionType: "private",
-            code: 'action'
+            code: 'action',
+            scope: "private"
         },
         {
             icon: "delete",
             title: "Delete",
             function: () => { },
             optionType: "private",
-            code: 'danger'
+            code: 'danger',
+            scope: "private"
         }
 
     ];
@@ -46,14 +50,16 @@ export const CardOptions = ({ questionId }) => {
                     {/* <div className='optionsOverlay'></div> */}
                     {
                         options?.map((option, i) => {
-                            return (
-                                <div className={`cardOption ${option?.code === "danger" ? "danger" : option?.code === "action" && "action"}`} key={i} onClick={e => { option?.function(); setIsOptionsVisible(false) }}>
-                                    <span className={`material-icons material-icons.md-18 optionIcon ${option?.code === "danger" ? "danger" : option?.code === "action" && "action"}`}>
-                                        {option?.icon}
-                                    </span>
-                                    <div className='optionTitle'>{option?.title}</div>
-                                </div>
-                            )
+                            if (scope === "private" || scope === option?.scope) {
+                                return (
+                                    <div className={`cardOption ${option?.code === "danger" ? "danger" : option?.code === "action" && "action"}`} key={i} onClick={e => { option?.function(); setIsOptionsVisible(false) }}>
+                                        <span className={`material-icons material-icons.md-18 optionIcon ${option?.code === "danger" ? "dangerIcon" : option?.code === "action" && "actionIcon"}`}>
+                                            {option?.icon}
+                                        </span>
+                                        <div className='optionTitle'>{option?.title}</div>
+                                    </div>
+                                )
+                            }
                         })
                     }
                 </div>

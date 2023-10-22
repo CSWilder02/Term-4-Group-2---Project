@@ -19,6 +19,20 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.questionTopLeft:hover {
+
+    /* text-decoration: underline; */
+    .questionTopLeftImgEmptyWrap {
+        border: 1px solid #FF8328;
+    }
+
+    .questionTopLeftDetailsName {
+        color: #FF8328;
+    }
 }
 
 .questionTopLeftDetailsWrap {

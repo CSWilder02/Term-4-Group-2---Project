@@ -48,9 +48,9 @@ export const RightMenu = () => {
     ]);
 
     useEffect(() => {
-        console.log(isLoggedIn)
+        // console.log(isLoggedIn)
         setIsLoggedIn(sessionStorage.getItem('loggedIn'));
-        console.log(loggedInUser)
+        // console.log(loggedInUser)
         // loggedInUser && loggedInUser?.username ? setIsLoggedIn("true") : setIsLoggedIn("false")
     }, [isRightBarActive, isLoggedIn, useInteraction(), loggedInUser]);
 
@@ -177,6 +177,7 @@ export const RightMenu = () => {
                                 // setIsLoggedIn("false");
                                 setLoggedInUser({})
                                 setIsRightBarActive(false);
+                                navigateTo('/onboarding')
                             }}>Sign Out</div>
                     </div>
                 </div>

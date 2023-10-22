@@ -18,7 +18,7 @@ export const QuestionsProvider = ({ children }) => {
                 sessionStorage.setItem('questions', JSON.stringify(newQuestions));
                 setQuestions(newQuestions);
             });
-    }, [token]); // Make sure to include dependencies that trigger the initialization
+    }, [token]); // Dependencies that trigger the initialization
 
     return (
         <QuestionsContext.Provider value={{ questions, setQuestions }}>

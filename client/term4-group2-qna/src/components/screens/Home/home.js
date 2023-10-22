@@ -18,7 +18,7 @@ export const Home = () => {
   const [Questions, setQuestions] = useState(questionsDemoData)
 
   useEffect(() => {
-    console.log("tkn: ", token)
+    // console.log("tkn: ", token)
   }, [user, users, questions, topics, useInteraction()])
 
   return (
@@ -53,14 +53,15 @@ export const Home = () => {
       </div>
 
       <div className='homeMidWrap'>
-        {/* {token} */}
-        {
-          questions?.map((question) => {
-            return (
-              <QuestionCard question={question} />
-            )
-          })
-        }
+        <div className='homeMidQuestions'>
+          {
+            questions?.map((question) => {
+              return (
+                <QuestionCard question={question} scope={"public"} />
+              )
+            })
+          }
+        </div>
       </div>
 
       <div className='homeRightWrap'>

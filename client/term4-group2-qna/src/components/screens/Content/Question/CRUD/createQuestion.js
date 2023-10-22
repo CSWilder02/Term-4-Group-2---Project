@@ -24,7 +24,7 @@ export const CreateQuestion = () => {
         // },
         // { name: 'subscribe', label: 'Subscribe to Newsletter', type: 'checkbox' },
         {
-            submitLabel: "Ask Quetsion",
+            submitLabel: "Ask Question",
             cancelLabel: "Cancel"
         }
     ];

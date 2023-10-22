@@ -10,33 +10,32 @@ import { Pagination, Navigation } from "swiper/modules";
 import { CardOptions } from './CardOptions/cardOptions';
 import FindImages from '../../../util/DataRequests/findImages';
 import { useImages } from '../../../util/UseContext/imagesContext';
+import { useNavigate } from 'react-router-dom';
+import { useUsers } from '../../../util/UseContext/usersContext';
+import { findImages } from './Card Functions/findImages';
+import { findUser } from './Card Functions/findUser';
+import { findTopics } from './Card Functions/findTopics';
+import { useTopics } from '../../../util/UseContext/topicsContext';
+import requestDataOf from '../../../util/DataRequests/fetchData';
+import { useToken } from '../../../util/UseContext/loggedInUserContext';
+import { useInteraction } from '../../../util/UI/interactionListener';
 // import { FindImages } from '../../../util/DataRequests/findImages';
 
-export const QuestionCard = ({ question, questioner, community }) => {
+export const QuestionCard = ({ question, community, scope }) => {
+    const navigatTo = useNavigate();
     const carouselRef = useRef(null);
     const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
     const [upVote, setUpVote] = useState(false);
     const [downVote, setDownVote] = useState(false);
     const [saved, setSaved] = useState(false);
     const { images } = useImages();
+    const { users } = useUsers();
+    const { topics } = useTopics();
+    let { token } = useToken();
 
     // Find Images
-    function imagesOnQuestion(imagesOnQuestion) {
-        let filteredImages = []
-        if (imagesOnQuestion?.length > 0) {
-            for (const image of imagesOnQuestion) {
-                for (let i = 0; i < images?.length; i++) {
-                    if (image === images[i]?._id) {
-                        filteredImages.push(images[i]?.data);
-                    }
-                    // console.log(images[i]?.data)
-                }
-                // console.log(image)
-            }
-        }
-        return filteredImages; // Return the filteredImages array
-    }
-
+    let questioner = findUser(question?.questioner, users);
+    let topicsOnQuestion = findTopics(question?.topics, topics)
 
     // Carousel Methods
     const pagination = {
@@ -80,14 +79,14 @@ export const QuestionCard = ({ question, questioner, community }) => {
     ]
 
     useEffect(() => {
-
-    }, [question, isDescriptionExpanded]);
+        console.log(topics)
+    }, [question, isDescriptionExpanded, useInteraction()]);
 
 
     return (
         <div className='questionWrap'>
             <div className='questionTop'>
-                <div className='questionTopLeft'>
+                <div className='questionTopLeft' onClick={e => navigatTo('/profile/user/' + questioner?.usernamer)}>
                     <div className='questionTopLeftImgWrap'>
                         {/* {
                             question?.questionSource === "community" && (
@@ -114,12 +113,12 @@ export const QuestionCard = ({ question, questioner, community }) => {
                                 <div className='questionTopLeftDetailsName color-text-secondary'>c/{question?.community?.name}/</div>
                             )
                         }
-                        <div className='questionTopLeftDetailsName'>@eddie</div>
+                        <div className='questionTopLeftDetailsName'>@{questioner?.username}</div>
                     </div>
                 </div>
                 <div className='questionTopRight'>
                     <div className='questionTopRightTimeAsked text-sm color-text-secondary'>{formatDate(question?.dateAsked)}</div>
-                    <CardOptions />
+                    <CardOptions scope={scope} />
                 </div>
             </div>
             <hr className='questionTop-hr' />
@@ -153,7 +152,7 @@ export const QuestionCard = ({ question, questioner, community }) => {
                                     modules={[Pagination, Navigation]}
                                     className="mySwiper">
                                     {
-                                        imagesOnQuestion(question?.images)?.map((image) => {
+                                        findImages(question?.images, images)?.map((image) => {
                                             return (
                                                 <SwiperSlide>
                                                     <img className='questionMidImgsCarouselImage' src={"data:image/png;base64," + image} alt="Supporting Image" />
@@ -171,8 +170,8 @@ export const QuestionCard = ({ question, questioner, community }) => {
                 <ul className='questionBtmLeftTags'
                     style={{ display: question?.topics?.length <= 1 && question?.topics[0] !== "" && "none" }}>
                     {question?.topics?.length > 0 && question?.topics[0] !== "" &&
-                        (question?.topics?.map((topic, i) => {
-                            const topicsList = question?.topics?.length
+                        (topicsOnQuestion?.map((topic, i) => {
+                            const topicsList = topicsOnQuestion?.length
                             return (
                                 <li className='questionBtmLeftTagsTag text-button-2'>
                                     {`#${topic} ${topicsList <= 1 || topicsList - 1 === i ? "" : ", "} `}

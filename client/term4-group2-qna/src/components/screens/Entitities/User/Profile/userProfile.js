@@ -111,7 +111,7 @@ export const UserProfile = ({ user, users, communities, questio, answers, replie
                     {
                         questions.map((question) => {
                             return (
-                                <QuestionCard question={question} />
+                                <QuestionCard question={question} scope={"private"} />
                             )
                         })
                     }
