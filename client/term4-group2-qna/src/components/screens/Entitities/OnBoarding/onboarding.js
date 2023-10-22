@@ -80,9 +80,9 @@ export const OnBoarding = ({ user, users }) => {
                         <input type="radio" name="slide" id="signup" />
                         <label for="login" className="slide login" onClick={loginBtn}>Login</label>
                         <label for="signup" className="slide signup" onClick={signupBtn}>Signup</label>
-                        <div class="slider-tab"></div>
+                        <div className="slider-tab"></div>
                     </div>
-                    <div class="form-inner">
+                    <div className="form-inner">
                         <form action="#" className="login" id="login2">
                             <div >
                                 <input className="field3" type="text" placeholder="Username" onChange={(e) => setLoginData({ ...loginData, username: e.target.value })} />

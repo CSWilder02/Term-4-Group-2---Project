@@ -27,7 +27,7 @@ export const SearchBar = () => {
         <div>
             <div className={searchBarWrap_active ? 'searchBarWrap' : 'searchBarWrap'}>
                 <div className='searchBarLeftContainer'>
-                    <span class="material-icons">
+                    <span className="material-icons">
                         search
                     </span>
                     <input className='searchBarInput text-normal' type='text' placeholder='Search'
@@ -37,7 +37,7 @@ export const SearchBar = () => {
                     // onBlur={e => setSearchBarWrap_active(false)} 
                     />
                 </div>
-                <span class={searchBarWrap_active ? "material-icons icon searchBarClose-active" : "material-icons icon searchBarClose-deactive"}
+                <span className={searchBarWrap_active ? "material-icons icon searchBarClose-active" : "material-icons icon searchBarClose-deactive"}
                     onClick={e => { setSearchBarWrap_active(false); setSearchValue("") }}>
                     cancel
                 </span>
@@ -46,7 +46,7 @@ export const SearchBar = () => {
             <div className={searchBarWrap_active ? 'searchBarOverlay-active' : 'searchBarOverlay-deactive'}>
                 <div className={searchBarWrap_active ? 'searchBarWrap searchBarWrap-active' : 'searchBarWrap'}>
                     <div className='searchBarLeftContainer'>
-                        <span class="material-icons">
+                        <span className="material-icons">
                             search
                         </span>
                         <input className='searchBarInput text-normal' type='text' placeholder='Search'
@@ -56,7 +56,7 @@ export const SearchBar = () => {
                         // onBlur={e => setSearchBarWrap_active(false)} 
                         />
                     </div>
-                    <span class={searchBarWrap_active ? "material-icons icon searchBarClose-active" : "material-icons icon searchBarClose-deactive"}
+                    <span className={searchBarWrap_active ? "material-icons icon searchBarClose-active" : "material-icons icon searchBarClose-deactive"}
                         onClick={e => { setSearchBarWrap_active(false); setSearchValue("") }}>
                         cancel
                     </span>
@@ -64,7 +64,7 @@ export const SearchBar = () => {
                 <div className='searchBarResultsWrap'>
                     <div className='searchBarSearchWrap' onClick={e => setSearchBarWrap_active(false)}>
                         <div className='searchBarSearchLeftContainer'>
-                            <span class="material-icons">
+                            <span className="material-icons">
                                 search
                             </span>
                             <div className='text-sm'>{"Search: " + searchValue}</div>
@@ -76,14 +76,14 @@ export const SearchBar = () => {
                         <div className='questionResultsHeader result-header'>Questions</div>
                         <ul className='questionResults results-container'>
                             {
-                                searchedQuestions.map(searchedQuestion => {
+                                searchedQuestions.map((searchedQuestion, i) => {
                                     return (
-                                        <li className='result-item text-normal'
+                                        <li key={i} className='result-item text-normal'
                                             onClick={e => {
                                                 setSearchValue(searchedQuestion.question);
                                                 setSearchBarWrap_active(false);
                                             }}>
-                                            <span class="material-icons icon searchBarClose-active">
+                                            <span className="material-icons icon searchBarClose-active">
                                                 forum
                                             </span>
                                             {searchedQuestion.question}
@@ -98,14 +98,14 @@ export const SearchBar = () => {
                         <div className='communitiesResultsHeader result-header'>Communities</div>
                         <ul className='communitiesResults results-container'>
                             {
-                                searchedCommunities.map(searchedCommunity => {
+                                searchedCommunities.map((searchedCommunity, i) => {
                                     return (
-                                        <li className='result-item text-sm'
+                                        <li key={i} className='result-item text-sm'
                                             onClick={e => {
                                                 setSearchValue(searchedCommunity);
                                                 setSearchBarWrap_active(false);
                                             }}>
-                                            <span class="material-icons icon searchBarClose-active">
+                                            <span className="material-icons icon searchBarClose-active">
                                                 groups_3
                                             </span>
                                             {searchedCommunity}
@@ -120,14 +120,14 @@ export const SearchBar = () => {
                         <div className='topicsResultsHeader result-header'>Topics</div>
                         <ul className='topicsResults results-container'>
                             {
-                                searchedTopics.map(searchedTopic => {
+                                searchedTopics.map((searchedTopic, i) => {
                                     return (
-                                        <li className='result-item text-sm'
+                                        <li key={i} className='result-item text-sm'
                                             onClick={e => {
                                                 setSearchValue(searchedTopic);
                                                 setSearchBarWrap_active(false);
                                             }}>
-                                            <span class="material-icons icon searchBarClose-active">
+                                            <span className="material-icons icon searchBarClose-active">
                                                 tag
                                             </span>
                                             {searchedTopic}

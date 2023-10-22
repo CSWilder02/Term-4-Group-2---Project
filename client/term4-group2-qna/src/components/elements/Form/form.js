@@ -142,9 +142,9 @@ export const Form = ({ fields, initialValues, onSubmit, onCancel }) => {
                         {field.type === 'file' && (
                             <div className='imageListWrap' onMouseOver={e => setHover(true)}>
                                 {
-                                    listOfImages?.map((image) => {
+                                    listOfImages?.map((image, i) => {
                                         return (
-                                            <img className="imageUploaded" src={"data:image/png;base64," + image} alt='Uploaded Image' />
+                                            <img key={i} className="imageUploaded" src={"data:image/png;base64," + image} alt='Uploaded Image' />
                                         )
                                     })
                                 }
@@ -157,7 +157,7 @@ export const Form = ({ fields, initialValues, onSubmit, onCancel }) => {
                                     onChange={e => { handleInputChange(e, field.name, 'file'); }}
                                 />
                                 <label for="fileInput" id="customUploadButton">
-                                    <i class="ri-add-line"></i>
+                                    <i className="ri-add-line"></i>
                                     <div className='uploadBtnLabel'> Image</div>
                                 </label>
                             </div>

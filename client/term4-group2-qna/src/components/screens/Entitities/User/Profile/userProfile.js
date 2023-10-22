@@ -62,9 +62,9 @@ export const UserProfile = ({ user, users, communities, questio, answers, replie
                     </div>
                     <div className='userProfileHeaderBottomSection  text-normal' >
                         {
-                            userContent.map((content) => {
+                            userContent.map((content, i) => {
                                 return (
-                                    <div className={selectedUserContent === content ? 'userProfileHeaderBottomSectionItm headerSectionItm-active' :
+                                    <div key={i} className={selectedUserContent === content ? 'userProfileHeaderBottomSectionItm headerSectionItm-active' :
                                         'userProfileHeaderBottomSectionItm'}
                                         style={{ color: selectedUserContent === content ? '#FF8328' : 'gray', cursor: "pointer" }}
                                         onClick={e => setSelectedUserContent(content)}
@@ -92,9 +92,9 @@ export const UserProfile = ({ user, users, communities, questio, answers, replie
                         </div>
                         <div className='userProfileAboutInfo'>
                             {
-                                userInfo.map((info) => {
+                                userInfo.map((info, i) => {
                                     return (
-                                        <div className='userProfileAboutInfoContainerItm'>
+                                        <div key={i} className='userProfileAboutInfoContainerItm'>
                                             <span className="material-icons  userProfileAboutInfoIcon">{info?.icon}</span>
                                             <div className='userProfileAboutInfoDetail'>{info?.preInfo + " " + info?.info}</div>
                                         </div>
@@ -109,9 +109,9 @@ export const UserProfile = ({ user, users, communities, questio, answers, replie
                 <div className='userProfileQuestionsContainer'>
                     {/* QUESTIONS | ANSWERS | REPLIES Section */}
                     {
-                        questions.map((question) => {
+                        questions.map((question, i) => {
                             return (
-                                <QuestionCard question={question} scope={"private"} />
+                                <QuestionCard key={i} question={question} scope={"private"} />
                             )
                         })
                     }

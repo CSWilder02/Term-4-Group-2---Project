@@ -52,8 +52,8 @@ export const CardOptions = ({ questionId, scope }) => {
                         options?.map((option, i) => {
                             if (scope === "private" || scope === option?.scope) {
                                 return (
-                                    <div className={`cardOption ${option?.code === "danger" ? "danger" : option?.code === "action" && "action"}`} key={i} onClick={e => { option?.function(); setIsOptionsVisible(false) }}>
-                                        <span className={`material-icons material-icons.md-18 optionIcon ${option?.code === "danger" ? "dangerIcon" : option?.code === "action" && "actionIcon"}`}>
+                                    <div key={i} className={`cardOption ${option?.code === "danger" ? "danger" : option?.code === "action" && "action"}`} onClick={e => { option?.function(); setIsOptionsVisible(false) }}>
+                                        <span key={i} className={`material-icons material-icons.md-18 optionIcon ${option?.code === "danger" ? "dangerIcon" : option?.code === "action" && "actionIcon"}`}>
                                             {option?.icon}
                                         </span>
                                         <div className='optionTitle'>{option?.title}</div>

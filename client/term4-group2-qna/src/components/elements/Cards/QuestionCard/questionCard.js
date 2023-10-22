@@ -41,7 +41,7 @@ export const QuestionCard = ({ question, community, scope }) => {
     const pagination = {
         clickable: true,
         renderBullet: function (index, className) {
-            return '<span class="' + className + '">' + (index + 1) + '</span>';
+            return '<span className="' + className + '">' + (index + 1) + '</span>';
         },
     };
 
@@ -152,10 +152,10 @@ export const QuestionCard = ({ question, community, scope }) => {
                                     modules={[Pagination, Navigation]}
                                     className="mySwiper">
                                     {
-                                        findImages(question?.images, images)?.map((image) => {
+                                        findImages(question?.images, images)?.map((image, i) => {
                                             return (
-                                                <SwiperSlide>
-                                                    <img className='questionMidImgsCarouselImage' src={"data:image/png;base64," + image} alt="Supporting Image" />
+                                                <SwiperSlide key={i}>
+                                                    <img key={i} className='questionMidImgsCarouselImage' src={"data:image/png;base64," + image} alt="Supporting Image" />
                                                 </SwiperSlide>
                                             )
                                         })
@@ -173,7 +173,7 @@ export const QuestionCard = ({ question, community, scope }) => {
                         (topicsOnQuestion?.map((topic, i) => {
                             const topicsList = topicsOnQuestion?.length
                             return (
-                                <li className='questionBtmLeftTagsTag text-button-2'>
+                                <li key={i} className='questionBtmLeftTagsTag text-button-2'>
                                     {`#${topic} ${topicsList <= 1 || topicsList - 1 === i ? "" : ", "} `}
                                 </li>
                             )

@@ -207,7 +207,7 @@ export const Home = ({ user }) => {
     setCurrentGroupName(groupName);
   };
 
-  // Function to change the CSS class based on the current page
+  // Function to change the CSS className based on the current page
   const changePage = (page) => {
     if (currentGroupName === page) {
       return 'button-nav-active';
@@ -267,7 +267,7 @@ export const Home = ({ user }) => {
         </Sidebar>;
       </div>
 
-      <div class="filter" role="group" aria-label="Basic example">
+      <div className="filter" role="group" aria-label="Basic example">
         <Col className="navBarRightContainerHome">
           <div style={{ height: '45px', marginBottom: '8px', marginTop: '12px' }} className={changePage("most asked")} onClick={e => setCurrentGroupName("most asked")}>
             <span className="material-icons md-24">local_fire_department</span>

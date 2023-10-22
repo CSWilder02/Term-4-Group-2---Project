@@ -53,7 +53,7 @@ export const LeftMenu = ({ visibility }) => {
 
     const returnMenuIcon = () => {
         return (
-            <span class="material-icons navBar-menu icon-button" onClick={e => setIsLeftBarActive(true)}>
+            <span className="material-icons navBar-menu icon-button" onClick={e => setIsLeftBarActive(true)}>
                 menu
             </span>
         )
@@ -64,17 +64,17 @@ export const LeftMenu = ({ visibility }) => {
             <div className='sideBarContainer leftSideBarContainer'>
                 <div className='sideBarTopContainer '>
                     <div className='navBarLeftTextContainer'>More Options</div>
-                    <span class="material-icons navBar-menu icon-button" onClick={e => setIsLeftBarActive(false)}>
+                    <span className="material-icons navBar-menu icon-button" onClick={e => setIsLeftBarActive(false)}>
                         close
                     </span>
                 </div>
                 {/* <hr className='sideBarSectionTopDivider' /> */}
                 <div className='sideBarSectionContainer'>
                     {
-                        sectionItems.map((item) => {
+                        sectionItems.map((item, i) => {
                             return (
-                                <div className='sideBarSectionItmContainer'>
-                                    <span class="material-icons icon-button sideBarSectionIcon">
+                                <div key={i} className='sideBarSectionItmContainer'>
+                                    <span className="material-icons icon-button sideBarSectionIcon">
                                         {item.icon}
                                     </span>
                                     <div className='sideBarSectionTitle'>{item.title}</div>
@@ -88,7 +88,7 @@ export const LeftMenu = ({ visibility }) => {
                 {
                     sectionCommunities.map((community, i) => {
                         return (
-                            <div>
+                            <div key={i}>
                                 {i > 0 && <hr className='sideBarSectionContentDivider' />}
                                 <div className='sideBarSectionContainer'>
                                     <div className={siderBarSelectedDropDown === community.category ?
@@ -104,7 +104,7 @@ export const LeftMenu = ({ visibility }) => {
                                         <div className={siderBarSelectedDropDown === community.category ?
                                             'sideBarSectionCategory dropdown-active' :
                                             'sideBarSectionCategory dropdown-deactive'}>{community.category}</div>
-                                        <span class="material-icons">
+                                        <span className="material-icons">
                                             {siderBarSelectedDropDown === community.category ?
                                                 'keyboard_arrow_up' :
                                                 'expand_more'}
@@ -116,10 +116,10 @@ export const LeftMenu = ({ visibility }) => {
                                             'sideBarItemsContainer itemContainerActive' :
                                             'sideBarItemsContainer itemContainerDeactive '}>
                                         {
-                                            community.communities.map((comm) => {
+                                            community.communities.map((comm, i) => {
                                                 return (
-                                                    <div className='sideBarSectionItmContainer itemInList' onClick={e => { navigateTo("/community" + comm?.to); setIsLeftBarActive(false) }}>
-                                                        <span class="material-icons icon-button sideBarSectionIcon">
+                                                    <div key={i} className='sideBarSectionItmContainer itemInList' onClick={e => { navigateTo("/community" + comm?.to); setIsLeftBarActive(false) }}>
+                                                        <span className="material-icons icon-button sideBarSectionIcon">
                                                             groups_3
                                                         </span>
                                                         <div className='sideBarSectionTitle'>{comm.title}</div>

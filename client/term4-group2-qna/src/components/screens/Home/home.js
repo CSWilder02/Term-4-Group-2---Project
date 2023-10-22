@@ -25,7 +25,7 @@ export const Home = () => {
     <div className="homeWrap">
 
 
-      {/* <div class="filter" role="group" aria-label="Basic example">
+      {/* <div className="filter" role="group" aria-label="Basic example">
         <Col className="navBarRightContainerHome">
           <div style={{ height: '45px', marginBottom: '8px', marginTop: '12px' }} 
           className={changePage("most asked")} 
@@ -55,9 +55,9 @@ export const Home = () => {
       <div className='homeMidWrap'>
         <div className='homeMidQuestions'>
           {
-            questions?.map((question) => {
+            questions?.map((question, i) => {
               return (
-                <QuestionCard question={question} scope={"public"} />
+                <QuestionCard key={i} question={question} scope={"public"} />
               )
             })
           }
