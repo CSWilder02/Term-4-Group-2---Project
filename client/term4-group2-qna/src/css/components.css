@@ -7,8 +7,7 @@
     color: #101011;
     border: 2px solid #FF8328;
     border-radius: 300px;
-    padding: 4px 12px;
-    padding: 4px 12px;
+    padding: 4px 14px;
     height: fit-content;
     transition: .17s all linear;
 }
@@ -27,7 +26,9 @@
     color: #87B7FF;
     border: 2px solid #87B7FF;
     border-radius: 300px;
-    padding: 6px 14px;
+    padding: 4px 14px;
+    height: fit-content;
+    transition: .17s all linear;
 }
 
 .button-nav-active {
