@@ -19,7 +19,8 @@ export const TopicsProvider = ({ children }) => {
                 const newTopics = response;
                 setTopics(newTopics);
                 console.log("get topics", response)
-            });
+            })
+            .catch(err => { console.log(err); setTopics(err) });
     }, []);
 
     return (

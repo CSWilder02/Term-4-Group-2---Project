@@ -21,7 +21,7 @@ const upload = multer({
 });
 
 // Create Question
-router.post("/api/createQuestion", verifyToken, upload.array("images", 5), async (req, res) => {
+router.post("/api/createQuestion", verifyToken, upload.array("images", 10), async (req, res) => {
     try {
         console.log("Start of createQuestion route"); // Debugging
         console.log(req.body);
@@ -51,22 +51,22 @@ router.post("/api/createQuestion", verifyToken, upload.array("images", 5), async
         const questionTopics = [];
 
         if (topics && topics.length > 0) {
-            // Iterate through the provided topics
             for (const topicText of topics) {
-                // Check if a Topic with the same text already exists
+                // Check if a Topic with the same title already exists
                 const existingTopic = await TopicSchema.findOne({ title: topicText });
 
                 if (existingTopic) {
-                    // If it exists, push its ID to the question's Topics array
-                    questionTopics.push(existingTopic._id);
+                    // If it exists, push its ID and title to the question's Topics array
+                    questionTopics.push({ id: existingTopic._id, title: existingTopic.title });
                 } else {
                     // If it doesn't exist, create a new Topic and push its ID
                     const newTopic = new TopicSchema({ title: topicText });
                     const savedTopic = await newTopic.save();
-                    questionTopics.push(savedTopic._id);
+                    questionTopics.push({ id: savedTopic._id, title: savedTopic.title });
                 }
             }
         }
+
 
         // Set the Question's topics array
         question.topics = questionTopics;
@@ -106,19 +106,14 @@ router.post("/api/createQuestion", verifyToken, upload.array("images", 5), async
 });
 
 
+
 // Get All Questions
 router.get("/api/getQuestions", verifyToken, async (req, res) => {
     try {
         const userId = req?.user?.userId;
-        // const userCommunity = req.user.username; // username is available in the JWT payload
-        // if (req?.user?.userId) {
-        //     const findQuestion = await QuestionSchema.find({ questioner: userId });
-        //     res.json(findQuestion);
-        //     console.log("User: " + userId)
-        // } else {
-        const findQuestion = await QuestionSchema.find();
+        const findQuestion = await QuestionSchema?.find()?.sort({ dateAsked: -1 });
         res.json(findQuestion);
-        console.log("No user")
+        // console.log("No user")
         // }
 
     }

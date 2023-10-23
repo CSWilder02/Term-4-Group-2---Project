@@ -15,7 +15,6 @@ export const Home = () => {
   const { users } = useUsers();
   const { questions } = useQuestions();
   const { topics } = useTopics();
-  const [Questions, setQuestions] = useState(questionsDemoData)
 
   useEffect(() => {
     // console.log("tkn: ", token)
@@ -57,7 +56,7 @@ export const Home = () => {
           {
             questions?.map((question, i) => {
               return (
-                <QuestionCard key={i} question={question} scope={"public"} />
+                <QuestionCard key={i} question={question} scope={"public"} index={i} />
               )
             })
           }

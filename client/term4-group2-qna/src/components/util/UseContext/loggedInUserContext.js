@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useInteraction } from '../UI/interactionListener';
 
 const LoggedInUserContext = createContext({});
 const TokenContext = createContext("");
@@ -9,6 +10,7 @@ const LoggedInContext = createContext("");
 export const LoggedInUserProvider = ({ children }) => {
     const initialUser = sessionStorage.getItem("user");
     const [loggedInUser, setLoggedInUser] = useState({});
+    const interaction = useInteraction();
 
     useEffect(() => {
         if (sessionStorage.getItem("user") !== null) {
@@ -23,7 +25,7 @@ export const LoggedInUserProvider = ({ children }) => {
                 setLoggedInUser({})
             }
         }
-    }, []);
+    }, [interaction]);
 
     return (
         <LoggedInUserContext.Provider value={{ loggedInUser, setLoggedInUser }}>
@@ -46,13 +48,10 @@ export const TokenProvider = ({ children }) => {
         if (sessionStorage.getItem("token") !== null) {
             if (initialToken) {
                 try {
-                    let tkn = JSON.parse(initialToken)
-                    setToken(tkn)
+                    setToken(initialToken)
                 } catch (error) {
                     setToken("")
                 }
-            } else {
-                setToken("")
             }
         }
     }, []);

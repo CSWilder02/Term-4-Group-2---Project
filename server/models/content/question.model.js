@@ -56,9 +56,23 @@ const QuestionSchema = mongoose.Schema({
     downVotes: [{
         type: String // Array of ids of users
     }],
-    topics: [{
-        type: String // Array of ids of topics objects
-    }]
+    topics: [
+        {
+            id: { type: String },
+            title: { type: String }
+        }
+    ],
+    reports: [
+        {
+            userReported: { type: String },
+            dateReported: { type: Date },
+            issue: {
+                type: String,
+                enum: ["repitition", "irrelevance", "spam", "offensive-or-inappropriate", "inaccurate-information"]
+            },
+            addressed: { Boolean }
+        }
+    ]
 });
 
 // Auto find questionerer

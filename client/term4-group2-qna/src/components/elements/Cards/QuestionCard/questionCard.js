@@ -8,34 +8,29 @@ import "swiper/css/pagination";
 import 'swiper/css/navigation';
 import { Pagination, Navigation } from "swiper/modules";
 import { CardOptions } from './CardOptions/cardOptions';
-import FindImages from '../../../util/DataRequests/findImages';
 import { useImages } from '../../../util/UseContext/imagesContext';
 import { useNavigate } from 'react-router-dom';
 import { useUsers } from '../../../util/UseContext/usersContext';
-import { findImages } from './Card Functions/findImages';
-import { findUser } from './Card Functions/findUser';
-import { findTopics } from './Card Functions/findTopics';
-import { useTopics } from '../../../util/UseContext/topicsContext';
+import { findImages } from './Card Functions/FindData/findImages';
+import { findUser } from './Card Functions/FindData/findUser';
 import requestDataOf from '../../../util/DataRequests/fetchData';
-import { useToken } from '../../../util/UseContext/loggedInUserContext';
+import { useLoggedInUser, useToken } from '../../../util/UseContext/loggedInUserContext';
 import { useInteraction } from '../../../util/UI/interactionListener';
-// import { FindImages } from '../../../util/DataRequests/findImages';
+import { BottomButtons } from './Card Functions/Interaction/BottomButtons';
 
-export const QuestionCard = ({ question, community, scope }) => {
+export const QuestionCard = ({ question, index, community, scope, }) => {
     const navigatTo = useNavigate();
-    const carouselRef = useRef(null);
     const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
-    const [upVote, setUpVote] = useState(false);
-    const [downVote, setDownVote] = useState(false);
-    const [saved, setSaved] = useState(false);
     const { images } = useImages();
     const { users } = useUsers();
-    const { topics } = useTopics();
-    let { token } = useToken();
+    const { loggedInUser } = useLoggedInUser();
+
+    useEffect(() => {
+
+    }, [question, isDescriptionExpanded, useInteraction()]);
 
     // Find Images
     let questioner = findUser(question?.questioner, users);
-    let topicsOnQuestion = findTopics(question?.topics, topics)
 
     // Carousel Methods
     const pagination = {
@@ -59,34 +54,11 @@ export const QuestionCard = ({ question, community, scope }) => {
         return `${day} ${month} ${year}`
     }
 
-    // Card Bottom Interactions
-    const cardBtmInteractions = [
-        {
-            icon: "arrow_circle_up",
-            interactionCount: question?.upVotes?.length,
-            action: () => { alert("Upvoted!") }
-        },
-        {
-            icon: "arrow_circle_down",
-            interactionCount: question?.downVotes?.length,
-            action: () => { alert("Downvoted... :(") }
-        },
-        {
-            icon: "mode_comment",
-            interactionCount: question?.answers?.length,
-            action: () => { alert("I will navigate to Comment section") }
-        }
-    ]
-
-    useEffect(() => {
-        console.log(topics)
-    }, [question, isDescriptionExpanded, useInteraction()]);
-
 
     return (
         <div className='questionWrap'>
             <div className='questionTop'>
-                <div className='questionTopLeft' onClick={e => navigatTo('/profile/user/' + questioner?.usernamer)}>
+                <div className='questionTopLeft' onClick={e => navigatTo('/profile/user/' + questioner?.username)}>
                     <div className='questionTopLeftImgWrap'>
                         {/* {
                             question?.questionSource === "community" && (
@@ -168,42 +140,21 @@ export const QuestionCard = ({ question, community, scope }) => {
             </div>
             <div className='questionBtm'>
                 <ul className='questionBtmLeftTags'
-                    style={{ display: question?.topics?.length <= 1 && question?.topics[0] !== "" && "none" }}>
-                    {question?.topics?.length > 0 && question?.topics[0] !== "" &&
-                        (topicsOnQuestion?.map((topic, i) => {
-                            const topicsList = topicsOnQuestion?.length
+                    style={{ display: question?.topics?.length <= 0 && question?.topics[0] !== "" && "none" }}>
+                    {question?.topics.length > 0 && question?.topics[0]?.title !== "" &&
+                        (question?.topics?.map((topic, i) => {
+                            const topicsList = question?.topics?.length
                             return (
-                                <li key={i} className='questionBtmLeftTagsTag text-button-2'>
-                                    {`#${topic} ${topicsList <= 1 || topicsList - 1 === i ? "" : ", "} `}
+                                <li key={i} className='questionBtmLeftTagsTag text-button-2' onClick={e => navigatTo("/topic/" + topic?.title)}>
+                                    {`#${topic?.title} ${topicsList <= 1 || topicsList - 1 === i ? "" : ", "} `}
                                 </li>
                             )
                         }))
                     }
                 </ul>
                 <hr className='questionBtm-hr' />
-                <div className='questionBtmInteractionsWrap'>
-                    <ul className='questionBtmRightInteraction'>
-                        {
-                            cardBtmInteractions?.map((interaction, i) => {
-                                return (
-                                    <li key={i} className='questionBtmRightInteractionItem'
-                                        onClick={interaction?.action}>
-                                        <span className='material-icons material-icons.md-36 icon'>
-                                            {interaction?.icon}
-                                        </span>
-                                        <div className='questionBtmRightInteraction-metrics text-normal'>{interaction?.interactionCount}</div>
-                                    </li>
-                                )
-                            })
-                        }
-                    </ul>
-                    <div className='questionBtmRightInteractionItem'
-                        onClick={e => alert("Saved")}>
-                        <span className='material-icons material-icons.md-36 icon'>
-                            {saved ? "bookmark_added" : "bookmark_add"}
-                        </span>
-                    </div>
-                </div>
+                {/* ---> Insert Bottom Buttons <--- */}
+                <BottomButtons loggedInUser={loggedInUser} question={question} index={index} />
             </div>
         </div >
     )

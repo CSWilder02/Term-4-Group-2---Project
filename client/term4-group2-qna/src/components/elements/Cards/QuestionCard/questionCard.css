@@ -158,6 +158,10 @@
     margin-top: 15px;
 }
 
+.questionBtmLeftTagsTag:hover {
+    text-decoration: underline;
+}
+
 .questionBtmInteractionsWrap {
     display: flex;
     justify-content: space-between;
@@ -174,6 +178,52 @@
 .questionBtmRightInteractionItem {
     display: flex;
     gap: 5px;
+}
+
+.cardIcon {
+    background: #18191B;
+    border-radius: 100px;
+    height: 24px;
+    width: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardIconUpvoted {
+    background: #8cff28;
+    border-radius: 100px;
+    height: 24px;
+    width: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #18191B;
+    font-size: 18px;
+}
+
+.cardIconDownvoted {
+    background: #ff2828;
+    border-radius: 100px;
+    height: 24px;
+    width: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #18191B;
+    font-size: 18px;
+}
+
+.cardIconSaved {
+    background: #f9f3ed;
+    border-radius: 100px;
+    height: 24px;
+    width: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #18191B;
+    font-size: 18px;
 }
 
 /* Swiper Style */

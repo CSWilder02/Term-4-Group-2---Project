@@ -39,26 +39,28 @@ import { ImagesProvider } from './components/util/UseContext/imagesContext';
 function App() {
   return (
     // Data Provider
-    <TokenProvider>
-      <LoggedInUserProvider>
-        <UsersProvider>
-          <QuestionsProvider>
-            <AnswersProvider>
-              <RepliesProvider>
-                <ImagesProvider>
+    <InteractionProvider>
+      <TokenProvider>
+        <LoggedInUserProvider>
+          <UsersProvider>
+            <QuestionsProvider>
+              <AnswersProvider>
+                <RepliesProvider>
+                  <ImagesProvider>
 
-                  {/* UI Provider*/}
-                  <InteractionProvider>
+                    {/* UI Provider*/}
+
                     <AppContent />
-                  </InteractionProvider>
 
-                </ImagesProvider>
-              </RepliesProvider>
-            </AnswersProvider>
-          </QuestionsProvider>
-        </UsersProvider>
-      </LoggedInUserProvider>
-    </TokenProvider>
+
+                  </ImagesProvider>
+                </RepliesProvider>
+              </AnswersProvider>
+            </QuestionsProvider>
+          </UsersProvider>
+        </LoggedInUserProvider>
+      </TokenProvider>
+    </InteractionProvider>
   );
 }
 

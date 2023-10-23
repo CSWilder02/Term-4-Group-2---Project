@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const config = (method, endpoint, token, formData) => {
+const config = (method, endpoint, token, payload) => {
     const requestConfig = {
         method: method,
         maxBodyLength: Infinity,
@@ -12,15 +12,15 @@ const config = (method, endpoint, token, formData) => {
     };
 
     if (method === "post" || method === "patch") {
-        requestConfig.data = formData;
+        requestConfig.data = payload;
     }
 
     return requestConfig;
 };
 
 const requestDataOf = {
-    request: async (method, endpoint, token, formData) => {
-        return axios.request(config(method, endpoint, token, formData))
+    request: async (method, endpoint, token, payload) => {
+        return axios.request(config(method, endpoint, token, payload))
     }
 };
 
