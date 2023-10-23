@@ -1,0 +1,8 @@
+.answerCardWrap{
+    border-radius: 10px;
+    padding: 20px;
+    background: #18191B;
+    font-family: Pontano Sans;
+    border: 1px solid #1d1d1e;
+    max-width: 600px;
+}
