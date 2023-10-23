@@ -21,7 +21,6 @@ export const AnswerCard = ({ answer, onReplySubmit }) => {
   };
 
   return (
-    // <div>answerCard</div>
     <div className="answerCardWrap">
       <div className="answer-card">
         {answer ? ( // Check if answer is defined
@@ -30,9 +29,13 @@ export const AnswerCard = ({ answer, onReplySubmit }) => {
               <p>{answer.text}</p>
             </div>
             <div className="replies">
-              {answer.replies.map((reply) => (
-                <ReplyCard key={reply._id} reply={reply} />
-              ))}
+              {answer.replies && answer.replies.length > 0 ? (
+                answer.replies.map((reply) => (
+                  <ReplyCard key={reply._id} reply={reply} />
+                ))
+              ) : (
+                <p>No replies available</p>
+              )}
             </div>
             <div className="reply-input">
               <input

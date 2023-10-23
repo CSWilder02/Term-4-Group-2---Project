@@ -16,6 +16,9 @@ export const Answers = ({
 }) => {
   const [Questions, setQuestions] = useState(questionsDemoData);
 
+  console.log("Answer Data in Answers component:", Questions[0]);
+
+
   const options = [
     { label: "Top", value: "top" },
 
@@ -71,7 +74,12 @@ export const Answers = ({
         </div>
         {/* ----------------AnswerCard------------------------------------ */}
         <div className="answerCard-Box">
-          <AnswerCard />
+          {Questions.length > 0 ? (
+            <AnswerCard answer={Questions[0]} />
+          ) : (
+            <p>No questions available</p>
+          )}
+
         </div>
 
       </div>
