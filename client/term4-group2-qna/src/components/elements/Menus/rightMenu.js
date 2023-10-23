@@ -48,9 +48,9 @@ export const RightMenu = () => {
     ]);
 
     useEffect(() => {
-        console.log(isLoggedIn)
+        // console.log(isLoggedIn)
         setIsLoggedIn(sessionStorage.getItem('loggedIn'));
-        console.log(loggedInUser)
+        // console.log(loggedInUser)
         // loggedInUser && loggedInUser?.username ? setIsLoggedIn("true") : setIsLoggedIn("false")
     }, [isRightBarActive, isLoggedIn, useInteraction(), loggedInUser]);
 
@@ -107,17 +107,17 @@ export const RightMenu = () => {
                             }
                         </div>
                     </div>
-                    <span class="material-icons navBar-menu icon-button" onClick={e => setIsRightBarActive(false)}>
+                    <span className="material-icons navBar-menu icon-button" onClick={e => setIsRightBarActive(false)}>
                         close
                     </span>
                 </div>
                 {/* <hr className='sideBarSectionTopDivider' /> */}
                 <div className='sideBarSectionContainer'>
                     {
-                        sectionItems.map((item) => {
+                        sectionItems.map((item, i) => {
                             return (
-                                <div className='sideBarSectionItmContainer' onClick={item.function}>
-                                    <span class="material-icons icon-button sideBarSectionIcon">
+                                <div key={i} className='sideBarSectionItmContainer' onClick={item.function}>
+                                    <span className="material-icons icon-button sideBarSectionIcon">
                                         {item.icon}
                                     </span>
                                     <div className='sideBarSectionTitle'>{item.title}</div>
@@ -135,10 +135,10 @@ export const RightMenu = () => {
                 <hr className='sideBarSectionContentDivider' />
                 <div className='sideBarSectionContainer'>
                     {
-                        sectionItems2.map((item) => {
+                        sectionItems2.map((item, i) => {
                             return (
-                                <div className='sideBarSectionItmContainer' onClick={item?.function}>
-                                    <span class="material-icons icon-button sideBarSectionIcon">
+                                <div key={i} className='sideBarSectionItmContainer' onClick={item?.function}>
+                                    <span className="material-icons icon-button sideBarSectionIcon">
                                         {item.icon}
                                     </span>
                                     <div className='sideBarSectionTitle'>{item.title}</div>
@@ -150,10 +150,10 @@ export const RightMenu = () => {
                 <hr className='sideBarSectionContentDivider' />
                 <div className='sideBarSectionContainer'>
                     {
-                        sectionItems3.map((item) => {
+                        sectionItems3.map((item, i) => {
                             return (
-                                <div className='sideBarSectionItmContainer' onClick={item?.function}>
-                                    <span class="material-icons icon-button sideBarSectionIcon">
+                                <div key={i} className='sideBarSectionItmContainer' onClick={item?.function}>
+                                    <span className="material-icons icon-button sideBarSectionIcon">
                                         {item.icon}
                                     </span>
                                     <div className='sideBarSectionTitle'>{item.title}</div>
@@ -166,7 +166,7 @@ export const RightMenu = () => {
                 <hr className='sideBarSectionContentDivider' />
                 <div className='sideBarSectionContainer'>
                     <div className='sideBarSectionItmContainer'>
-                        <span class="material-icons icon-button sideBarSectionIcon color-danger">
+                        <span className="material-icons icon-button sideBarSectionIcon color-danger">
                             logout
                         </span>
                         <div className='sideBarSectionTitle font-heading color-danger'
@@ -177,6 +177,7 @@ export const RightMenu = () => {
                                 // setIsLoggedIn("false");
                                 setLoggedInUser({})
                                 setIsRightBarActive(false);
+                                navigateTo('/onboarding')
                             }}>Sign Out</div>
                     </div>
                 </div>

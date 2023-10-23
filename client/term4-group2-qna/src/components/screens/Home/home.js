@@ -7,6 +7,7 @@ import { useUsers } from '../../util/UseContext/usersContext';
 import { useQuestions } from '../../util/UseContext/questionsContext';
 import { useTopics } from '../../util/UseContext/topicsContext';
 import { useLoggedInUser, useToken } from '../../util/UseContext/loggedInUserContext';
+import { useInteraction } from '../../util/UI/interactionListener';
 
 export const Home = () => {
   const { user } = useLoggedInUser();
@@ -14,17 +15,16 @@ export const Home = () => {
   const { users } = useUsers();
   const { questions } = useQuestions();
   const { topics } = useTopics();
-  const [Questions, setQuestions] = useState(questionsDemoData)
 
   useEffect(() => {
-    console.log("tkn: ", token)
-  }, [user, users, questions, topics])
+    // console.log("tkn: ", token)
+  }, [user, users, questions, topics, useInteraction()])
 
   return (
     <div className="homeWrap">
 
 
-      {/* <div class="filter" role="group" aria-label="Basic example">
+      {/* <div className="filter" role="group" aria-label="Basic example">
         <Col className="navBarRightContainerHome">
           <div style={{ height: '45px', marginBottom: '8px', marginTop: '12px' }} 
           className={changePage("most asked")} 
@@ -52,14 +52,15 @@ export const Home = () => {
       </div>
 
       <div className='homeMidWrap'>
-        {/* {token} */}
-        {
-          Questions?.map((question) => {
-            return (
-              <QuestionCard question={question} />
-            )
-          })
-        }
+        <div className='homeMidQuestions'>
+          {
+            questions?.map((question, i) => {
+              return (
+                <QuestionCard key={i} question={question} scope={"public"} index={i} />
+              )
+            })
+          }
+        </div>
       </div>
 
       <div className='homeRightWrap'>

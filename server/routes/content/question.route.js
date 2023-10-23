@@ -20,8 +20,8 @@ const upload = multer({
     },
 });
 
-//Create
-router.post("/api/createQuestion", verifyToken, upload.array("images", 5), async (req, res) => {
+// Create Question
+router.post("/api/createQuestion", verifyToken, upload.array("images", 10), async (req, res) => {
     try {
         console.log("Start of createQuestion route"); // Debugging
         console.log(req.body);
@@ -51,22 +51,22 @@ router.post("/api/createQuestion", verifyToken, upload.array("images", 5), async
         const questionTopics = [];
 
         if (topics && topics.length > 0) {
-            // Iterate through the provided topics
             for (const topicText of topics) {
-                // Check if a Topic with the same text already exists
+                // Check if a Topic with the same title already exists
                 const existingTopic = await TopicSchema.findOne({ title: topicText });
 
                 if (existingTopic) {
-                    // If it exists, push its ID to the question's Topics array
-                    questionTopics.push(existingTopic._id);
+                    // If it exists, push its ID and title to the question's Topics array
+                    questionTopics.push({ id: existingTopic._id, title: existingTopic.title });
                 } else {
                     // If it doesn't exist, create a new Topic and push its ID
                     const newTopic = new TopicSchema({ title: topicText });
                     const savedTopic = await newTopic.save();
-                    questionTopics.push(savedTopic._id);
+                    questionTopics.push({ id: savedTopic._id, title: savedTopic.title });
                 }
             }
         }
+
 
         // Set the Question's topics array
         question.topics = questionTopics;
@@ -76,16 +76,21 @@ router.post("/api/createQuestion", verifyToken, upload.array("images", 5), async
         if (images && images.length > 0) {
             for (const imageData of images) {
                 let image = new ImageSchema({ data: imageData, source: { userId: userId } });
-                console.log(image)
+                console.log(image);
                 const savedImage = await image.save();
                 imageIds.push(savedImage._id);
             }
         }
-        question.images = imageIds
+        question.images = imageIds;
 
         question.save()
             .then((savedQuestion) => {
                 console.log("Question saved successfully."); // Debugging
+
+                // Add the question ID to the user's questions array
+                user.questions.push(savedQuestion._id);
+                user.save(); // Save the user document
+
                 res.json(savedQuestion);
             })
             .catch((error) => {
@@ -100,25 +105,29 @@ router.post("/api/createQuestion", verifyToken, upload.array("images", 5), async
     }
 });
 
+
+
 // Get All Questions
 router.get("/api/getQuestions", verifyToken, async (req, res) => {
     try {
-        const userId = req.user.userId;
-        // const userCommunity = req.user.username; // username is available in the JWT payload
-
-        const findQuestion = await QuestionSchema.find({ questioner: userId });
+        const userId = req?.user?.userId;
+        const findQuestion = await QuestionSchema?.find()?.sort({ dateAsked: -1 });
         res.json(findQuestion);
+        // console.log("No user")
+        // }
+
     }
     catch (error) {
         res.status(500).json({ error: "Error fetching questions.", error });
+        console.log(error)
     }
 });
 
 // Get Single Question
-router.get("/api/question/:id", verifyToken, async (req, res) => {
+router.get("/api/question/:id", async (req, res) => {
     try {
 
-        const findSingleQuestion = await QuestionSchema.findById(req.params.id);
+        const findSingleQuestion = await QuestionSchema.findById(req?.params?.id);
 
         res.json(findSingleQuestion);
     } catch (error) {

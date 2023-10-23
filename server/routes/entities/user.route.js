@@ -29,7 +29,33 @@ router.post("/api/loginUser", async (req, res) => {
 
                 // Generate a JWT token
                 const token = jwt.sign({ userId: findUser._id, role: findUser.role }, secretKey, { expiresIn: "1h" });
-                res.json({ user: userWithoutPassword, token });
+
+                // Create session-related items
+                const signedInAt = new Date();
+                const expiresAt = new Date(signedInAt);
+                expiresAt.setHours(expiresAt.getHours() + 4); // Expires 4 hours after login
+
+                // Update the session field in the user document
+                await UserSchema.updateOne(
+                    { _id: findUser._id },
+                    {
+                        $set: {
+                            'session.signedInAt': signedInAt,
+                            'session.expiresAt': expiresAt,
+                            'session.token': token,
+                        },
+                    }
+                );
+
+                res.json({
+                    user: userWithoutPassword,
+                    token,
+                    session: {
+                        signedInAt,
+                        expiresAt,
+                        token, // This could be a session token if needed
+                    },
+                });
             } else {
                 console.log("Invalid password:", req.body.password);
                 res.status(401).json({ error: "Invalid username or password." });

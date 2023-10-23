@@ -9,8 +9,8 @@ router.get("/api/getTopics", verifyToken, async (req, res) => {
     try {
         const userId = req.user.userId;
         if (userId || userId !== "") {
-            const findTopic = await TopicSchema.find();
-            res.json(findTopic);
+            const findTopics = await TopicSchema.find();
+            res.json(findTopics);
         } else {
             res.json({ error: "Access denied. Please login or provide token." })
         }

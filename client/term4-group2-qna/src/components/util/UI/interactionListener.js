@@ -20,11 +20,11 @@ export const InteractionProvider = ({ children }) => {
         }
 
         document.body.addEventListener('click', handleInteraction);
-        window.addEventListener('scroll', handleInteraction);
+        // window.addEventListener('scroll', handleInteraction);
 
         return () => {
             document.body.removeEventListener('click', handleInteraction);
-            window.removeEventListener('scroll', handleInteraction);
+            // window.removeEventListener('scroll', handleInteraction);
         };
     }, []);
 

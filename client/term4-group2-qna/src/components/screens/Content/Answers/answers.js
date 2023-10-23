@@ -160,8 +160,8 @@ export const Answers = ({ user, users, questions, answers, replies, topics }) =>
           <label className="dropdown-filter">
             Sort by:
             <select className="select-box">
-              {options.map((option) => (
-                <option value={option.value}>{option.label}</option>
+              {options.map((option, i) => (
+                <option key={i} value={option.value}>{option.label}</option>
               ))}
             </select>
           </label>

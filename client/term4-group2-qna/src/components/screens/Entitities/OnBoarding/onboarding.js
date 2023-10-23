@@ -21,12 +21,14 @@ export const OnBoarding = ({ user, users }) => {
         // requestDataOf.request(method, endpoint, token, formData) This is the structure of the function
         requestDataOf.request("post", "loginUser", '', loginData)
             .then((response) => {
+                let res = response?.data
                 sessionStorage.setItem("loggedIn", "true");
-                sessionStorage.setItem("user", JSON.stringify(response?.data?.user));
-                sessionStorage.setItem("token", response?.data?.token);
-                setLoggedInUser(response?.data);
-                setToken(response?.data?.token)
+                sessionStorage.setItem("user", JSON.stringify(res?.user));
+                sessionStorage.setItem("token", res?.token);
+                setLoggedInUser(res?.user);
+                setToken(res?.token)
                 navigate('/'); // Navigate to the "Home" page
+                console.log(response)
             })
             .catch((error) => {
                 console.log(error);
@@ -40,7 +42,7 @@ export const OnBoarding = ({ user, users }) => {
                 sessionStorage.setItem("loggedIn", "true");
                 sessionStorage.setItem("user", JSON.stringify(response?.data?.user));
                 sessionStorage.setItem("token", response?.data?.token);
-                setLoggedInUser(response?.data);
+                setLoggedInUser(response?.data?.user);
                 setToken(response?.data?.token)
             })
             .catch((error) => {
@@ -78,9 +80,9 @@ export const OnBoarding = ({ user, users }) => {
                         <input type="radio" name="slide" id="signup" />
                         <label for="login" className="slide login" onClick={loginBtn}>Login</label>
                         <label for="signup" className="slide signup" onClick={signupBtn}>Signup</label>
-                        <div class="slider-tab"></div>
+                        <div className="slider-tab"></div>
                     </div>
-                    <div class="form-inner">
+                    <div className="form-inner">
                         <form action="#" className="login" id="login2">
                             <div >
                                 <input className="field3" type="text" placeholder="Username" onChange={(e) => setLoginData({ ...loginData, username: e.target.value })} />

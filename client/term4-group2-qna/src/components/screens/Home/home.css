@@ -5,3 +5,9 @@
     padding: 10px 5px;
     gap: 10px;
 }
+
+.homeMidQuestions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
