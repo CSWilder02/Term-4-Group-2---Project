@@ -111,7 +111,8 @@ router.post("/api/createQuestion", verifyToken, upload.array("images", 10), asyn
 router.get("/api/getQuestions", verifyToken, async (req, res) => {
     try {
         const userId = req?.user?.userId;
-        const findQuestion = await QuestionSchema?.find()?.sort({ dateAsked: -1 });
+        // const findQuestion = await QuestionSchema?.find()?.sort({ dateAsked: -1 }); //Filter from latest to newest
+        const findQuestion = await QuestionSchema?.find();
         res.json(findQuestion);
         // console.log("No user")
         // }
