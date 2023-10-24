@@ -32,29 +32,35 @@ import { Error404 } from './components/screens/404/error404';
 import { useTopics } from './components/util/UseContext/topicsContext';
 import { useCommunities } from './components/util/UseContext/communitiesContext';
 import { ClickInteractionProvider, InteractionProvider } from './components/util/UI/interactionListener';
+import { Landing } from './components/screens/Landing/landing';
+import { ImagesProvider } from './components/util/UseContext/imagesContext';
 
 
 function App() {
   return (
     // Data Provider
-    <TokenProvider>
-      <LoggedInUserProvider>
-        <UsersProvider>
-          <QuestionsProvider>
-            <AnswersProvider>
-              <RepliesProvider>
+    <InteractionProvider>
+      <TokenProvider>
+        <LoggedInUserProvider>
+          <UsersProvider>
+            <QuestionsProvider>
+              <AnswersProvider>
+                <RepliesProvider>
+                  <ImagesProvider>
 
-                {/* UI Provider*/}
-                <InteractionProvider>
-                  <AppContent />
-                </InteractionProvider>
+                    {/* UI Provider*/}
 
-              </RepliesProvider>
-            </AnswersProvider>
-          </QuestionsProvider>
-        </UsersProvider>
-      </LoggedInUserProvider>
-    </TokenProvider>
+                    <AppContent />
+
+
+                  </ImagesProvider>
+                </RepliesProvider>
+              </AnswersProvider>
+            </QuestionsProvider>
+          </UsersProvider>
+        </LoggedInUserProvider>
+      </TokenProvider>
+    </InteractionProvider>
   );
 }
 
@@ -77,6 +83,7 @@ const AppContent = () => {
       <NavBar user={loggedInUser} users={users} />
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/#' element={<Landing />} />
         <Route path='/questions/:id' element={<Questions />} />
         <Route path='/onboarding' element={<OnBoarding />} />
         <Route path='/profile/:type/:id' element={<UserProfile />} />

@@ -25,7 +25,7 @@ export const NavBar = ({ user, users }) => {
 
     useEffect(() => {
         setLoggedIn(sessionStorage.getItem("loggedIn"));
-        console.log(id)
+        // console.log(id)
     }, [sessionStorage.getItem("loggedIn"), useInteraction()]);
 
 

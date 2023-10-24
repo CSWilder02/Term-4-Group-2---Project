@@ -24,7 +24,7 @@ export const CreateQuestion = () => {
         // },
         // { name: 'subscribe', label: 'Subscribe to Newsletter', type: 'checkbox' },
         {
-            submitLabel: "Ask Quetsion",
+            submitLabel: "Ask Question",
             cancelLabel: "Cancel"
         }
     ];
@@ -35,7 +35,12 @@ export const CreateQuestion = () => {
     };
 
     const createQuestion = async (formValues) => {
-        requestDataOf.request("post", "createQuestion", token, formValues).then(() => { alert("Posted") })
+        requestDataOf.request("post", "createQuestion", token, formValues).
+            then(() => {
+                alert("Posted"); navigateTo('/')
+            }).
+            catch(err => console.log(err))
+
     };
     const cancelQuestion = async (formValues) => {
         navigateTo('/')

@@ -5,3 +5,16 @@
     padding: 10px 5px;
     gap: 10px;
 }
+
+.homeMidWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    /* width: 100%; */
+}
+
+.homeMidQuestions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

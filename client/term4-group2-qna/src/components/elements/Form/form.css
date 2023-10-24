@@ -46,7 +46,7 @@
     margin-top: 20px;
 }
 
-input[type="text"].text,
+.text,
 textarea {
     background: #18191B;
     border: 0.75px solid #252527;
@@ -65,7 +65,7 @@ textarea {
     min-height: 150px !important;
 }
 
-input[type="text"]:focus,
+.text:focus,
 textarea:focus {
     background: none;
     border: 1px solid #FF8328;

@@ -124,13 +124,13 @@ const LeftBar = () => {
                 <MenuItem style={{ borderBottom: 'solid 1px #' }} > Home </MenuItem>
                 <MenuItem style={{ borderBottom: 'solid 1px #4B4D55' }} > New </MenuItem>
                 {
-                    menu?.map((menuItem) => {
+                    menu?.map((menuItem, i) => {
                         return (
-                            <SubMenu style={{ borderBottom: 'solid 1px #4B4D55' }} label={menuItem?.menuCategories}>
+                            <SubMenu key={i} style={{ borderBottom: 'solid 1px #4B4D55' }} label={menuItem?.menuCategories}>
                                 {
-                                    menuItem?.subMenus?.map((submenu) => {
+                                    menuItem?.subMenus?.map((submenu, i) => {
                                         return (
-                                            <MenuItem onClick={e => setSelectedPage(submenu?.codeMenu)} style={{ backgroundColor: selectedPage === submenu?.codeMenu ? "red" : '#18191B' }} > {submenu?.subMenuTitle} </MenuItem>
+                                            <MenuItem key={i} onClick={e => setSelectedPage(submenu?.codeMenu)} style={{ backgroundColor: selectedPage === submenu?.codeMenu ? "red" : '#18191B' }} > {submenu?.subMenuTitle} </MenuItem>
                                         )
                                     })
                                 }
