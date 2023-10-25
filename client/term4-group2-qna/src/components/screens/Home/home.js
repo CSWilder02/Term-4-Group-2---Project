@@ -32,8 +32,9 @@ export const Home = () => {
   }
 
   useEffect(() => {
+    setFilteredQuestions(returnFilteredQuestions(filterState, sortState, questions))
     // console.log("tkn: ", token)
-  }, [user, users, questions, topics, useInteraction()]);
+  }, [user, users, questions, topics, useInteraction(), filteredQuestions]);
 
   useEffect(() => {
     setFilteredQuestions(returnFilteredQuestions(filterState, sortState, questions))

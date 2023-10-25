@@ -216,7 +216,9 @@ export const BottomButtons = ({ question, index }) => {
                                 </span>
                                 <div className='questionBtmRightInteraction-metrics text-normal'>
                                     {interaction?.name === "downVote" && interaction?.interactionCount > 0 && "-"}
-                                    {interaction?.interactionCount}
+                                    {interaction?.name === "comment" && "Answer ("}
+                                    <b>{interaction?.interactionCount}</b>
+                                    {interaction?.name === "comment" && ")"}
                                 </div>
                             </li>
                         )
