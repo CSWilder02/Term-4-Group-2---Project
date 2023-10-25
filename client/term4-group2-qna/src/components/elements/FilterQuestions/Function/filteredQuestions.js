@@ -11,7 +11,7 @@ export const returnFilteredQuestions = (filter, sort, questions) => {
             return filteredQuestions
         } else if (sort === "reset") {
             filteredQuestions = (questions?.sort((a, b) => new Date(b["dateAsked"]) - new Date(a["dateAsked"])))
-            return filteredQuestions;
+            return questions;
         }
     } else if (filter === "most") {
         let mostQuestions = questions?.sort((a, b) => b.answers.length - a.answers.length);
