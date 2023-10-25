@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './onboarding.css';
@@ -12,8 +12,12 @@ export const OnBoarding = ({ user, users }) => {
     const [registerData, setRegisterData] = useState({}); // Declare and initialize registerData
     const navigate = useNavigate(); // Initialize useNavigate
 
+    const loginFormRef = useRef();
+    const loginHeadingRef = useRef();
+    const loginTextRef = useRef();
+
     useEffect(() => {
-    }, [loginData, registerData, loggedInUser, token]);
+    }, [loginData, registerData, loggedInUser, token, loginFormRef]);
 
     const submitLogin = (e) => {
         e?.preventDefault()
@@ -56,14 +60,20 @@ export const OnBoarding = ({ user, users }) => {
     const loginText = document.getElementById("login2");
     const loginForm = document.getElementById("login");
     const signupBtn = () => {
-        loginForm.style.marginLeft = "-50%";
-        loginText.style.marginLeft = "-50%";
-        loginHeading.style.marginLeft = "-50%";
+        // loginForm.style.marginLeft = "-50%";
+        // loginText.style.marginLeft = "-50%";
+        // loginHeading.style.marginLeft = "-50%";
+        loginFormRef.current.style.marginLeft = "-50%"
+        loginHeadingRef.current.style.marginLeft = "-50%"
+        loginTextRef.current.style.marginLeft = "-50%"
     };
     const loginBtn = () => {
-        loginForm.style.marginLeft = "0%";
-        loginText.style.marginLeft = "0%";
-        loginHeading.style.marginLeft = "0%";
+        // loginForm.style.marginLeft = "0%";
+        // loginText.style.marginLeft = "0%";
+        // loginHeading.style.marginLeft = "0%";
+        loginFormRef.current.style.marginLeft = "0%"
+        loginHeadingRef.current.style.marginLeft = "0%"
+        loginTextRef.current.style.marginLeft = "0%"
     };
 
     return (
@@ -71,19 +81,19 @@ export const OnBoarding = ({ user, users }) => {
 
             <div className="wrapper">
                 <div className='form'>
-                    <div className='title login' id="login3">Login Form</div>
+                    <div className='title login' id="login3" ref={loginHeadingRef}>Login Form</div>
                     <div className='title2 signup'>Signup Form</div>
                 </div>
                 <div className="form-container">
                     <div className="slide-controls">
-                        <input type="radio" name="slide" id="login" checked />
+                        <input type="radio" name="slide" id="login" ref={loginFormRef} checked />
                         <input type="radio" name="slide" id="signup" />
-                        <label for="login" className="slide login" onClick={loginBtn}>Login</label>
+                        <label for="login" className="slide primary" onClick={loginBtn}>Login</label>
                         <label for="signup" className="slide signup" onClick={signupBtn}>Signup</label>
                         <div className="slider-tab"></div>
                     </div>
                     <div className="form-inner">
-                        <form action="#" className="login" id="login2">
+                        <form action="#" className="login" id="login2" ref={loginTextRef}>
                             <div >
                                 <input className="field3" type="text" placeholder="Username" onChange={(e) => setLoginData({ ...loginData, username: e.target.value })} />
                             </div>
@@ -91,7 +101,7 @@ export const OnBoarding = ({ user, users }) => {
                                 <input className="field3" style={{ marginLeft: '1px', marginTop: '10px' }} type="password" placeholder="Password" onChange={(e) => setLoginData({ ...loginData, password: e.target.value })} />
                             </div>
 
-                            <button className='login_button' onClick={e => submitLogin(e)}>Log In</button>
+                            <button className='button-primary' onClick={e => submitLogin(e)}>Log In</button>
 
                         </form>
                         <form action="#" className="signup">
