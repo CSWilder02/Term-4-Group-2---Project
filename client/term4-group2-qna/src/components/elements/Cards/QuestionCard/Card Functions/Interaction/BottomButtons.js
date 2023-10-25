@@ -21,7 +21,7 @@ export const BottomButtons = ({ question, index }) => {
             if (question?.upVotes[i] === loggedInUser?._id) {
                 setUpVote(prevUpVote => {
                     // Use a callback function to get the previous state and update it
-                    console.log(`UpVoteState: ${index}`, prevUpVote); // Log the updated value
+                    // console.log(`UpVoteState: ${index}`, prevUpVote); // Log the updated value
                     return true; // Update the state to the opposite value
                 });
                 // break;

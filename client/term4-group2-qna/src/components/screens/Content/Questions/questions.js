@@ -43,8 +43,8 @@ export const Questions = () => {
           'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
-          text: newAnswer, 
-          question: specificQuestion._id, 
+          text: newAnswer,
+          question: specificQuestion._id,
         }),
       });
 
@@ -75,6 +75,7 @@ export const Questions = () => {
 
   useEffect(() => {
     // console.log("tkn: ", token)
+    console.log(id)
   }, [user, users, questions, useInteraction()]);
 
   return (
@@ -88,7 +89,8 @@ export const Questions = () => {
         {/* ----------------MainQuestion-------------------------------- */}
         <div className="question-box">
           {questions.length > 0 ? (
-            <QuestionCard question={specificQuestion} />
+            // <QuestionCard question={specificQuestion} />
+            ""
           ) : (
             <p>No questions available</p>
           )}
