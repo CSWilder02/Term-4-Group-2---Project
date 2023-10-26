@@ -8,11 +8,12 @@ import requestDataOf from '../../../../util/DataRequests/fetchData';
 import { useInteraction } from '../../../../util/UI/interactionListener';
 import { useLoggedInUser, useToken } from '../../../../util/UseContext/loggedInUserContext';
 
-export const AnswerBottomButtons = ({ question, index }) => {
+export const AnswerBottomButtons = ({ question, feedback, index }) => {
 
     const navigatTo = useNavigate();
     const [upVote, setUpVote] = useState(false);
     const [downVote, setDownVote] = useState(false);
+    const [respond, setRespond] = useState(true)
     const [saved, setSaved] = useState(false);
     const { token } = useToken();
     const { loggedInUser } = useLoggedInUser();
@@ -31,7 +32,7 @@ export const AnswerBottomButtons = ({ question, index }) => {
                 // break;
             }
         }
-    }, [useInteraction()])
+    }, [useInteraction(), respond])
 
     // Button Functions
     const handleUpvote = () => {
@@ -201,9 +202,17 @@ export const AnswerBottomButtons = ({ question, index }) => {
             name: 'comment',
             icon: "mode_comment",
             interactionCount: question?.answers?.length,
-            action: () => { navigatTo(`/question/${question?._id}`) }
+            action: () => {
+                setRespond(!respond);
+                respond ? feedback("respondOn") : feedback("respondOff")
+            }
         },
-    ]
+    ];
+
+
+    const buttonFeedback = () => {
+
+    }
 
     return (
         <div className='questionBtmInteractionsWrap'>
@@ -220,7 +229,7 @@ export const AnswerBottomButtons = ({ question, index }) => {
                                 </span>
                                 <div className='questionBtmRightInteraction-metrics text-normal'>
                                     {interaction?.name === "downVote" && interaction?.interactionCount > 0 && "-"}
-                                    {interaction?.name === "comment" && "Respond"}
+                                    {interaction?.name === "comment" && respond ? "Respond" : interaction?.name === "comment" && !respond && "Cancel"}
                                     {/* <b>{interaction?.interactionCount ? interaction?.interactionCount : 0}</b>
                                     {interaction?.name === "comment" && ")"} */}
                                 </div>

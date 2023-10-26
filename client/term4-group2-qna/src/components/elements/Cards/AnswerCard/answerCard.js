@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./answerCard.css"
 import { useUsers } from "../../../util/UseContext/usersContext";
 import { AnswerBottomButtons } from "./Interaction/answerBottomInteraction";
+import { useInteraction } from "../../../util/UI/interactionListener";
 
 export const AnswerCard = ({ answer, onReplySubmit }) => {
   const [replyText, setReplyText] = useState("");
   const [isViewReplies, setIsViewReplies] = useState(false);
+  const [isViewResponsSection, setIsViewResponsSection] = useState(false);
   const { users } = useUsers();
 
   const handleReplySubmit = () => {
@@ -23,9 +25,18 @@ export const AnswerCard = ({ answer, onReplySubmit }) => {
         }
       }
     }
+  };
+  const userWhoAnswered = findAnswerer(users);
+
+  const buttonFeedback = (val) => {
+    if (val) {
+      val === "respondOn" ? setIsViewResponsSection(true) : val === "respondOff" && setIsViewResponsSection(false)
+    }
   }
 
-  const userWhoAnswered = findAnswerer(users)
+  useEffect(() => {
+
+  }, [isViewResponsSection, useInteraction()])
 
   return (
     <div className="answerCardWrap">
@@ -61,21 +72,25 @@ export const AnswerCard = ({ answer, onReplySubmit }) => {
           <div className="answerRightBottomWrap">
             <div className="answerRightBottomAnswer text-normal color-text-secondary">{answer?.text}</div>
             <div className="answerRightBottomInteraction">
-              <AnswerBottomButtons question={answer} />
+              <AnswerBottomButtons question={answer} feedback={buttonFeedback} />
             </div>
           </div>
         </div>
       </div>
-      <div className="answerCardRespondWrap">
-        {/* <hr /> */}
-        <div className="answerCardRespondLineWrap lineWrap">
-          <div className="answerCardRespondLine line" />
+      {
+        isViewResponsSection &&
+        <div className="answerCardRespondWrap">
+          {/* <hr /> */}
+          <div className="answerCardRespondLineWrap lineWrap">
+            <div className="answerCardRespondLine line" />
+          </div>
+          <div className="answerCardRespondForm">
+            <textarea placeholder="Type response" type="text" className="text" />
+            <button className="button-secondary respondButton" >Respond</button>
+          </div>
         </div>
-        <div className="answerCardRespondForm">
-          <input type="text" className="text" />
-          <button className="button-secondary respondButton" >Respond</button>
-        </div>
-      </div>
+      }
+
     </div>
   );
 };

@@ -119,6 +119,7 @@ export const QuestionPage = () => {
                         Post Answer
                     </button>
                 </div>
+                <hr style={{ margin: 0 }} />
                 <div className='text-normal'>All Answers {"(" + specificAnswers?.length + ")"}</div>
 
                 {/* ----------------Filter------------------------------------ */}

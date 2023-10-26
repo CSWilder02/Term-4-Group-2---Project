@@ -9,7 +9,8 @@ const routes = require("./routes/routes")
 
 require("dotenv").config({ path: '.env' });
 
-app.use(cors({ origin: 'http://192.168.8.103:3000' }));
+app.use(cors({ origin: 'http://localhost:3000' }));
+// app.use(cors({ origin: 'http://192.168.8.103:3000' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
