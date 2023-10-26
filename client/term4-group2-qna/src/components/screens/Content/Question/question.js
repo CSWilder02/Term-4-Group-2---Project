@@ -18,6 +18,7 @@ import {
 import { useInteraction } from "../../../util/UI/interactionListener";
 import requestDataOf from "../../../util/DataRequests/fetchData";
 import { QuestionCard } from '../../../elements/Cards/QuestionCard/questionCard';
+import { FilterQuestionsWidget } from '../../../elements/FilterQuestions/filterQuestionsWidget';
 // import from "./";
 
 
@@ -29,15 +30,27 @@ export const QuestionPage = () => {
     const { users } = useUsers();
     const { token } = useToken();
     const { id } = useParams();
+    const [isPostAnswerVisible, setIsPostAnswerVisible] = useState(false)
+
+    // Retrieving and sending filter states
+    const [filterState, setFilterState] = useState("latest");
+    const [sortState, setSortState] = useState("reset");
 
     const specificQuestion = questions.find((question) => question._id === id);
-    const specificQuestionAnswers = specificQuestion
-        ? specificQuestion.answers
-        : [];
 
-    const specificAnswers = () => {
-
+    const findAnswers = (answers) => {
+        let specificAnswersArray = []
+        if (answers) {
+            for (const answer of answers) {
+                if (answer?.question === id) {
+                    specificAnswersArray.push(answer);
+                }
+            }
+        }
+        return specificAnswersArray
     }
+
+    const specificAnswers = findAnswers(answers)
 
     const [answerText, setAnswerText] = useState("");
 
@@ -50,7 +63,7 @@ export const QuestionPage = () => {
         }
 
         requestDataOf.request("post", "createAnswer", token, payload)
-            .then((res) => { console.log(res) })
+            .then((res) => { setIsPostAnswerVisible(false); console.log(res) })
             .catch((err) => { console.log(err) })
     };
 
@@ -63,16 +76,21 @@ export const QuestionPage = () => {
         { label: "Oldest", value: "oldest" },
     ];
 
+    const getFilter = (val) => {
+        setFilterState(val)
+    };
+    const getSort = (val) => {
+        setSortState(val)
+    }
+
     useEffect(() => {
         console.log(answerText);
         console.log(answers)
-    }, [user, users, questions, useInteraction(), answerText]);
+        console.log(`Answers for: ${id}:`, specificAnswers)
+    }, [user, users, questions, useInteraction(), answers, answerText, isPostAnswerVisible]);
 
 
     return (
-        // questionPageLogic()
-
-        // bldn
         <div className="Comment">
             {/* ------------------LeftBar------------------------------------ */}
             <div className="leftBar">
@@ -84,48 +102,38 @@ export const QuestionPage = () => {
                 <div className="question-box">
                     {questions.length > 0 ? (
                         <QuestionCard question={specificQuestion} />
-                        // ""
                     ) : (
-                        <p>No questions available</p>
+                        <p>Cannot find question.</p>
                     )}
                 </div>
-                {/* ----------------Filter------------------------------------ */}
-                <div className="filter-add-comment">
-                    <div className="comment-filter">
-                        <label className="dropdown-filter">
-                            Sort by:
-                            <select className="select-box">
-                                {options.map((option) => (
-                                    <option value={option.value}>{option.label}</option>
-                                ))}
-                            </select>
-                        </label>
-                    </div>
-                </div>
+
                 {/* -----------------AddComment--------------------------------- */}
-                <div className="AddComment-box">
-                    <textarea
-                        rows="4"
-                        cols="50"
-                        value={answerText}
-                        onChange={e => { setAnswerText(e.target.value) }}
-                        placeholder="Write your comment here..."
-                    />
+                <div className="AddComment-box" >
+                    {isPostAnswerVisible &&
+                        <textarea rows="4" cols="50" value={answerText} onChange={e => { setAnswerText(e.target.value) }}
+                            placeholder="Write your comment here..." />
+                    }
                     <br />
-                    <button
-                        className="addComment-Btn"
-                        onClick={handlePostAnswer}
-                    >
-                        Post Comment
+                    <button className="button-primary "
+                        onClick={e => { isPostAnswerVisible ? handlePostAnswer() : setIsPostAnswerVisible(true) }}>
+                        Post Answer
                     </button>
                 </div>
+                <hr style={{ margin: 0 }} />
+                <div className='text-normal'>All Answers {"(" + specificAnswers?.length + ")"}</div>
+
+                {/* ----------------Filter------------------------------------ */}
+                <FilterQuestionsWidget getFilter={getFilter} getSort={getSort} />
+
                 {/* ----------------AnswerCard------------------------------------ */}
                 <div className="answerCard-Box">
-                    {answers.length > 0 ? (
-                        <AnswerCard answer={specificQuestionAnswers} />
-                    ) : (
-                        <p>No answers available</p>
-                    )}
+                    {
+                        specificAnswers?.map((answer, i) => {
+                            return (
+                                <AnswerCard key={i} answer={answer} />
+                            )
+                        })
+                    }
                 </div>
             </div>
             <div className="rightBar"></div>

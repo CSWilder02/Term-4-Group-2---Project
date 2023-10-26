@@ -5,6 +5,7 @@ const config = (method, endpoint, token, payload) => {
         method: method,
         maxBodyLength: Infinity,
         url: `http://localhost:5000/api/${endpoint}`,
+        // url: `http://192.168.8.103:5000/api/${endpoint}`,
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
