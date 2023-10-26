@@ -26,7 +26,7 @@ router.post("/api/createAnswer", verifyToken, async (req, res) => {
 
 // Read All Answers
 router.get("/api/getAnswers", verifyToken, async (req, res) => {
-    const findAnswers = await AnswerSchema.find()
+    const findAnswers = await AnswerSchema.find()?.sort({ dateAnswered: -1 });
     res.json(findAnswers)
 });
 

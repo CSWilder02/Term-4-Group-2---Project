@@ -1,0 +1,98 @@
+.centerWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.answerCard-Box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.Comment {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 20px auto 0;
+    padding: 10px 5px;
+    gap: 10px;
+}
+
+.filter-add-comment {
+    display: flex;
+    margin-top: 15px;
+}
+
+.comment-filter {
+    width: 149px;
+    height: 28px;
+    flex-shrink: 0;
+    border-radius: 17px;
+    background: #313338;
+    /* padding-top: 12px; */
+}
+
+.dropdown-filter {
+    padding-left: 10px;
+    color: #fff;
+    font-family: Uni Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.select-box {
+    background-color: #313338;
+    border: transparent;
+    color: #fff;
+    font-family: Uni Sans;
+    font-style: normal;
+    font-weight: 600;
+    margin-left: 5px;
+}
+
+.add-comment {
+    width: auto;
+    height: 28px;
+    border-radius: 17px;
+    background-color: #313338;
+    float: right;
+    padding-top: 12px;
+    font-size: 14px;
+    color: #fff;
+    font-family: Uni Sans;
+    font-style: normal;
+    font-weight: 600;
+    margin-left: 5px;
+    display: flex;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.add-btn {
+    margin-left: 20px;
+}
+
+.AddComment-box {
+    margin-bottom: 15px;
+}
+
+
+.addComment-Btn {
+    background-color: #ff8328;
+    border: 2px solid #FF8328;
+    border-radius: 20px;
+    color: #000;
+    font-weight: 600;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+
+}
+
+.addComment-Btn:hover {
+    background-color: transparent;
+    color: #FF8328;
+}
