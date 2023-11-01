@@ -54,11 +54,15 @@ export const QuestionCard = ({ question, index, community, scope, }) => {
         return `${day} ${month} ${year}`
     }
 
+    const navigateToProfile = () => {
+        questioner?.username === loggedInUser?.username ? navigatTo('/profile/user/me') : navigatTo('/profile/user/' + questioner?.username)
+    }
+
 
     return (
         <div className='questionWrap'>
             <div className='questionTop'>
-                <div className='questionTopLeft' onClick={e => navigatTo('/profile/user/' + questioner?.username)}>
+                <div className='questionTopLeft' onClick={navigateToProfile}>
                     <div className='questionTopLeftImgWrap'>
                         {/* {
                             question?.questionSource === "community" && (
