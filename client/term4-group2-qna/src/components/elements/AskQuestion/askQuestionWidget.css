@@ -5,13 +5,14 @@
     border-radius: 10px;
     padding: 20px;
     justify-content: space-between;
+    max-width: 800px;
 }
 
 .askQuestionLeftContainer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
 }
 
 .askQuestionUserContainer {
@@ -24,6 +25,7 @@
     height: 40px;
     width: 40px;
     border-radius: 100px;
+    border: 1px solid #303032;
 }
 
 .askQuestionUserOnlineStatus {

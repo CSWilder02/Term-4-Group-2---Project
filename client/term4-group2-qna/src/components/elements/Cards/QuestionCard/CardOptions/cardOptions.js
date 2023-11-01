@@ -3,14 +3,15 @@ import './cardOptions.css'
 import { useInteraction } from '../../../../util/UI/interactionListener';
 
 
-export const CardOptions = ({ questionId, scope }) => {
+export const CardOptions = ({ questionId, scope, state }) => {
     let interactionState = useInteraction();
     const [interaction, setInteraction] = useState('idle');
-    const [isOptionsVisible, setIsOptionsVisible] = useState(false)
+    const [isOptionsVisible, setIsOptionsVisible] = useState(false);
+
     const options = [
         {
-            icon: "ios_share",
-            title: "Share",
+            icon: "link",
+            title: "Copy Link",
             function: () => { },
             optionType: "public",
             code: 'normal',
@@ -30,7 +31,8 @@ export const CardOptions = ({ questionId, scope }) => {
             function: () => { },
             optionType: "private",
             code: 'action',
-            scope: "private"
+            scope: "private",
+            border: true
         },
         {
             icon: "delete",
@@ -48,20 +50,26 @@ export const CardOptions = ({ questionId, scope }) => {
             return (
                 <div className='cardOptionsWrap'>
                     {/* <div className='optionsOverlay'></div> */}
-                    {
-                        options?.map((option, i) => {
-                            if (scope === "private" || scope === option?.scope) {
-                                return (
-                                    <div key={i} className={`cardOption ${option?.code === "danger" ? "danger" : option?.code === "action" && "action"}`} onClick={e => { option?.function(); setIsOptionsVisible(false) }}>
-                                        <span key={i} className={`material-icons material-icons.md-18 optionIcon ${option?.code === "danger" ? "dangerIcon" : option?.code === "action" && "actionIcon"}`}>
-                                            {option?.icon}
-                                        </span>
-                                        <div className='optionTitle'>{option?.title}</div>
-                                    </div>
-                                )
-                            }
-                        })
-                    }
+                    <div className='cardOptionsContainer'>
+                        {
+                            options?.map((option, i) => {
+                                if (scope === "private" || scope === option?.scope) {
+                                    return (
+                                        <div
+                                            key={i}
+                                            className={`cardOption ${option?.code === "danger" ? "danger" : option?.code === "action" && "action"}`}
+                                            onClick={e => { option?.function(); setIsOptionsVisible(false) }}
+                                        >
+                                            <span key={i} className={`material-icons material-icons.md-18 optionIcon ${option?.code === "danger" ? "dangerIcon" : option?.code === "action" && "actionIcon"}`}>
+                                                {option?.icon}
+                                            </span>
+                                            <div className='optionTitle'>{option?.title}</div>
+                                        </div>
+                                    )
+                                }
+                            })
+                        }
+                    </div>
                 </div>
             )
         } else {
@@ -79,6 +87,29 @@ export const CardOptions = ({ questionId, scope }) => {
 
 
     return (
-        returnOptions()
+        // returnOptions()
+        <div className='cardOptionsWrap'>
+            <div className='optionsOverlay'
+                onClick={e => {
+                    state && state(false)
+                }}
+            />
+            <div className='cardOptionsContainer'>
+                {
+                    options?.map((option, i) => {
+                        if (scope === "private" || scope === option?.scope) {
+                            return (
+                                <div key={i} className={`cardOption ${option?.code === "danger" ? "danger" : option?.code === "action" && "action"}`} onClick={e => { option?.function(); setIsOptionsVisible(false); state && state(false) }}>
+                                    <span key={i} className={`material-icons material-icons.md-18 optionIcon ${option?.code === "danger" ? "dangerIcon" : option?.code === "action" && "actionIcon"}`}>
+                                        {option?.icon}
+                                    </span>
+                                    <div className='optionTitle'>{option?.title}</div>
+                                </div>
+                            )
+                        }
+                    })
+                }
+            </div>
+        </div>
     )
 }

@@ -1,11 +1,13 @@
 import React from 'react';
 import './sideBars.css';
+import './rightBar.css'
 
 const RightBar = () => {
     return (
-        <div className='sideBarWrap'>
-            <div className='AccountSec'>
+        <div className='sideBarWrap rightBarWrap'>
+            <div className='AccountSection'>
                 {/* Your AccountSec content */}
+
             </div>
             <div className='StudentSec'>
                 <p className='LecTitle'>LECTURES</p>
