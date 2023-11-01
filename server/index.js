@@ -11,7 +11,7 @@ require("dotenv").config({ path: '.env' });
 
 app.use(cors({ origin: 'http://localhost:3000' }));
 // app.use(cors({ origin: 'https://dev8972.d2pwu4n0glrq99.amplifyapp.com' })); // Amazon
-// app.use(cors({ origin: 'http://192.168.8.103:3000' }));
+// app.use(cors({ origin: 'http://192.168.8.103:3000' })); //Eddie's Home API
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

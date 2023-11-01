@@ -1,10 +1,11 @@
 .questionWrap {
     border-radius: 10px;
     padding: 20px;
-    background: #18191B;
+    /* background: #18191B; */
+    background: #131315;
     font-family: Pontano Sans;
     border: 1px solid #1d1d1e;
-    max-width: 600px;
+    max-width: 800px;
 }
 
 .questionTop {

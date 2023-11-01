@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 
 const TopicSchema = mongoose.Schema({
+    type: {
+        type: String,
+        enum: ["topic"],
+        default: "topic"
+    },
     title: {
         type: String
     },

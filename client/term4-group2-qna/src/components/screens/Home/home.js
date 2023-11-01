@@ -11,6 +11,9 @@ import { useInteraction } from '../../util/UI/interactionListener';
 import { AskQuestionWidget } from '../../elements/AskQuestion/askQuestionWidget';
 import { FilterQuestionsWidget } from '../../elements/FilterQuestions/filterQuestionsWidget';
 import { returnFilteredQuestions } from '../../elements/FilterQuestions/Function/filteredQuestions';
+import HomeBanner from '../../assets/images/util/home_banner.jpg'
+import RightBar from '../../elements/SideBars/rightBar';
+import { SearchTest } from '../../elements/Search Bar/searchTest';
 
 export const Home = () => {
   const { user } = useLoggedInUser();
@@ -76,8 +79,9 @@ export const Home = () => {
       </div>
 
       <div className='homeMidWrap'>
+        <img src={HomeBanner} alt='Home Banner: Make Coding Easier' style={{ width: '100%', maxWidth: '800px', borderRadius: '10px' }} />
         <AskQuestionWidget />
-        <hr />
+        <hr className='home-hr' />
         <FilterQuestionsWidget getFilter={getFilter} getSort={getSort} />
         <div className='homeMidQuestions'>
           {
@@ -91,6 +95,8 @@ export const Home = () => {
       </div>
 
       <div className='homeRightWrap'>
+        <SearchTest />
+        <RightBar />
       </div>
 
     </div>

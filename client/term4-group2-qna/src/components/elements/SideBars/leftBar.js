@@ -119,7 +119,7 @@ const LeftBar = () => {
 
 
     return (
-        <Sidebar className='sideBarWrap' style={{ marginLeft: '48px', border: '0px' }}>
+        <Sidebar className='sideBarWrap' style={{ marginLeft: '48px', border: '0px', position: 'sticky', top: '85px' }}>
             <Menu style={{ backgroundColor: '#18191B', color: '#A3A6B5', transition: 'background-color 0.3s', padding: '10px', textAlign: 'left' }}>
                 <MenuItem style={{ borderBottom: 'solid 1px #' }} > Home </MenuItem>
                 <MenuItem style={{ borderBottom: 'solid 1px #4B4D55' }} > New </MenuItem>

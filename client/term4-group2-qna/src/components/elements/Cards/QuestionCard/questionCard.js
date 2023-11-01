@@ -17,6 +17,7 @@ import requestDataOf from '../../../util/DataRequests/fetchData';
 import { useLoggedInUser, useToken } from '../../../util/UseContext/loggedInUserContext';
 import { useInteraction } from '../../../util/UI/interactionListener';
 import { BottomButtons } from './Card Functions/Interaction/BottomButtons';
+import { UserSummary } from '../../Tooltip/UserSummary/userSummary';
 
 export const QuestionCard = ({ question, index, community, scope, }) => {
     const navigatTo = useNavigate();
@@ -25,9 +26,15 @@ export const QuestionCard = ({ question, index, community, scope, }) => {
     const { users } = useUsers();
     const { loggedInUser } = useLoggedInUser();
 
+    // UI Components
+    const [isOptionsVisible, setIsOptionsVisible] = useState(false);
+    const getOptionVisibilityState = (state) => {
+        setIsOptionsVisible(state)
+    }
+
     useEffect(() => {
 
-    }, [question, isDescriptionExpanded, useInteraction()]);
+    }, [question, isDescriptionExpanded, useInteraction(), isOptionsVisible]);
 
     // Find Images
     let questioner = findUser(question?.questioner, users);
@@ -61,6 +68,8 @@ export const QuestionCard = ({ question, index, community, scope, }) => {
 
     return (
         <div className='questionWrap'>
+            {isOptionsVisible && <CardOptions scope={scope} state={getOptionVisibilityState} />}
+            {/* {<UserSummary />} */}
             <div className='questionTop'>
                 <div className='questionTopLeft' onClick={navigateToProfile}>
                     <div className='questionTopLeftImgWrap'>
@@ -94,7 +103,9 @@ export const QuestionCard = ({ question, index, community, scope, }) => {
                 </div>
                 <div className='questionTopRight'>
                     <div className='questionTopRightTimeAsked text-sm color-text-secondary'>{formatDate(question?.dateAsked)}</div>
-                    <CardOptions scope={scope} />
+                    <span className="material-icons" onClick={e => { setIsOptionsVisible(true) }}>
+                        more_horiz
+                    </span>
                 </div>
             </div>
             <hr className='questionTop-hr' />

@@ -20,9 +20,13 @@ export const SearchBar = () => {
     // const[i, setI] = useState(false);
 
 
-    useEffect(() => {
 
-    }, [searchBarWrap_active, searchValue])
+
+
+    useEffect(() => {
+    }, [searchBarWrap_active, searchValue]);
+
+
     return (
         <div>
             <div className={searchBarWrap_active ? 'searchBarWrap' : 'searchBarWrap'}>
