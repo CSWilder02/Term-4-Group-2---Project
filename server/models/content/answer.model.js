@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 
 const AnswerSchema = mongoose.Schema({
+    type: {
+        type: String,
+        enum: ["answer"],
+        default: "answer"
+    },
     answerer: {
         type: String
     },
@@ -22,7 +27,11 @@ const AnswerSchema = mongoose.Schema({
     }],
     downVotes: [{
         type: String // Array of ids of users
-    }]
+    }],
+    views: [{
+        userViewed: { type: Number },
+        timesViewed: { type: Number }
+    }],
 });
 
 module.exports = mongoose.model("Answer", AnswerSchema)

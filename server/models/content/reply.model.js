@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 
 const ReplySchema = mongoose.Schema({
+    type: {
+        type: String,
+        enum: ["reply"],
+        default: "reply"
+    },
     replier: {
         type: String
     },

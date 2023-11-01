@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 
 const CommunitySchemma = mongoose.Schema({
+    type: {
+        type: String,
+        enum: ["community"],
+        default: "question"
+    },
     name: {
         type: String
     },

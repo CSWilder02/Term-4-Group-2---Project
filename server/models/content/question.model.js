@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 
 const QuestionSchema = mongoose.Schema({
+    type: {
+        type: String,
+        enum: ["question"],
+        default: "question"
+    },
     questioner: {
         // type: mongoose.Schema.Types.ObjectId,
         // ref: "User",
@@ -34,11 +39,13 @@ const QuestionSchema = mongoose.Schema({
     },
     title: {
         type: String,
-        require: true
+        require: true,
+        index: 'text'
     },
     descriptionOfIssue: {
         type: String,
-        require: true
+        require: true,
+        index: 'text'
     },
     images: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -62,6 +69,10 @@ const QuestionSchema = mongoose.Schema({
             title: { type: String }
         }
     ],
+    views: [{
+        userViewed: { type: Number },
+        timesViewed: { type: Number }
+    }],
     reports: [
         {
             userReported: { type: String },
@@ -74,6 +85,9 @@ const QuestionSchema = mongoose.Schema({
         }
     ]
 });
+
+// Add text indexes to the title and descriptionOfIssue fields
+QuestionSchema.index({ title: 'text', descriptionOfIssue: 'text' });
 
 // Auto find questionerer
 QuestionSchema.pre(/^find/, function (next) {

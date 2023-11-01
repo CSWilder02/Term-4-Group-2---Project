@@ -11,17 +11,26 @@ const questionRouter = require("./content/question.route");
 const answerRouter = require("./content/answer.route");
 const replyRouter = require("./content/reply.route")
 const topicRouter = require("./content/topic.route");
-const imageRouter = require("./content/image.route")
+const imageRouter = require("./content/image.route");
+
+// Utility - ROUTES Section
+const searchRouter = require("./util/search/search.route")
 
 // Use Routes section
+
+// --- Entity
 routes.use(adminRouter);
 routes.use(userRouter);
 routes.use(communityRouter);
 
+// --- Content
 routes.use(questionRouter);
 routes.use(answerRouter);
 routes.use(replyRouter);
 routes.use(topicRouter);
 routes.use(imageRouter);
+
+//  --- Utility
+routes.use(searchRouter);
 
 module.exports = routes
