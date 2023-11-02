@@ -43,13 +43,13 @@ export const NavBar = ({ user, users }) => {
                 <SearchBar />
             </Col>
             <Col className='navBarRightContainer'>
-                <div className={changePage("trending")} onClick={e => {
+                {/* <div className={changePage("trending")} onClick={e => {
                     setCurrentPage("trending");
                     navigatTo('/questions/trending')
                 }}>
                     <span className="material-icons md-24">local_fire_department</span>
                     <div className='navBarRightContainerItmTxt'>Trending</div>
-                </div>
+                </div> */}
                 <div className={changePage("notification")} onClick={e => {
                     setCurrentPage("notification");
                     navigatTo('/notification')

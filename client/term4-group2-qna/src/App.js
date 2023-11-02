@@ -91,7 +91,7 @@ const AppContent = () => {
         <Route path='/question/:id' element={<Question />} />
         <Route path='/answer/:id' element={<Answers />} />
         <Route path='/topic/:id' element={<Topics />} />
-        <Route path='/search/:query' element={<Search />} />
+        <Route path='/search/:type/:query' element={<Search />} />
         <Route path='/notification' element={<Notifications />} />
         <Route path='*' element={<Error404 />} />
       </Routes>
