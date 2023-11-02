@@ -4,7 +4,7 @@ import { useUsers } from "../../../util/UseContext/usersContext";
 import { AnswerBottomButtons } from "./Interaction/answerBottomInteraction";
 import { useInteraction } from "../../../util/UI/interactionListener";
 
-export const AnswerCard = ({ answer, onReplySubmit }) => {
+export const AnswerCard = ({ answer, onReplySubmit, index }) => {
   const [replyText, setReplyText] = useState("");
   const [isViewReplies, setIsViewReplies] = useState(false);
   const [isViewResponsSection, setIsViewResponsSection] = useState(false);

@@ -1,15 +1,19 @@
 .button-primary {
-    font-size: 16px;
-    font-size: 16px;
+    font-size: 14px;
     font-family: Kanit;
     font-weight: 500;
     background: #FF8328;
     color: #101011;
     border: 2px solid #FF8328;
     border-radius: 300px;
-    padding: 3px 10px;
+    padding-left: 14px;
+    padding: 4px 12px;
     height: fit-content;
     transition: .17s all linear;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
 }
 
 .button-primary:hover {
@@ -19,16 +23,26 @@
 }
 
 .button-secondary {
-    font-size: 16px;
+    font-size: 15px;
     font-family: Kanit;
-    font-weight: 400;
+    font-weight: 500;
     background: none;
     color: #87B7FF;
     border: 2px solid #87B7FF;
     border-radius: 300px;
-    padding: 3px 10px;
+    padding: 4px 12px;
+    padding-left: 14px;
     height: fit-content;
     transition: .17s all linear;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.button-secondary:hover {
+    color: #f1f4fa;
+    border: 2px solid #f1f4fa;
 }
 
 .button-nav-active {
