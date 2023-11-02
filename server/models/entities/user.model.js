@@ -28,7 +28,8 @@ const UserSchema = mongoose.Schema({
     },
     profileImage: {
         type: String,
-        default: 'https://ucarecdn.com/3cfda29f-3620-4ce6-b488-7f0757853c6d/-/preview/500x500/-/quality/smart_retina/-/format/auto/'
+        // default: 'https://ucarecdn.com/3cfda29f-3620-4ce6-b488-7f0757853c6d/-/preview/500x500/-/quality/smart_retina/-/format/auto/'
+        default: '65439993cd6293a690be6859'
     },
     realibility: {
         type: Number,

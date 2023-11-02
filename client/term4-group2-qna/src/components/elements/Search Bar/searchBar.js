@@ -91,7 +91,14 @@ export const SearchBar = () => {
                     </span>
                 </div>
                 <div className='searchBarResultsWrap'>
-                    <div className='searchBarSearchWrap' onClick={e => setSearchBarWrap_active(false)}>
+                    <div className='searchBarSearchWrap' onClick=
+                        {
+                            e => {
+                                setSearchBarWrap_active(false);
+                                navigateTo('/search/question/' + searchValue);
+                                setSearchValue("");
+                            }
+                        }>
                         <div className='searchBarSearchLeftContainer'>
                             <span className="material-icons">
                                 search
@@ -138,6 +145,8 @@ export const SearchBar = () => {
                                                 onClick={e => {
                                                     setSearchValue(searchedUser);
                                                     setSearchBarWrap_active(false);
+                                                    navigateTo('/search/user/' + searchedUser?.username);
+                                                    setSearchValue("");
                                                 }}>
                                                 <span className="material-icons icon searchBarClose-active">
                                                     groups_3
@@ -162,6 +171,8 @@ export const SearchBar = () => {
                                                 onClick={e => {
                                                     setSearchValue(searchedTopic);
                                                     setSearchBarWrap_active(false);
+                                                    navigateTo('/search/topic/' + searchedTopic?.title);
+                                                    setSearchValue("");
                                                 }}>
                                                 <span className="material-icons icon searchBarClose-active">
                                                     tag
