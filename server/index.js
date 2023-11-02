@@ -29,6 +29,10 @@ mongoose.connect(
     .then(console.log('Connected to Database'))
     .catch(err => console.log("No Connection. Error:" + err));
 
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static("../client/term4-group2-qna/build"))
+}
+
 // PORT section
 const PORT = process.env.PORT;
 app.listen(PORT, () => { console.log(`Listening to Port: ${PORT}`) });

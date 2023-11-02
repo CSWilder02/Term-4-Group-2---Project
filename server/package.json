@@ -4,7 +4,12 @@
   "description": "a question-and-answer website for programmers.",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index",
+    "dev": "concurrently -n 'server,client' -c 'red,green'  \"nodemon server.js\" \"npm run client\"",
+    "start": "node index.js",
+    "install-client": "cd ../client/term4-group2-qna && npm install",
+    "heroku-postbuild": "npm run install-client && npm run build",
+    "client": "cd client && npm start",
+    "build": "cd ../client/term4-group2-qna && npm run build",
     "test": "test"
   },
   "repository": {
@@ -29,6 +34,7 @@
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
+    "concurrently": "^8.2.2",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
