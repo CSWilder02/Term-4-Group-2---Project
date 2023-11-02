@@ -6,7 +6,7 @@
     justify-content: space-between;
     gap: 4px;
     width: 100%;
-    max-width: 320px;
+    max-width: 6000px;
     border-radius: 12px;
     position: relative;
     border: 2px solid #18191B;
@@ -89,16 +89,24 @@
 .searchBarSearchWrap {
     display: flex;
     align-items: center;
-    background: #494b50;
+    background: #ff8328;
+    color: #18191B;
     padding: 8px 14px;
     border-radius: 10px;
     justify-content: space-between;
     cursor: pointer;
+    max-width: 600px;
+    overflow-x: clip;
 }
 
 .searchBarSearchLeftContainer {
     display: flex;
     gap: 6px;
+    align-items: center;
+}
+
+.searchBarQueryText {
+    font-weight: 900;
 }
 
 .result-header {
@@ -130,3 +138,13 @@
     background: #494b50;
     border-radius: 6px;
 }
+
+.searchBarQuestionResultsContainer,
+.searchBarUsersResultsContainer,
+.searchBarTopicsResultsContainer {
+    overflow-y: clip;
+    height: 100%;
+    max-height: 175px;
+}
+
+.no-results-found {}

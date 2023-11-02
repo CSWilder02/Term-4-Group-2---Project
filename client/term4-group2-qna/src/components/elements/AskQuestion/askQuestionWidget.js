@@ -10,7 +10,7 @@ export const AskQuestionWidget = () => {
     const staticProfileImg = "https://ucarecdn.com/89f9e618-9617-4ce3-8498-0842734f899f/-/preview/500x500/-/quality/smart_retina/-/format/auto/"
 
     useEffect(() => {
-        console.log(loggedInUser)
+        // console.log(loggedInUser)
     }, [loggedInUser])
 
     return (

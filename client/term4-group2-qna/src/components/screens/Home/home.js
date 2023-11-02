@@ -41,7 +41,7 @@ export const Home = () => {
 
   useEffect(() => {
     setFilteredQuestions(returnFilteredQuestions(filterState, sortState, questions))
-    console.log(filteredQuestions)
+    // console.log(filteredQuestions)
     // console.log(filterState)
     // console.log(sortState)
   }, [filterState, sortState, filteredQuestions]);
@@ -95,7 +95,7 @@ export const Home = () => {
       </div>
 
       <div className='homeRightWrap'>
-        <SearchTest />
+        {/* <SearchTest /> */}
         <RightBar />
       </div>
 
