@@ -14,7 +14,7 @@
     -webkit-box-shadow: 0 4px 31px rgba(237, 238, 242, 0.045);
     -moz-box-shadow: 0 4px 31px rgba(237, 238, 242, 0.045); */
     width: 100%;
-    max-width: 560px;
+    max-width: 760px;
     display: flex;
     justify-content: flex-end;
 
@@ -28,7 +28,7 @@
     background: #18191B;
     width: fit-content;
     gap: 20px;
-    z-index: 1;
+    z-index: 2;
     border-radius: 7.5px;
     outline: 1px solid #313132;
     box-shadow: 0 4px 31px rgba(237, 238, 242, 0.045);
