@@ -68,7 +68,7 @@ export const QuestionCard = ({ question, index, community, scope, }) => {
 
     return (
         <div className='questionWrap'>
-            {isOptionsVisible && <CardOptions scope={scope} state={getOptionVisibilityState} />}
+            {isOptionsVisible && <CardOptions question={question} scope={scope} state={getOptionVisibilityState} />}
             {/* {<UserSummary />} */}
             <div className='questionTop'>
                 <div className='questionTopLeft' onClick={navigateToProfile}>
@@ -103,7 +103,7 @@ export const QuestionCard = ({ question, index, community, scope, }) => {
                 </div>
                 <div className='questionTopRight'>
                     <div className='questionTopRightTimeAsked text-sm color-text-secondary'>{formatDate(question?.dateAsked)}</div>
-                    <span className="material-icons" onClick={e => { setIsOptionsVisible(true) }}>
+                    <span className="material-icons questionMore" onClick={e => { setIsOptionsVisible(true) }}>
                         more_horiz
                     </span>
                 </div>

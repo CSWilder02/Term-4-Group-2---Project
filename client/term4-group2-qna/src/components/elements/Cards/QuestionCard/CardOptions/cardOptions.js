@@ -1,10 +1,15 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import './cardOptions.css'
 import { useInteraction } from '../../../../util/UI/interactionListener';
+import requestDataOf from '../../../../util/DataRequests/fetchData';
+import { useToken } from '../../../../util/UseContext/loggedInUserContext';
+import { useNavigate } from 'react-router-dom';
 
 
-export const CardOptions = ({ questionId, scope, state }) => {
+export const CardOptions = ({ question, scope, state }) => {
+    const navigateTo = useNavigate();
     let interactionState = useInteraction();
+    const { token } = useToken();
     const [interaction, setInteraction] = useState('idle');
     const [isOptionsVisible, setIsOptionsVisible] = useState(false);
 
@@ -12,7 +17,13 @@ export const CardOptions = ({ questionId, scope, state }) => {
         {
             icon: "link",
             title: "Copy Link",
-            function: () => { },
+            function: () => {
+                navigator.clipboard
+                    .writeText("http://www." + window.location.host + `/question/${question?._id}`)
+                    .then(() => {
+                        alert('URL copied to clipboard');
+                    })
+            },
             optionType: "public",
             code: 'normal',
             scope: "public"
@@ -28,7 +39,10 @@ export const CardOptions = ({ questionId, scope, state }) => {
         {
             icon: "edit_note",
             title: "Update",
-            function: () => { },
+            function: () => {
+                // alert(question?._id)
+                navigateTo(`/question/update`)
+            },
             optionType: "private",
             code: 'action',
             scope: "private",
@@ -37,7 +51,10 @@ export const CardOptions = ({ questionId, scope, state }) => {
         {
             icon: "delete",
             title: "Delete",
-            function: () => { },
+            function: () => {
+                requestDataOf.request("delete", `deleteQuestion/${question?._id}`, token, "")
+                    .then(() => { alert("deleted: " + question?.title) })
+            },
             optionType: "private",
             code: 'danger',
             scope: "private"

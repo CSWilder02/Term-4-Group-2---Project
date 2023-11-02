@@ -79,6 +79,10 @@
 
 .questionTopRightTimeAsked {}
 
+.questionMore {
+    cursor: pointer;
+}
+
 .questionTop-hr {
     margin: 0;
     margin-bottom: 15px;

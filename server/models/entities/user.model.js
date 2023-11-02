@@ -3,6 +3,7 @@ require('dotenv').config({ path: '.env' });
 
 const passwordHashKey = JSON.parse(process.env.PASSWORD_HASH_KEY);
 const bcrypt = require('bcryptjs');
+const Joi = require('joi');
 
 
 const UserSchema = mongoose.Schema({
