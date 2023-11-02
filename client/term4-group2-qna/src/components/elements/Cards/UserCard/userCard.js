@@ -51,7 +51,7 @@ export const UserCard = ({ user, index }) => {
             <div className='userContentSection'>
                 <div className='userContentMore'
                     onClick={e => {
-                        navigateTo('/search/question/by%20' + user?.username)
+                        navigateTo('/search/question/by_' + user?.username)
                     }}
                 >
                     <div className='userContentMoreTxt text-normal'>Questions by {user?.fullName}</div>

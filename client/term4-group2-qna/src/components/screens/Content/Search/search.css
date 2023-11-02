@@ -1,7 +1,23 @@
+.searchPage {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0px;
+}
+
+.searchMidWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    width: 100%;
+    max-width: 800px;
+}
+
 .back {
     display: flex;
     justify-content: flex-start;
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .queryDisplay {
@@ -10,7 +26,7 @@
     border: 1px solid #333;
     background: #101011;
     height: 100%;
-    max-height: 400px;
+    max-height: 120px;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -24,7 +40,8 @@
     height: 100%;
     max-width: 800px;
     /* position: absolute; */
-    max-height: 200px;
+    max-height: 120px;
+    border-radius: 10px;
 }
 
 .queryDisplayContent {
@@ -97,4 +114,11 @@
     border: 1px solid #2d2e31;
     color: #FF8328 !important;
     font-weight: 500;
+}
+
+.content-wrap {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0px;
+    gap: 10px;
 }

@@ -6,6 +6,9 @@ import requestDataOf from '../../../util/DataRequests/fetchData';
 import { QuestionCard } from '../../../elements/Cards/QuestionCard/questionCard';
 import { AnswerCard } from '../../../elements/Cards/AnswerCard/answerCard';
 import { UserCard } from '../../../elements/Cards/UserCard/userCard';
+import { TopicCard } from '../../../elements/Cards/TopicCard/topicCard';
+import LeftBar from '../../../elements/SideBars/leftBar';
+import RightBar from '../../../elements/SideBars/rightBar';
 
 export const Search = (user, users, questions, answers, replies, topics) => {
     const { type, query } = useParams();
@@ -55,86 +58,105 @@ export const Search = (user, users, questions, answers, replies, topics) => {
 
 
     return (
-        <div>
-            {/* TYPE:{type},
-            <br />
-            QUERY:{query} */}
+        <div className='searchPage'>
 
-            <div className='back'>
-                <span className='material-icons'>
-                    keyboard_backspace
-                </span>
-            </div>
+            {/* ---> LEFT SIDE <--- */}
+            <div className='searchLeftWrap'><LeftBar /></div>
 
-            <div className='queryDisplay'>
-                <img className='queryDisplayBackground'
-                    src={QueryDisplayBackground} alt='Query Display Gradient Background' />
-                <div className='queryDisplayContent'>
-                    <div className='contentLeft'>
-                        <span className='material-icons searchIcon'>search</span>
+            {/* ---> MIDDLE SIDE <--- */}
+            <div className='searchMidWrap'>
+                <div className='back'
+                    onClick={e => {
+                        navigateTo(-1)
+                    }}
+                >
+                    <span className='material-icons'>
+                        keyboard_backspace
+                    </span>
+                </div>
+
+                <div className='queryDisplay'>
+                    <img className='queryDisplayBackground'
+                        src={QueryDisplayBackground} alt='Query Display Gradient Background' />
+                    <div className='queryDisplayContent'>
+                        <div className='contentLeft'>
+                            <span className='material-icons searchIcon'>search</span>
+                        </div>
+                        <div className='contentRight'>
+                            <div className='contentRightTop'>`{query}`</div>
+                            <div className='contentRightBtm'>No results</div>
+                        </div>
                     </div>
-                    <div className='contentRight'>
-                        <div className='contentRightTop'>`{query}`</div>
-                        <div className='contentRightBtm'>No results</div>
-                    </div>
+                </div>
+
+                <div className='filterWrap'>
+                    {
+                        filterTypes?.map((filter, i) => {
+                            return (
+                                <div className={
+                                    selectedFilter === filter?.id ?
+                                        'filterItem activeFilter text-sm' :
+                                        'filterItem text-sm'}
+                                    onClick={e => {
+                                        setSelectedFilter(filter?.id);
+                                        navigateTo('/search/' + filter?.id + '/' + query);
+                                    }}
+                                    key={i}
+                                >
+                                    {filter?.label}
+                                    {filter?.id === "question" && " (" + searchedQuestions?.length + ")"}
+                                    {filter?.id === "answer" && " (" + searchedAnswers?.length + ")"}
+                                    {filter?.id === "user" && " (" + searchedUsers?.length + ")"}
+                                    {filter?.id === "topic" && " (" + searchedTopics?.length + ")"}
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+
+
+                <div className='content-wrap'>
+                    {
+                        selectedFilter === "question" && (
+                            searchedQuestions?.map((question, i) => {
+                                return (
+                                    <QuestionCard question={question} index={i} scope={"public"} />
+                                )
+                            })
+                        )
+                    }
+                    {
+                        selectedFilter === "answer" && (
+                            searchedAnswers?.map((answer, i) => {
+                                return (
+                                    <AnswerCard answer={answer} index={i} />
+                                )
+                            })
+                        )
+                    }
+                    {
+                        selectedFilter === "user" && (
+                            searchedUsers?.map((user, i) => {
+                                return (
+                                    <UserCard user={user} index={i} />
+                                )
+                            })
+                        )
+                    }
+                    {
+                        selectedFilter === "topic" && (
+                            searchedTopics?.map((topic, i) => {
+                                return (
+                                    <TopicCard topic={topic} index={i} />
+                                )
+                            })
+                        )
+                    }
                 </div>
             </div>
 
-            <div className='filterWrap'>
-                {
-                    filterTypes?.map((filter, i) => {
-                        return (
-                            <div className={
-                                selectedFilter === filter?.id ?
-                                    'filterItem activeFilter text-sm' :
-                                    'filterItem text-sm'}
-                                onClick={e => {
-                                    setSelectedFilter(filter?.id);
-                                    navigateTo('/search/' + filter?.id + '/' + query);
-                                }}
-                                key={i}
-                            >
-                                {filter?.label}
-                                {filter?.id === "question" && " (" + searchedQuestions?.length + ")"}
-                                {filter?.id === "answer" && " (" + searchedAnswers?.length + ")"}
-                                {filter?.id === "user" && " (" + searchedUsers?.length + ")"}
-                                {filter?.id === "topic" && " (" + searchedTopics?.length + ")"}
-                            </div>
-                        )
-                    })
-                }
-            </div>
-
-
-            <div className='content-wrap'>
-                {
-                    selectedFilter === "question" && (
-                        searchedQuestions?.map((question, i) => {
-                            return (
-                                <QuestionCard question={question} index={i} scope={"public"} />
-                            )
-                        })
-                    )
-                }
-                {
-                    selectedFilter === "answer" && (
-                        searchedAnswers?.map((answer, i) => {
-                            return (
-                                <AnswerCard answer={answer} index={i} />
-                            )
-                        })
-                    )
-                }
-                {
-                    selectedFilter === "user" && (
-                        searchedUsers?.map((user, i) => {
-                            return (
-                                <UserCard user={user} index={i} />
-                            )
-                        })
-                    )
-                }
-            </div>
+            {/* ---> RIGHT SIDE <--- */}
+            <div className='searchRighttWrap'><RightBar /></div>
 
         </div>
     )
