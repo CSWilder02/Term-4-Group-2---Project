@@ -1,0 +1,51 @@
+.topicCard {
+    background: #131315;
+    border: 1px solid #1d1d1e;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.topicLeftWrap {
+    display: flex;
+    gap: 20px;
+}
+
+.topicLeftWrapLeft {
+    height: 50px;
+    width: 50px;
+    background: #26282C;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.topic-icon {
+    font-size: 24px;
+}
+
+.topicLeftWrapRight {
+    display: flex;
+    flex-direction: column;
+}
+
+.topicLeftWrapRightTopicName {
+    cursor: pointer;
+}
+
+.topicLeftWrapRightTopicName:hover {
+    color: #FF8328;
+    text-decoration: underline;
+}
+
+.topicLeftWrapRightQuestionCount {
+    color: #848079;
+}
+
+.add-icon {
+    font-size: 18px;
+}
