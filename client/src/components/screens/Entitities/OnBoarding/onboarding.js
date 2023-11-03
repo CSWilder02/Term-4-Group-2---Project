@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './onboarding.css';
 import { useLoggedInUser, useToken } from '../../../util/UseContext/loggedInUserContext';
 import requestDataOf from '../../../util/DataRequests/fetchData';
+import { Form } from '../../../elements/Form/form';
 
 export const OnBoarding = ({ user, users }) => {
     const { loggedInUser, setLoggedInUser } = useLoggedInUser();
@@ -20,7 +21,7 @@ export const OnBoarding = ({ user, users }) => {
     }, [loginData, registerData, loggedInUser, token, loginFormRef]);
 
     const submitLogin = (e) => {
-        e?.preventDefault()
+        // e?.preventDefault()
 
         // requestDataOf.request(method, endpoint, token, formData) This is the structure of the function
         requestDataOf.request("post", "loginUser", '', loginData)
@@ -40,7 +41,7 @@ export const OnBoarding = ({ user, users }) => {
     };
 
     const submitRegister = (e) => {
-        e?.preventDefault()
+        // e?.preventDefault()
         requestDataOf.request("post", "registerUser", '', registerData)
             .then((response) => {
                 sessionStorage.setItem("loggedIn", "true");
@@ -76,10 +77,30 @@ export const OnBoarding = ({ user, users }) => {
         loginTextRef.current.style.marginLeft = "0%"
     };
 
+    const fields = [
+        { title: "Login" },
+        // { description: "Make changes to the question" },
+        // { name: 'images', label: 'Images', type: 'file', multiple: true },
+        { none: null },
+        { none: null },
+        { name: 'username', label: 'Username or Email', type: 'text' },
+        { name: 'password', label: 'Password', type: 'text' },
+        // { name: 'descriptionOfIssue', label: 'Description', type: 'paragraph' },
+        // { name: 'topics', label: 'Topics', type: 'arrayOfStrings' },
+        { none: null },
+        {
+            submitLabel: "Login",
+            cancelLabel: "Register"
+        }
+    ];
+
+
+
     return (
         <div className='mainbg'>
 
-            <div className="wrapper">
+            <Form fields={fields} onSubmit={submitLogin} onCancel={"alert"} />
+            {/* <div className="wrapper">
                 <div className='form'>
                     <div className='title login' id="login3" ref={loginHeadingRef}>Login Form</div>
                     <div className='title2 signup'>Signup Form</div>
@@ -123,7 +144,7 @@ export const OnBoarding = ({ user, users }) => {
                         </form>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }
