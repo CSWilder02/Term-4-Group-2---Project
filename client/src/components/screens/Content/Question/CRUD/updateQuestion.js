@@ -9,7 +9,16 @@ import { useInteraction } from '../../../../util/UI/interactionListener';
 export const UpdateQuestion = ({ }) => {
     const { token } = useToken();
     const navigateTo = useNavigate();
-    let question = JSON.parse(sessionStorage?.getItem("update-question"))
+    let question = JSON.parse(sessionStorage?.getItem("update-question"));
+    const topics = () => {
+        if (question && question.topics && Array.isArray(question.topics)) {
+            console.log("Topics array:", question.topics);
+            return question.topics
+                .filter(topic => typeof topic.title === "string")
+                .map(topic => topic.title);
+        }
+        return [];
+    }
 
     const fields = [
         { title: "Update Question" },
@@ -27,7 +36,8 @@ export const UpdateQuestion = ({ }) => {
     let initialValues = {
         title: question?.title,
         descriptionOfIssue: question?.descriptionOfIssue,
-        topics: () => (question?.topics || []).map(topic => topic?.title)
+        topics: [question?.topics[0].title, question?.topics[1]?.title, question?.topics[2]?.title]
+
 
     }
 

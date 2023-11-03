@@ -19,7 +19,7 @@ export const CardOptions = ({ question, scope, state }) => {
             title: "Copy Link",
             function: () => {
                 navigator.clipboard
-                    .writeText("http://www." + window.location.host + `/question/${question?._id}`)
+                    .writeText("https://." + window.location.host + `/question/${question?._id}`)
                     .then(() => {
                         alert('URL copied to clipboard');
                     })

@@ -63,8 +63,21 @@ export const QuestionCard = ({ question, index, community, scope, }) => {
 
     const navigateToProfile = () => {
         questioner?.username === loggedInUser?.username ? navigatTo('/profile/user/me') : navigatTo('/profile/user/' + questioner?.username)
-    }
+    };
 
+    const returnProfileImage = (imageId, images) => {
+        for (const image of images) {
+            if (image?._id === imageId) {
+                return image
+            }
+        }
+    };
+
+    let profileImage = returnProfileImage(questioner?.profileImage, images)
+    let profileImageIcon = returnProfileImage("65439993cd6293a690be6859", images)
+    useEffect(() => {
+        console.log("PROFF IMG", questioner?.profileImage)
+    })
 
     return (
         <div className='questionWrap'>
@@ -80,16 +93,22 @@ export const QuestionCard = ({ question, index, community, scope, }) => {
                         } */}
                         {
                             questioner?.profileImage ? (
-                                questioner?.profileImage !== "" &&
-                                <img className='questionTopLeftImgImage' src={questioner?.profileImage} alt='Community/User Profile' />
-                            ) :
+                                questioner?.profileImage !== "" && questioner?.profileImage?.slice(0, 5) !== "https" &&
                                 (
-                                    <div className={question?.questionSource !== "community" ? 'questionTopLeftImgEmptyWrap' : "questionTopLeftImgEmptyComWrap"}>
-                                        <span className="material-icons md-24 ">
-                                            {question?.questionSource !== "community" ? "person" : "groups_3"}
-                                        </span>
-                                    </div>
+                                    questioner?.profileImage === "65439993cd6293a690be6859"
+                                        ? <img className='questionTopLeftImgImage' src={"data:image/png;base64," + profileImageIcon?.data} alt='Community/User Profile' />
+                                        : <img className='questionTopLeftImgImage' src={"data:image/png;base64," + profileImage?.data} alt='Community/User Profile' />
                                 )
+                            ) :
+                                questioner?.profileImage?.slice(0, 5) === "https"
+                                && <img className='questionTopLeftImgImage' src={questioner?.profileImage} alt='User Profile' />
+                            // : (
+                            //     <div className={question?.questionSource !== "community" ? 'questionTopLeftImgEmptyWrap' : "questionTopLeftImgEmptyComWrap"}>
+                            //         <span className="material-icons md-24 ">
+                            //             {question?.questionSource !== "community" ? "person" : "groups_3"}
+                            //         </span>
+                            //     </div>
+                            // )
                         }
                     </div>
                     <div className='questionTopLeftDetailsWrap text-normal'>

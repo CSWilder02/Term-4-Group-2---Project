@@ -51,7 +51,7 @@ export const Form = ({ fields, initialValues, onSubmit, onCancel }) => {
         if (fieldType === 'number') {
             inputValue = parseInt(inputValue, 10);
         } else if (fieldType === 'arrayOfStrings') {
-            inputValue = inputValue.split(',').map(item => item.trim());
+            inputValue = inputValue?.split(',').map(item => item?.trim());
         } else if (fieldType === 'file') {
             const files = e.target.files;
             const base64Promises = [];
@@ -134,10 +134,11 @@ export const Form = ({ fields, initialValues, onSubmit, onCancel }) => {
                                 placeholder={field?.label}
                                 className='text'
                                 type="text"
-                                value={formValues[field?.name] ? formValues[field.name]?.join(', ') : ''}
-                                onChange={e => handleInputChange(e, field?.name, 'arrayOfStrings')}
+                                value={Array.isArray(formValues[field.name]) ? formValues[field.name].join(', ') : ''}
+                                onChange={e => handleInputChange(e, field.name, 'arrayOfStrings')}
                             />
                         )}
+
 
                         {field.type === 'file' && (
                             <div className='imageListWrap' onMouseOver={e => setHover(true)}>

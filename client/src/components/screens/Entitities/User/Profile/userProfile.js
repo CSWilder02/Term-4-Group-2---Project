@@ -78,10 +78,10 @@ export const UserProfile = ({ user, users, communities, questio, answers, replie
 
     useEffect(() => {
         // setQuestions(questionsDemoData);
-        console.log("User Questions", userQuestions(questions, id));
-        console.log("logged in user: ", loggedInUser)
+        // console.log("User Questions", userQuestions(questions, id));
+        // console.log("logged in user: ", loggedInUser)
 
-        id === "me" && !loggedInUser?.username && navigateTo("/onboarding")
+        // id === "me" && !loggedInUser?.username && navigateTo("/onboarding")
 
     }, [selectedUserContent, questions, useInteraction()])
 
