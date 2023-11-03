@@ -17,13 +17,12 @@ export const OnBoarding = ({ user, users }) => {
     const loginHeadingRef = useRef();
     const loginTextRef = useRef();
 
+    const [state, setState] = useState('login')
+
     useEffect(() => {
-    }, [loginData, registerData, loggedInUser, token, loginFormRef]);
+    }, [loginData, registerData, loggedInUser, token, loginFormRef, state]);
 
-    const submitLogin = async (e) => {
-        // e?.preventDefault()
-
-        // requestDataOf.request(method, endpoint, token, formData) This is the structure of the function
+    const submitLogin = async (loginData) => {
         requestDataOf.request("post", "loginUser", '', loginData)
             .then((response) => {
                 let res = response?.data
@@ -40,7 +39,7 @@ export const OnBoarding = ({ user, users }) => {
             });
     };
 
-    const submitRegister = (e) => {
+    const submitRegister = (registerData) => {
         // e?.preventDefault()
         requestDataOf.request("post", "registerUser", '', registerData)
             .then((response) => {
@@ -56,10 +55,6 @@ export const OnBoarding = ({ user, users }) => {
             });
     }
 
-    // To switch between Login and Sign Up
-    const loginHeading = document.getElementById("login3");
-    const loginText = document.getElementById("login2");
-    const loginForm = document.getElementById("login");
     const signupBtn = () => {
         // loginForm.style.marginLeft = "-50%";
         // loginText.style.marginLeft = "-50%";
@@ -77,16 +72,12 @@ export const OnBoarding = ({ user, users }) => {
         loginTextRef.current.style.marginLeft = "0%"
     };
 
-    const fields = [
+    const fieldsLogin = [
         { title: "Login" },
-        // { description: "Make changes to the question" },
-        // { name: 'images', label: 'Images', type: 'file', multiple: true },
-        { none: null },
         { none: null },
         { name: 'username', label: 'Username or Email', type: 'text' },
-        { name: 'password', label: 'Password', type: 'text' },
-        // { name: 'descriptionOfIssue', label: 'Description', type: 'paragraph' },
-        // { name: 'topics', label: 'Topics', type: 'arrayOfStrings' },
+        { name: 'password', label: 'Password', type: 'password' },
+        { none: null },
         { none: null },
         {
             submitLabel: "Login",
@@ -94,12 +85,35 @@ export const OnBoarding = ({ user, users }) => {
         }
     ];
 
+    const fieldsRegister = [
+        { title: "Create Account" },
+        { none: null },
+        { name: 'username', label: 'Username or Email', type: 'text' },
+        { name: 'password', label: 'Password', type: 'password' },
+        { none: null },
+        { none: null },
+        {
+            submitLabel: "Register",
+            cancelLabel: "Login instead"
+        }
+    ];
+
+    const switchToLogin = () => {
+        setState('login')
+    }
+
+    const switchToRegister = () => {
+        setState('register')
+    }
 
 
     return (
         <div className='mainbg'>
 
-            <Form fields={fields} onSubmit={submitLogin} onCancel={"alert"} />
+            {state === "login"
+                ? <Form fields={fieldsLogin} onSubmit={submitLogin} onCancel={switchToRegister} />
+                : <Form fields={fieldsRegister} onSubmit={submitRegister} onCancel={switchToLogin} />
+            }
             {/* <div className="wrapper">
                 <div className='form'>
                     <div className='title login' id="login3" ref={loginHeadingRef}>Login Form</div>

@@ -30,7 +30,7 @@ export const Form = ({ fields, initialValues, onSubmit, onCancel }) => {
                             <button style={{ width: "100%" }} className='button-primary form-btn' type="submit">{fields[btnIndex]?.submitLabel}</button>
                         </div>
                         <div style={{ width: "" }}>
-                            <button style={{ width: "fit-content" }} className='button-secondary form-btn' onClick={onCancel}>{fields[btnIndex]?.cancelLabel}</button>
+                            <button style={{ width: "fit-content" }} className='button-secondary form-btn' onClick={e => { onCancel("register") }}>{fields[btnIndex]?.cancelLabel}</button>
                         </div>
                     </div>
                 )
@@ -120,6 +120,15 @@ export const Form = ({ fields, initialValues, onSubmit, onCancel }) => {
                                 type="number"
                                 value={formValues[field.name] || ''}
                                 onChange={e => handleInputChange(e, field.name, 'number')}
+                            />
+                        )}
+                        {field.type === 'password' && (
+                            <input
+                                placeholder={field?.label}
+                                className='text'
+                                type="password"
+                                value={formValues[field.name] || ''}
+                                onChange={e => handleInputChange(e, field.name, 'password')}
                             />
                         )}
                         {field.type === 'paragraph' && (
