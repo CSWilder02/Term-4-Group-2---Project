@@ -1,0 +1,118 @@
+.answerCardWrap {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    /* background: #18191B; */
+    font-family: Pontano Sans;
+    /* border: 2px solid #1d1d1e; */
+    max-width: 600px;
+}
+
+.answerCardContent {
+    display: flex;
+    gap: 20px;
+    /* background: #18191B; */
+    /* border: 1px solid #1d1d1e; */
+}
+
+.answerLeftWrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    gap: 10px;
+    /* height: 100%; */
+}
+
+.answerLeftTopWrap {}
+
+.answerLeftBottomWrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: fit-content;
+    align-items: center;
+    gap: 5px;
+}
+
+.lineWrap {
+    /* height: 100%; */
+    min-height: 36px;
+    width: 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.answerLeftBottomLine,
+.line {
+    height: 100%;
+    min-height: 36px;
+    border-right: 1.5px solid #222222;
+}
+
+.answerMoreResponds {
+    /* width: 26px !important;
+    height: 26px !important; */
+    padding: 3px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid #666666;
+    cursor: pointer;
+}
+
+.answerRightWrap {
+    display: flex;
+    flex-direction: column;
+    width: -webkit-fill-available;
+    gap: 10px;
+    /* align-items: center; */
+}
+
+.answerRightTopWrap {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-top: 5px;
+}
+
+.answerRightTopLeftWrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.answerRightTopUsername {}
+
+.moreOptions {
+    width: 24px;
+}
+
+.answerRightBottomWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.answerCardRespondWrap {
+    display: flex;
+    padding-top: 5px;
+    gap: 20px;
+}
+
+.answerCardRespondForm {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+    gap: 10px;
+}
+
+.respondButton {
+    width: min-content;
+}

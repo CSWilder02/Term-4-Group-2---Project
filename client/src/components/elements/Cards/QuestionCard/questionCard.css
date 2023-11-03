@@ -1,0 +1,255 @@
+.questionWrap {
+    border-radius: 10px;
+    padding: 20px;
+    /* background: #18191B; */
+    background: #131315;
+    font-family: Pontano Sans;
+    border: 1px solid #1d1d1e;
+    max-width: 800px;
+}
+
+.questionTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* padding: 10px; */
+    padding-bottom: 15px;
+}
+
+.questionTopLeft {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.questionTopLeft:hover {
+
+    /* text-decoration: underline; */
+    .questionTopLeftImgEmptyWrap {
+        border: 1px solid #FF8328;
+    }
+
+    .questionTopLeftDetailsName {
+        color: #FF8328;
+    }
+}
+
+.questionTopLeftDetailsWrap {
+    display: flex;
+    gap: 2px;
+}
+
+.questionTopLeftImgWrap {}
+
+.questionTopLeftImgImage {
+    height: 36px;
+    width: 36px;
+    border-radius: 100px;
+}
+
+.questionTopLeftImgEmptyWrap {
+    background: #18191B;
+    height: 36px;
+    width: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    border: 1px solid #2A2A2E;
+}
+
+.questionTopLeftImgEmptyComWrap {
+    background: #101011;
+    height: 36px;
+    width: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid #2A2A2E;
+}
+
+.questionTopRight {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.questionTopRightTimeAsked {}
+
+.questionMore {
+    cursor: pointer;
+}
+
+.questionTop-hr {
+    margin: 0;
+    margin-bottom: 15px;
+}
+
+.questionMid {
+    display: flex;
+    flex-direction: column;
+}
+
+.questionMidText {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.questionMidCard {
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+}
+
+.questionMidCard.expnded {
+    max-height: none
+}
+
+.questionMidTextDescription.expanded {
+    /* width: 100%;
+    height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; */
+    height: auto;
+    overflow: visible;
+    white-space: normal;
+}
+
+.questionMidImgs {
+    margin-top: 10px;
+    max-width: 600px;
+}
+
+.questionMidImgsCarousel {
+    /* display: flex; */
+    /* width: 100%; */
+    align-items: center;
+}
+
+.questionMidImgsCarouselImage {
+    width: 100%;
+    max-width: 600px;
+    max-height: 600px;
+    border: 1px solid #2A2A2E;
+    border-radius: 10px;
+    object-fit: cover;
+    user-select: none;
+}
+
+.ImgCarouselButtons {
+    position: absolute;
+    z-index: 1;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    max-width: 560px;
+    max-height: 570px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.carasoul-button {
+    cursor: pointer;
+}
+
+.questionBtm {}
+
+.questionBtmLeftTags {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 15px;
+}
+
+.questionBtmLeftTagsTag:hover {
+    text-decoration: underline;
+}
+
+.questionBtmInteractionsWrap {
+    display: flex;
+    justify-content: space-between;
+}
+
+.questionBtmRightInteraction {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 25px;
+}
+
+.questionBtmRightInteractionItem {
+    display: flex;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.cardIcon {
+    background: #18191B;
+    border-radius: 100px;
+    height: 24px;
+    width: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardIconUpvoted {
+    background: #8cff28;
+    border-radius: 100px;
+    height: 24px;
+    width: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #18191B;
+    font-size: 18px;
+}
+
+.cardIconDownvoted {
+    background: #ff2828;
+    border-radius: 100px;
+    height: 24px;
+    width: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #18191B;
+    font-size: 18px;
+}
+
+.cardIconSaved {
+    background: #f9f3ed;
+    border-radius: 100px;
+    height: 24px;
+    width: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #18191B;
+    font-size: 18px;
+}
+
+/* Swiper Style */
+
+
+.questionBtmRightInteraction-metrics {}
+
+/* Responsiveness */
+
+@media only screen and (max-width: 500px) {
+
+    /* For Mobiles: */
+    .ImgCarouselButtons {
+        display: none;
+    }
+
+}

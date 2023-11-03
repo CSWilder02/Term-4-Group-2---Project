@@ -1,0 +1,124 @@
+.searchPage {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0px;
+}
+
+.searchMidWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.back {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.queryDisplay {
+    max-width: 800px;
+    display: flex;
+    border: 1px solid #333;
+    background: #101011;
+    height: 100%;
+    max-height: 120px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 73px;
+    z-index: 3;
+}
+
+.queryDisplayBackground {
+    width: 100%;
+    height: 100%;
+    max-width: 800px;
+    /* position: absolute; */
+    max-height: 120px;
+    border-radius: 10px;
+}
+
+.queryDisplayContent {
+    /* height: 100%; */
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.contentLeft {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    width: 80px;
+    background: #18191B;
+    border-radius: 10px;
+    border: 1px solid #2A2A2E;
+}
+
+.searchIcon {
+    font-size: 36px;
+}
+
+.contentRight {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.contentRightTop {
+    font-family: Kanit;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.contentRightBtm {
+    font-size: 0.75rem;
+    margin-top: -5px;
+    font-family: Pontano Sans;
+}
+
+.filterWrap {
+    display: flex;
+    gap: 2.5px;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 800px;
+    border: 1px solid #2A2A2E;
+    border-radius: 100px;
+    padding: 10px 10px;
+}
+
+.filterItem {
+    display: flex;
+    align-items: center;
+    gap: 7.5px;
+    /* background: ; */
+    padding: 5px 15px;
+    padding-right: 15px;
+    cursor: pointer;
+    border-radius: 100px;
+    color: #848079;
+}
+
+.activeFilter {
+    background: #1a1c20;
+    border: 1px solid #2d2e31;
+    color: #FF8328 !important;
+    font-weight: 500;
+}
+
+.content-wrap {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0px;
+    gap: 10px;
+}

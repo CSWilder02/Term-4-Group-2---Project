@@ -1,0 +1,27 @@
+.theme-primary {
+    background: #101011 !important;
+}
+
+.theme-secondary {
+    background: #18191B !important;
+}
+
+.theme-tertiary {
+    background: #26282C !important;
+}
+
+.color-danger {
+    color: #f15d5d !important;
+}
+
+.color-main .color-text-primary {
+    color: #f6f7f9;
+}
+
+.color-text-secondary {
+    color: #a2a2a5;
+}
+
+.color-component-secondary {
+    color: #67686c;
+}

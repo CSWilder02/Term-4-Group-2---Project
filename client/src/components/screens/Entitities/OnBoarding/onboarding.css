@@ -1,0 +1,247 @@
+/* Log In & Sign Up */
+.mainbg {
+    background-color: #232428;
+    width: 101%;
+    height: 675px;
+    margin-left: -8px;
+    padding-top: 40px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+::selection {
+    background: #54555A;
+    color: #87B7FF;
+}
+
+.wrapper {
+    overflow: hidden;
+    max-width: 460px;
+    background-color: #3D3F44;
+    padding: 28px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 15px;
+    margin-top: 10px;
+    width: 800px
+}
+
+.wrapper .form {
+    display: flex;
+    width: 220%;
+
+}
+
+.title {
+    color: #D6D6D6;
+    width: 580px;
+    margin-bottom: 20px;
+    padding-left: 6px;
+    font-size: 35pt;
+    font-weight: 500;
+    font-family: Kanit;
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.title2 {
+    color: #D6D6D6;
+    width: 400px;
+    margin-bottom: 20px;
+    font-size: 35pt;
+    font-weight: 500;
+    font-family: Kanit;
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .slide-controls {
+    position: relative;
+    display: flex;
+    height: 50px;
+    width: 100%;
+    overflow: hidden;
+    margin: 0px 0 10px 0;
+    justify-content: space-between;
+    border: 3px solid #2B2C31;
+    border-radius: 15px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.slide-controls .slide {
+    height: 100%;
+    width: 100%;
+    color: #2B2C31;
+    font-size: 23pt;
+    font-weight: 700;
+    text-align: center;
+    line-height: 48px;
+    cursor: pointer;
+    z-index: 1;
+    font-family: Pontano Sans;
+    transition: all 0.6s ease;
+}
+
+.slide-controls label.signup {
+    color: #2B2C31;
+}
+
+.slide-controls .slider-tab {
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    left: 0;
+    z-index: 0;
+    border-radius: 15px;
+    background-color: #f07f2e;
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+#signup:checked~.slider-tab {
+    left: 50%;
+}
+
+#signup:checked~label.signup {
+    color: #2B2C31;
+    cursor: default;
+    user-select: none;
+}
+
+#signup:checked~label.login {
+    color: #2B2C31;
+}
+
+#login:checked~label.signup {
+    color: #2B2C31;
+}
+
+#login:checked~label.login {
+    cursor: default;
+    user-select: none;
+}
+
+.wrapper .form-container {
+    width: 100%;
+    overflow: hidden;
+}
+
+.form-container .form-inner {
+    display: flex;
+    width: 200%;
+}
+
+.form-container .form-inner form {
+    width: 50%;
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+
+.field2 {
+    height: 60px;
+    width: 400px;
+    margin-right: 10px;
+    border-radius: 30px;
+    border: solid 0.5px #4B4D55;
+    background-color: #2B2C31;
+    color: #F9F5ED;
+    font-family: Pontano Sans;
+    font-size: 18pt;
+    padding-left: 20px;
+    transition: background-color 0.3s, color 0.3s;
+    /* Add a smooth transition effect */
+}
+
+.field2:hover {
+    background-color: #2B2C31;
+    /* Change the background color on hover */
+    color: #4B4D55;
+    /* Change the text color on hover */
+    border: solid 2px #FF8328;
+}
+
+.field3 {
+    height: 60px;
+    width: 403px;
+    margin-right: 10px;
+    border-radius: 30px;
+    border: solid 0.5px #4B4D55;
+    background-color: #2B2C31;
+    color: #F9F5ED;
+    font-family: Pontano Sans;
+    font-size: 18pt;
+    padding-left: 20px;
+    margin-left: '10px';
+    transition: background-color 0.3s, color 0.3s;
+    /* Add a smooth transition effect */
+}
+
+.field3:hover {
+    background-color: #2B2C31;
+    /* Change the background color on hover */
+    color: #4B4D55;
+    /* Change the text color on hover */
+    border: solid 2px #FF8328;
+}
+
+
+.login_button {
+    color: black;
+    background-color: #f07f2e;
+    width: 270px;
+    font-size: 22pt;
+    font-weight: 500;
+    border-radius: 40px;
+    padding: 5px;
+    font-family: Kanit;
+    margin-top: 40px;
+    margin-left: 62px;
+}
+
+.login_button:hover {
+    color: white;
+    background-color: #4B4D55;
+    width: 270px;
+    font-size: 22pt;
+    font-weight: 500;
+    border-radius: 40px;
+    padding: 5px;
+    font-family: Kanit;
+    margin-top: 40px;
+    margin-left: 62px;
+}
+
+
+.signup_button {
+    color: black;
+    background-color: #f07f2e;
+    width: 270px;
+    font-size: 22pt;
+    font-weight: 500;
+    border-radius: 40px;
+    padding: 5px;
+    font-family: Kanit;
+    margin-top: 30px;
+    margin-left: 70px;
+    margin-left: 63px;
+}
+
+.signup_button:hover {
+    color: white;
+    background-color: #4B4D55;
+    width: 270px;
+    font-size: 22pt;
+    font-weight: 500;
+    border-radius: 40px;
+    padding: 5px;
+    font-family: Kanit;
+    margin-top: 30px;
+    margin-left: 70px;
+    margin-left: 63px;
+}

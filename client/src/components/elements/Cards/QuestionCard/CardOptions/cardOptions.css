@@ -1,0 +1,84 @@
+.cardOptionsWrap {
+    /* display: flex;
+    flex-direction: column;
+    position: absolute;
+    padding: 20px;
+    background: #18191B;
+    margin-left: -2.4rem;
+    margin-bottom: -8.2rem;
+    gap: 20px;
+    z-index: 11;
+    border-radius: 7.5px;
+    outline: 1px solid #313132;
+    box-shadow: 0 4px 31px rgba(237, 238, 242, 0.045);
+    -webkit-box-shadow: 0 4px 31px rgba(237, 238, 242, 0.045);
+    -moz-box-shadow: 0 4px 31px rgba(237, 238, 242, 0.045); */
+    width: 100%;
+    max-width: 760px;
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+.cardOptionsContainer {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    padding: 20px 80px 20px 20px;
+    background: #18191B;
+    width: fit-content;
+    gap: 20px;
+    z-index: 2;
+    border-radius: 7.5px;
+    outline: 1px solid #313132;
+    box-shadow: 0 4px 31px rgba(237, 238, 242, 0.045);
+    -webkit-box-shadow: 0 4px 31px rgba(237, 238, 242, 0.045);
+    -moz-box-shadow: 0 4px 31px rgba(237, 238, 242, 0.045);
+}
+
+.cardOption {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.dangerIcon {
+    color: #947277 !important;
+}
+
+.danger {
+    color: #ff799b !important;
+}
+
+.actionIcon {
+    color: #728092 !important;
+}
+
+.action {
+    color: #80b5ff !important;
+}
+
+.optionIcon {
+    color: #8c8b89;
+    font-size: 18x !important;
+}
+
+.optionTitle {
+    font-family: Pontano Sans;
+    font-weight: 500 !important;
+    font-size: 16px;
+}
+
+.optionsOverlay {
+    position: fixed;
+    width: 93vw;
+    height: 99vh;
+    /* background: aliceblue; */
+    top: 0;
+    left: 0;
+    /* right: 0; */
+    /* bottom: 0; */
+    z-index: 1;
+}

@@ -1,0 +1,79 @@
+.userCard {
+    background: #131315;
+    border: 1px solid #1d1d1e;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.userInfoSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.userInfoLeftWrap {
+    display: flex;
+    gap: 20px;
+}
+
+.userInfoLeftProfile {
+    height: 50px;
+    width: 50px;
+    background: #26282C;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.userInfoProfileImg {
+    height: 50px;
+    width: 50px;
+    border-radius: 10px;
+}
+
+.userInfoLeftProfileInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.userInfoLeftProfileUsername {
+    cursor: pointer;
+}
+
+.userInfoLeftProfileUsername:hover {
+    color: #FF8328;
+    text-decoration: underline;
+}
+
+.userInfoLeftProfileContentNumber {
+    color: #848079;
+}
+
+.add-icon {
+    font-size: 18px;
+}
+
+.user-content-hr {
+    margin: 10px 0px;
+}
+
+.userContentSection {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.userContentMore {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    background: #18191B;
+    border: 1px solid #2A2A2E;
+    border-radius: 10px;
+    padding: 5px 10px;
+    padding-right: 6px;
+    cursor: pointer;
+}

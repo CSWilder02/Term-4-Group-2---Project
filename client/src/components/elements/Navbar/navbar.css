@@ -1,0 +1,90 @@
+.navBarWrap {
+    display: flex;
+    margin: 0;
+    padding: 0 20px;
+    background: #18191B;
+    width: 100% !important;
+    justify-content: space-between;
+    border-bottom: 1px solid #2A2A2E;
+    z-index: 9;
+    position: sticky;
+    top: 0;
+}
+
+.container,
+.row {
+    margin: 0 !important;
+}
+
+.navBarLeftContainer,
+.navBarMidContainer,
+.navBarRightContainer {
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    gap: 30px;
+}
+
+.navBarLeftContainer {
+    font-family: Kanit;
+    font-weight: 600;
+    padding: 10px 0px;
+}
+
+
+.navBarRightItm-3-Container {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    /* background: #26282C; */
+    padding: 6px 0px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: Kanit;
+}
+
+.navBarLeftLogoContainer {
+    cursor: pointer;
+    user-select: none;
+}
+
+.navBar-menu {
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 500px) {
+
+    /* For Mobiles: */
+    .navBarRightContainerItmTxt {
+        display: none;
+    }
+
+    .navBarRightContainer {
+        justify-content: space-between;
+        width: 100% !important;
+        display: none !important;
+    }
+
+    .navBarLeftContainer {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .navBarMidContainer {
+        /* padding-bottom: 24px; */
+        display: none !important;
+    }
+}
+
+@media only screen and (min-width: 700px) {
+
+    /* For tablets: */
+    .navBarRightContainerItmTxt {
+        display: block;
+    }
+
+    .navBarLeftProfileContainer-mobile {
+        display: none;
+    }
+}

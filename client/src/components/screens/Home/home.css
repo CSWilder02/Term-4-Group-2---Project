@@ -1,0 +1,24 @@
+.homeWrap {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 0px;
+    gap: 10px;
+}
+
+.homeMidWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    /* width: 100%; */
+}
+
+.home-hr {
+    margin: 10px 0px;
+}
+
+.homeMidQuestions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

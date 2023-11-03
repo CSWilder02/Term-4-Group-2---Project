@@ -1,0 +1,63 @@
+html {
+  background: #101011;
+}
+
+.App {
+  background: #101011;
+  color: #F9F3ED;
+  width: 100%;
+}
+
+/* Material Icons Size  Configuration */
+.material-icons.md-16 {
+  font-size: 16px !important;
+}
+
+.material-icons.md-18 {
+  font-size: 18px !important;
+}
+
+.material-icons.md-20 {
+  font-size: 20px !important;
+}
+
+.material-icons.md-24 {
+  font-size: 24px !important;
+}
+
+.material-icons.md-36 {
+  font-size: 36px;
+}
+
+.material-icons.md-48 {
+  font-size: 48px;
+}
+
+.primaryButton {
+  border: none;
+  background: #FF8328;
+  color: #100E0D;
+}
+
+.secondaryButton {
+  border: 1px solid #87B7FF;
+  background: none;
+  color: #87B7FF;
+}
+
+.button-icon-2 {
+  background: #18191B;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 100px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #2A2A2E;
+}
+
+hr {
+  border: 1px solid #39393c !important;
+  /* margin: 10px 0px; */
+}
