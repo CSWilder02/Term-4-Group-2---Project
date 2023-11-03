@@ -134,11 +134,11 @@ export const Form = ({ fields, initialValues, onSubmit, onCancel }) => {
                                 placeholder={field?.label}
                                 className='text'
                                 type="text"
-                                // placeholder="item1, item2, item3, ..."
-                                value={formValues[field.name] ? formValues[field.name].join(', ') : ''}
-                                onChange={e => handleInputChange(e, field.name, 'arrayOfStrings')}
+                                value={formValues[field?.name] ? formValues[field.name]?.join(', ') : ''}
+                                onChange={e => handleInputChange(e, field?.name, 'arrayOfStrings')}
                             />
                         )}
+
                         {field.type === 'file' && (
                             <div className='imageListWrap' onMouseOver={e => setHover(true)}>
                                 {
