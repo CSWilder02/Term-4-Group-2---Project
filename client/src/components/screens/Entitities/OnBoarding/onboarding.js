@@ -20,7 +20,7 @@ export const OnBoarding = ({ user, users }) => {
     useEffect(() => {
     }, [loginData, registerData, loggedInUser, token, loginFormRef]);
 
-    const submitLogin = (e) => {
+    const submitLogin = async (e) => {
         // e?.preventDefault()
 
         // requestDataOf.request(method, endpoint, token, formData) This is the structure of the function
