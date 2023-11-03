@@ -12,6 +12,13 @@
     "client": "cd client && npm start",
     "dev": "concurrently -n 'index,client' -c 'red,green'  \"nodemon index.js\" \"npm run client\""
   },
+  "heroku": {
+    "buildpacks": [
+      {
+        "url": "heroku/nodejs"
+      }
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CSWilder02/Term-4-Group-2---Project.git"
