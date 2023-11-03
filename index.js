@@ -11,7 +11,7 @@ const routes = require("./routes/routes");
 require("dotenv").config({ path: '.env' });
 
 app.use(cors({ origin: 'https://codegenius-1ab16d917280.herokuapp.com/' }));
-app.use(cors({ origin: 'http://localhost:3000' }));
+// app.use(cors({ origin: 'http://localhost:3000' }));
 // https://codegenius-1ab16d917280.herokuapp.com/
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
