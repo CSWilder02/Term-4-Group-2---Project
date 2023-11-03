@@ -26,6 +26,9 @@
 </div>
 
 
+## Mockup
+![image1](Readme_Images/Mockup.JPG)
+
 ## About this Project
 
 
@@ -36,6 +39,8 @@ CodeGenius is a robust and fully-developed Full MERN Stack Application that serv
 
 -  [Built With](#built-with)
 
+-  [Prerequisites](#Prerequisites)
+
 -  [Installation](#installation)
 
 -  [UI Designs](#ui-designs)
@@ -44,8 +49,10 @@ CodeGenius is a robust and fully-developed Full MERN Stack Application that serv
 
 -  [Features](#features)
 
+-  [Development Process](#Development-Process)
 
-## Built With
+
+### Built With
 * [![React][React.js]][React-url]
 * [![Express][Express.js]][Express-url]
 * [![Mongodb][MongoDB]][MongoDB-url]
@@ -54,7 +61,12 @@ CodeGenius is a robust and fully-developed Full MERN Stack Application that serv
 * [![nodemon][Nodemon]][Nodemon-url]
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Installation
+## Getting Started
+### Prerequisites
+
+For development, you require to create an account on [Mongodb](https://www.mongodb.com/).
+
+### Installation
 
 
 1. Clone the repo
@@ -78,7 +90,21 @@ CodeGenius is a robust and fully-developed Full MERN Stack Application that serv
 
 ## UI Designs
 
-add Ui designs here 
+![image1](Readme_Images/Log_In.jpg)
+Log In
+
+![image2](Readme_Images/Home_Page.JPG)
+Home Page
+
+![image3](Readme_Images/Profile_Page.jpg)
+Profile Page
+
+![image4](Readme_Images/Single_Question.jpg)
+Single Question Page with Answers
+
+![image5](Readme_Images/Create_Question.jpg)
+Create Question Page
+ 
 
 ## Credits
 
@@ -90,7 +116,7 @@ add Ui designs here
       <img src="https://github.com/eddiesosera.png" alt="eddie Sosera" width="100px">
     </a>
     <br>
-    <sub>eddie Sosera</sub>
+    <sub>Eddie Sosera</sub>
   </div>
   
   <div style="text-align: center;">
@@ -146,6 +172,28 @@ CodeGenius allows users to save their favorite questions for future reference. A
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## Development Process
+
+The `Development Process` is the technical implementations and functionality done for the website.
+
+### Object Mapping
+
+Below you can see a diagram of our Object Mapping that we did for the website.
+
+![image6](Readme_Images/Objet_Mapping_&_DB_Archtecture.jpg)
+
+## Final Outcome
+### Demo Video
+
+[View Demonstration]()
+
+### Deployement Link
+
+[Deploy on Haroku]()
+
+## Conclusion
+### License
+Rights reserved © 2023
 
 
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
