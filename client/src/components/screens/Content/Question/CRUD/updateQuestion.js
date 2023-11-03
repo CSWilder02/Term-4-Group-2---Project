@@ -9,7 +9,16 @@ import { useInteraction } from '../../../../util/UI/interactionListener';
 export const UpdateQuestion = ({ }) => {
     const { token } = useToken();
     const navigateTo = useNavigate();
-    let question = JSON.parse(sessionStorage?.getItem("update-question"))
+    let question = JSON.parse(sessionStorage?.getItem("update-question"));
+    const topics = () => {
+        if (question && question.topics && Array.isArray(question.topics)) {
+            console.log("Topics array:", question.topics);
+            return question.topics
+                .filter(topic => typeof topic.title === "string")
+                .map(topic => topic.title);
+        }
+        return [];
+    }
 
     const fields = [
         { title: "Update Question" },
@@ -19,7 +28,7 @@ export const UpdateQuestion = ({ }) => {
         { name: 'descriptionOfIssue', label: 'Description', type: 'paragraph' },
         { name: 'topics', label: 'Topics', type: 'arrayOfStrings' },
         {
-            submitLabel: "Ask Question",
+            submitLabel: "Update Question",
             cancelLabel: "Cancel"
         }
     ];
@@ -27,19 +36,17 @@ export const UpdateQuestion = ({ }) => {
     let initialValues = {
         title: question?.title,
         descriptionOfIssue: question?.descriptionOfIssue,
-        topics: () => {
-            let topics = []
-            for (const topic of question?.topics) {
-                topics.push(topic?.title)
-            }
-            return topics
-        }
+
+        topics: question?.topics[0].title && [question?.topics[0].title, question?.topics[1]?.title, question?.topics[2]?.title]
+
+
     }
 
     const updateQuestion = async (formValues) => {
         requestDataOf.request("patch", `updateQuestion/${question?._id}`, token, formValues).
             then(() => {
-                alert("Update Successful"); navigateTo('-1')
+                alert("Update Successful");
+                navigateTo('question' + question?._id)
             }).
             catch(err => console.log(err))
 
