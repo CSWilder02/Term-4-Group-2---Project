@@ -27,13 +27,8 @@ export const UpdateQuestion = ({ }) => {
     let initialValues = {
         title: question?.title,
         descriptionOfIssue: question?.descriptionOfIssue,
-        topics: () => {
-            let topics = []
-            for (const topic of question?.topics) {
-                topics.push(topic?.title)
-            }
-            return topics
-        }
+        topics: () => (question?.topics || []).map(topic => topic?.title)
+
     }
 
     const updateQuestion = async (formValues) => {
