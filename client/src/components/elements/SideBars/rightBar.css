@@ -3,3 +3,8 @@
     max-width: 300px;
     min-width: 300px;
 }
+
+.banner_1 {
+    max-width: 280px;
+    border-radius: 10px;
+}

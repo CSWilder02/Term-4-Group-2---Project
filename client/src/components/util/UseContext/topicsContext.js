@@ -18,7 +18,7 @@ export const TopicsProvider = ({ children }) => {
             .then((response) => {
                 const newTopics = response;
                 setTopics(newTopics);
-                console.log("get topics", response)
+                // console.log("get topics", response)
             })
             .catch(err => { console.log(err); setTopics(err) });
     }, []);

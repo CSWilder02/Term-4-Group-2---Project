@@ -1,0 +1,15 @@
+.notifications {
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.coming-soon {
+    font-family: Kanit;
+    font-weight: 600;
+    font-size: 20px;
+    color: #FEF5D3;
+    text-align: center;
+}
