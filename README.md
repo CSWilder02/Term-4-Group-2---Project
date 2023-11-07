@@ -185,11 +185,11 @@ Below you can see a diagram of our Object Mapping that we did for the website.
 ## Final Outcome
 ### Demo Video
 
-[View Demonstration]()
+[View Demonstration](https://youtu.be/K2TSUsroUAA)
 
 ### Deployement Link
 
-[Deploy on Haroku]()
+[Deploy on Haroku](https://codegenius-1ab16d917280.herokuapp.com)
 
 ## Conclusion
 ### License
