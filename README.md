@@ -16,7 +16,7 @@
     <a href="https://github.com/CSWilder02/Term-4-Group-2---Project/tree/main/Class%20Work"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="add The demo Video Link here">View Demo</a>
+    <a href="https://youtu.be/K2TSUsroUAA">View Demo</a>
     ·
     <a href="bug report link">Report Bug</a>
     ·
